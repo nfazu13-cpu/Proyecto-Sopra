@@ -21,6 +21,7 @@ public class ShopController {
     public void start() {
         Scanner sc = new Scanner(System.in);
         int opt;
+        String resultMessage;
         do {
             view.landingPage();
             view.playerStatus(player);
@@ -32,10 +33,11 @@ public class ShopController {
                 case 2:
                     view.displayStock(repository.getAllStock(), false);
                     view.showMessage("Introduce número del producto que quieres comprar ");
-                    processPurchase(sc.nextInt());
+                    resultMessage = buyProcess(sc.nextInt());
+                    view.showMessage(resultMessage);
                     break;
                 case 3:
-                    // TODO Logic to add products to stock
+                    // TODO Logic to sell and add products to stock
                     break;
                 case 4:
                     // TODO Logic to ...
@@ -50,20 +52,21 @@ public class ShopController {
         } while (opt != 0);
     }
 
-    private void processPurchase(int id) {
+    private String buyProcess(int id) {
         Item item = repository.getItem(id);
-        
         if (item == null) {
-            view.showMessage("[!] Ese objeto no existe en nuestra tienda.");
-            return;
+            return "[!] Ese objeto no existe en nuestra tienda.";
         }
-
         if (player.getGold() >= item.getPrice()) {
             player.buy(item);
             repository.buyItem(id);
-            view.showMessage("[+] " + item.getName() + " ya está en tu equipo!");
+            return "[+] " + item.getName() + " ya está en tu equipo!";
         } else {
-            view.showMessage("[!] No tienes suficiente oro. Vuelve cuando hayas saqueado algo.");
+            return "[!] No tienes suficiente oro. Vuelve cuando hayas saqueado algo.";
         }
+    }
+
+    private void sellProcess(Item item) {
+        //TODO Sell process
     }
 }
