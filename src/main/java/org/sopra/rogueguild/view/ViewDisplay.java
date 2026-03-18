@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Player;
+import org.sopra.rogueguild.view.model.BuyResponse;
 
 public class ViewDisplay {
     String R = "\u001B[0m", G = "\u001B[90m", RED = "\u001B[31m", PURPLE = "\u001B[35m";;
@@ -15,20 +16,6 @@ public class ViewDisplay {
         System.out.println("||  " + message);
         System.out.println("|| ");
         System.out.println(" \\______________________________________________________/");
-    }
-
-    public void clearScreen() {
-        try {
-            String os = System.getProperty("os.name").toLowerCase();
-
-            if (os.contains("win")) {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-            } else {
-                new ProcessBuilder("clear").inheritIO().start().waitFor();
-            }
-        } catch (Exception e) {
-            for (int i = 0; i < 50; i++) System.out.println();
-        }
     }
 
     public void landingPage() {
@@ -61,7 +48,7 @@ public class ViewDisplay {
         System.out.println("");
     }
 
-    public void displayStock(Map<Integer, Item> itemMap, boolean isInventory) {
+    public void displayStock(Map<Integer, Item> itemMap, boolean isInPurchaseProcess) {
         System.out.println("  ___________________________________________________");
         System.out.println(" /  _______________________________________________  \\");
         System.out.println("|| /                                               \\ ||");
@@ -73,16 +60,36 @@ public class ViewDisplay {
                 .forEach(e -> {
                     int id = e.getKey();
                     Item item = e.getValue();
-                    if (isInventory) {
-                        System.out.printf("|| |  [%s] %-28s %4d oro    | ||%n",
-                                "-", item.getName(), item.getPrice());
-                    } else {
+                    if (isInPurchaseProcess) {
                         System.out.printf("|| |  [%d] %-28s %4d oro    | ||%n",
                                 id, item.getName(), item.getPrice());
+                    } else {
+                        System.out.printf("|| |  [%s] %-28s %4d oro    | ||%n",
+                                "-", item.getName(), item.getPrice());
                     }
                 });
         System.out.println("|| |                                               | ||");
         System.out.println("|| \\_______________________________________________/ ||");
         System.out.println(" \\___________________________________________________/");
+        if (isInPurchaseProcess) {
+            showMessage("Introduce número del producto que quieres comprar ");
+        }
     }
+
+    public void buyResult(BuyResponse r) {
+        switch (r.getStatus()) {
+        case SUCCESS -> showMessage("[+] " + r.getItem().getName() + " ya está en tu equipo!");
+        case NOT_FOUND -> showMessage("[!] Ese objeto (" + r.getRequestedId() + ") no existe en nuestra tienda.");
+        case NOT_ENOUGH_GOLD -> showMessage("[!] No tienes suficiente oro. Te faltan " + r.getMissingGold() + " monedas.");
+        }
+    }
+
+    public void pressKeyMessage() {
+        showMessage("Pulsa cualquier tecla para continuar ");
+    }
+
+    public void quitMessage() {
+        showMessage("Nos vemos pronto.");
+    }
+
 }

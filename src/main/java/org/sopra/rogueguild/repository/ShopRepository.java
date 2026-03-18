@@ -16,7 +16,7 @@ public class ShopRepository {
     }
 
     private void loadInitialStock() {
-        stock.put(1, new Weapon("Dagas de Sombras", 150, 10));
+        stock.put(1, new Weapon("Daga de las Sombras", 150, 10));
         stock.put(2, new Weapon("Espada del Renegado", 350, 15));
         stock.put(3, new Armor("Armadura del Sol Naciente", 200, 5));
     }
@@ -25,7 +25,7 @@ public class ShopRepository {
         return stock.get(id);
     }
 
-    public void buyItem(int id) { stock.remove(id); }
+    public void removeItem(int id) { stock.remove(id); }
 
     public Map<Integer, Item> getAllStock() {
         return stock;
