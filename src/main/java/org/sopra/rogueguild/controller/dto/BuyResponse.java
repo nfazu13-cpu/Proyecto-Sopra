@@ -1,4 +1,4 @@
-package org.sopra.rogueguild.view.model;
+package org.sopra.rogueguild.controller.dto;
 
 import org.sopra.rogueguild.repository.model.Item;
 

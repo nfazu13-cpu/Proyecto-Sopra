@@ -6,7 +6,7 @@ import org.sopra.rogueguild.repository.ShopRepository;
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.view.ViewDisplay;
-import org.sopra.rogueguild.view.model.BuyResponse;
+import org.sopra.rogueguild.controller.dto.BuyResponse;
 
 public class ShopController {
     private final Player player;
