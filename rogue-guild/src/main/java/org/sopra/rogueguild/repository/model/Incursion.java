@@ -69,7 +69,7 @@ public class Incursion {
     }
 
     private void recompensaGold() {
-        this.goldReward = random.nextInt(3000) + 1;
+        this.goldReward = random.nextInt(500) + 1;
     }
 
 }
