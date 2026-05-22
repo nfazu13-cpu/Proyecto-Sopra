@@ -5,24 +5,32 @@ import java.util.Scanner;
 import org.sopra.rogueguild.repository.ShopRepository;
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Player;
+import org.sopra.rogueguild.repository.model.WorldEvent;
 import org.sopra.rogueguild.view.ViewDisplay;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
 
 public class ShopController {
+
     private final Player player;
     private final ViewDisplay view;
     private final ShopRepository repository;
     private final Scanner sc;
-    private IncursionController incursionController;
+    private final WorldEvent worldEvent;
+
+
 
     public ShopController(Player p, ViewDisplay v, ShopRepository r) {
         this.player = p;
         this.view = v;
         this.repository = r;
         this.sc = new Scanner(System.in);
+        this.worldEvent = new WorldEvent();
     }
 
     public void start() {
+        worldEvent.randomWorldEvent(repository);
+        view.showWorldEventMessage(worldEvent);
+
         int opt;
         do {
             view.landingPage();

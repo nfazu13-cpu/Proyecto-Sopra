@@ -1,10 +1,10 @@
 package org.sopra.rogueguild.view;
-
 import java.io.PrintStream;
 import java.util.Map;
 
 import org.sopra.rogueguild.repository.model.Item;
 import org.sopra.rogueguild.repository.model.Player;
+import org.sopra.rogueguild.repository.model.WorldEvent;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.view.components.BannerView;
 import org.sopra.rogueguild.view.components.BuyResultView;
@@ -31,29 +31,17 @@ public class ViewDisplay {
         this.buyResultView = new BuyResultView(messages);
     }
 
-    public void landingPage() {
-        banner.landingPage();
+    public void landingPage() { banner.landingPage(); }
+    public void showMessage(String msg) { messages.showMessage(msg); }
+    public void pressKeyMessage() { messages.pressKeyMessage(); }
+    public void quitMessage() { messages.quitMessage(); }
+    public void showPrompt(String prompt) { messages.showPrompt(prompt); }
+    
+    public void showWorldEventMessage(WorldEvent worldEvent) { 
+        messages.showMessage(worldEvent.getFinalMessage()); 
     }
 
-    public void showMessage(String msg) {
-        messages.showMessage(msg);
-    }
-
-    public void pressKeyMessage() {
-        messages.pressKeyMessage();
-    }
-
-    public void quitMessage() {
-        messages.quitMessage();
-    }
-
-    public void showPrompt(String prompt) {
-        messages.showPrompt(prompt);
-    }
-
-    public void playerStatus(Player player) {
-        playerView.playerStatus(player);
-    }
+    public void playerStatus(Player player) { playerView.playerStatus(player); }
 
     public void displayStock(Map<Integer, Item> itemMap, boolean isInPurchaseProcess) {
         stockView.displayStock(itemMap, isInPurchaseProcess);

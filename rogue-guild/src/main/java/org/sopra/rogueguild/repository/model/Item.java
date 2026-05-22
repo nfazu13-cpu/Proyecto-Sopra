@@ -21,6 +21,10 @@ public abstract class Item {
         return price;
     }
 
+    public ItemCategory getCategory() {
+        return category;
+    }
+
     public String toString() {
         return name + " (" + price + " oro)";
     }
@@ -33,10 +37,6 @@ public abstract class Item {
         if (price >= 0) {
             this.price = price;
         }
-    }
-
-    public ItemCategory getCategory() {
-        return category;
     }
 
 }

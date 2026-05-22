@@ -37,5 +37,4 @@ public class ShopRepository {
     public Map<Integer, Item> getAllStock() {
         return stock;
     }
-
 }
