@@ -13,6 +13,7 @@ public class ShopController {
     private final ViewDisplay view;
     private final ShopRepository repository;
     private final Scanner sc;
+    private IncursionController incursionController;
 
     public ShopController(Player p, ViewDisplay v, ShopRepository r) {
         this.player = p;

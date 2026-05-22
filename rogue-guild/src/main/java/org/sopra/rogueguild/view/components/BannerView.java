@@ -27,6 +27,7 @@ public class BannerView {
         out.println("|| |  [1] Ver productos de la tienda               | ||");
         out.println("|| |  [2] Comprar un producto                      | ||");
         out.println("|| |  [3] Venta de producto                        | ||");
+        out.println("|| |  [4] Incursiones                              | ||");
         out.println("|| |" + c(Ansi.GRAY, "  [0] Salir                                    ") + "| ||");
         out.println("|| \\_______________________________________________/ ||");
         out.println(" \\___________________________________________________/");
