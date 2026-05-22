@@ -62,5 +62,4 @@ public class ViewDisplay {
     public void buyResult(BuyResponse r) {
         buyResultView.show(r);
     }
-
 }
