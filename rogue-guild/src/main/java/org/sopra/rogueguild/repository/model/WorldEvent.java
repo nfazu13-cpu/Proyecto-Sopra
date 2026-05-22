@@ -15,11 +15,9 @@ public class WorldEvent {
         return Math.random() > 0.5; // if 'isGlobal' > 0.5, event = global, else event = specific
     }
 
-
     public boolean declareType() {
         return Math.random() > 0.5; // if 'type' > 0.5, percentage = possitive, else percentage = negative
     }
-
 
     public ItemCategory selectCategory() {
         ItemCategory[] categories = ItemCategory.values();
@@ -27,12 +25,10 @@ public class WorldEvent {
         return categories[randomCategory];
     }
 
-
     public double calcFactor() {
         return Math.round(((int) (Math.random() * 9) + 2) * 0.05 * 100.0) / 100.0;
     }
 
-    
     public void randomWorldEvent(ShopRepository stock) {
 
         ItemCategory category = null;
@@ -55,14 +51,12 @@ public class WorldEvent {
 
     }
 
-
     public void modifyPrice(boolean isGlobal, double percentage, ShopRepository stock, ItemCategory category) {
 
-
-        int randomMessageOption = (int) (Math.random() * messageOptions ) + 1;
+        int randomMessageOption = (int) (Math.random() * messageOptions) + 1;
 
         if (isGlobal) {
-            
+
             globalApply(randomMessageOption, percentage, stock);
 
         } else {
@@ -72,7 +66,6 @@ public class WorldEvent {
         }
 
     }
-
 
     public void globalApply(int option, double percentage, ShopRepository stock) {
 
@@ -88,27 +81,25 @@ public class WorldEvent {
 
     }
 
-
     public ItemCategory localApply(int option, double percentage, ShopRepository stock, ItemCategory category) {
 
         int eventPrice;
 
-            for (Item item : stock.getAllStock().values()) {
-                
-                if (item.getCategory() == category) {
-                    
-                    eventPrice = (int) (item.getBasePrice() * percentage);
-                    item.setPrice(eventPrice);
-                }
+        for (Item item : stock.getAllStock().values()) {
 
+            if (item.getCategory() == category) {
+
+                eventPrice = (int) (item.getBasePrice() * percentage);
+                item.setPrice(eventPrice);
             }
+
+        }
 
         selectMessage(option, percentage, category);
 
         return category;
 
     }
-
 
     public void selectMessage(int messageSelection, double percentage) {
 
@@ -118,43 +109,53 @@ public class WorldEvent {
 
             switch (messageSelection) {
                 case 1:
-                    this.finalMessage = "¡Las guerras de los reinos del Norte han provocado una subida del " + percentage + "% en todos los productos!";
+                    this.finalMessage = "¡Las guerras de los reinos del Norte han provocado una subida del "
+                            + percentage + "% en todos los productos!";
                     break;
 
                 case 2:
-                    this.finalMessage = "¡Una plaga de dragones rojos acecha los caminos! Toda la mercancía sube un " + percentage + "% debido al alto riesgo del transporte.";
+                    this.finalMessage = "¡Una plaga de dragones rojos acecha los caminos! Toda la mercancía sube un "
+                            + percentage + "% debido al alto riesgo del transporte.";
                     break;
 
                 case 3:
-                    this.finalMessage = "¡El Rey ha decretado un nuevo impuesto sobre el comercio en todo el reino! Todos los precios de la tienda aumentan un " + percentage + "%.";
+                    this.finalMessage = "¡El Rey ha decretado un nuevo impuesto sobre el comercio en todo el reino! Todos los precios de la tienda aumentan un "
+                            + percentage + "%.";
                     break;
 
                 case 4:
-                    this.finalMessage = "¡Una terrible sequía azota la región! Los costes de mantenimiento obligan a subir todos los productos un " + percentage + "%.";
+                    this.finalMessage = "¡Una terrible sequía azota la región! Los costes de mantenimiento obligan a subir todos los productos un "
+                            + percentage + "%.";
                     break;
 
                 case 5:
-                    this.finalMessage = "¡El gremio de transportistas y arrieros se declara en huelga! Comprar cualquier cosa cuesta un " + percentage + "% más.";
+                    this.finalMessage = "¡El gremio de transportistas y arrieros se declara en huelga! Comprar cualquier cosa cuesta un "
+                            + percentage + "% más.";
                     break;
 
                 case 6:
-                    this.finalMessage = "¡Se rumorea la llegada de un ejército orco a las fronteras! El pánico generalizado infla todos los precios un " + percentage + "%.";
+                    this.finalMessage = "¡Se rumorea la llegada de un ejército orco a las fronteras! El pánico generalizado infla todos los precios un "
+                            + percentage + "%.";
                     break;
 
                 case 7:
-                    this.finalMessage = "¡Una maldición de óxido y podredumbre se extiende por los almacenes imperiales! Reponer los artículos cuesta un " + percentage + "% más.";
+                    this.finalMessage = "¡Una maldición de óxido y podredumbre se extiende por los almacenes imperiales! Reponer los artículos cuesta un "
+                            + percentage + "% más.";
                     break;
 
                 case 8:
-                    this.finalMessage = "¡La devaluación de la moneda real por orden de la corona hace que el coste de vida suba un " + percentage + "%!";
+                    this.finalMessage = "¡La devaluación de la moneda real por orden de la corona hace que el coste de vida suba un "
+                            + percentage + "%!";
                     break;
 
                 case 9:
-                    this.finalMessage = "¡Los bandidos han tomado el paso de montaña principal! Los mercaderes cobran un " + percentage + "% extra por los desvíos peligrosos.";
+                    this.finalMessage = "¡Los bandidos han tomado el paso de montaña principal! Los mercaderes cobran un "
+                            + percentage + "% extra por los desvíos peligrosos.";
                     break;
 
                 case 10:
-                    this.finalMessage = "¡Alineación planetaria desfavorable! La magia del comercio se debilita y provoca un aumento general del " + percentage + "%.";
+                    this.finalMessage = "¡Alineación planetaria desfavorable! La magia del comercio se debilita y provoca un aumento general del "
+                            + percentage + "%.";
                     break;
 
                 default:
@@ -162,50 +163,60 @@ public class WorldEvent {
                     break;
 
             }
-        
+
         } else {
             percentage = 1 - percentage;
             percentage *= 100;
 
             switch (messageSelection) {
                 case 1:
-                    this.finalMessage = "¡Los caminos comerciales del Norte vuelven a ser seguros! Los precios globales bajan un " + percentage + "%.";
+                    this.finalMessage = "¡Los caminos comerciales del Norte vuelven a ser seguros! Los precios globales bajan un "
+                            + percentage + "%.";
                     break;
 
                 case 2:
-                    this.finalMessage = "¡Un grupo de aventureros ha derrotado al dragón de la montaña! Los mercaderes lo celebran bajando todos los precios un " + percentage + "%.";
+                    this.finalMessage = "¡Un grupo de aventureros ha derrotado al dragón de la montaña! Los mercaderes lo celebran bajando todos los precios un "
+                            + percentage + "%.";
                     break;
 
                 case 3:
-                    this.finalMessage = "¡Es el Día del Festival del Solsticio en la ciudad! Los tenderos ofrecen una rebaja global del " + percentage + "% en todo su inventario.";
+                    this.finalMessage = "¡Es el Día del Festival del Solsticio en la ciudad! Los tenderos ofrecen una rebaja global del "
+                            + percentage + "% en todo su inventario.";
                     break;
 
                 case 4:
-                    this.finalMessage = "¡Se ha firmado un tratado de paz histórico entre los reinos vecinos! La apertura de fronteras abarata todo un " + percentage + "%.";
+                    this.finalMessage = "¡Se ha firmado un tratado de paz histórico entre los reinos vecinos! La apertura de fronteras abarata todo un "
+                            + percentage + "%.";
                     break;
 
                 case 5:
-                    this.finalMessage = "¡Una megacarabana de comerciantes del lejano oriente ha llegado a la ciudad! La sobreoferta baja los precios un " + percentage + "%.";
+                    this.finalMessage = "¡Una megacarabana de comerciantes del lejano oriente ha llegado a la ciudad! La sobreoferta baja los precios un "
+                            + percentage + "%.";
                     break;
 
                 case 6:
-                    this.finalMessage = "¡El nuevo año del Duque comienza con la exención de aranceles comerciales! Todo el inventario se reduce un " + percentage + "%.";
+                    this.finalMessage = "¡El nuevo año del Duque comienza con la exención de aranceles comerciales! Todo el inventario se reduce un "
+                            + percentage + "%.";
                     break;
 
                 case 7:
-                    this.finalMessage = "¡Año de cosechas y producción récord en todas las profesiones! Los costes bajan y la tienda aplica un " + percentage + "% de descuento en todo.";
+                    this.finalMessage = "¡Año de cosechas y producción récord en todas las profesiones! Los costes bajan y la tienda aplica un "
+                            + percentage + "% de descuento en todo.";
                     break;
 
                 case 8:
-                    this.finalMessage = "¡El gremio de magos ha abierto un portal permanente con la capital! Al eliminar el transporte, todo cae un " + percentage + "%.";
+                    this.finalMessage = "¡El gremio de magos ha abierto un portal permanente con la capital! Al eliminar el transporte, todo cae un "
+                            + percentage + "%.";
                     break;
 
                 case 9:
-                    this.finalMessage = "¡Liquidación por reforma del establecimiento! El mercader quiere vaciar las estanterías rápido y aplica un " + percentage + "% general.";
+                    this.finalMessage = "¡Liquidación por reforma del establecimiento! El mercader quiere vaciar las estanterías rápido y aplica un "
+                            + percentage + "% general.";
                     break;
 
                 case 10:
-                    this.finalMessage = "¡Bendición del Dios del Comercio sobre toda la comarca! La fortuna sonríe a los compradores y todo baja un " + percentage + "%.";
+                    this.finalMessage = "¡Bendición del Dios del Comercio sobre toda la comarca! La fortuna sonríe a los compradores y todo baja un "
+                            + percentage + "%.";
                     break;
 
                 default:
@@ -218,42 +229,40 @@ public class WorldEvent {
 
     }
 
-
     public String customMessage(ItemCategory category) {
 
         String customMessage = "";
 
         switch (category) {
-                        case WEAPON:
-                            customMessage = "las armas ";
-                            break;
+            case WEAPON:
+                customMessage = "las armas ";
+                break;
 
-                        case ARMOR:
-                            customMessage = "las armaduras ";
-                            break;
+            case ARMOR:
+                customMessage = "las armaduras ";
+                break;
 
-                        case POTION:
-                            customMessage = "las pociones ";
-                            break;
+            case POTION:
+                customMessage = "las pociones ";
+                break;
 
-                        case HELMET:
-                            customMessage = "los cascos ";
-                            break;
+            case HELMET:
+                customMessage = "los cascos ";
+                break;
 
-                        case BOOTS:
-                            customMessage = "las botas ";
-                            break;
-                    
-                        default:
-                            customMessage = "otros productos ";
-                            break;
-                    }
+            case BOOTS:
+                customMessage = "las botas ";
+                break;
+
+            default:
+                customMessage = "otros productos ";
+                break;
+        }
 
         return customMessage;
-        
+
     }
 
-        
     public void selectMessage(int option, double percentaje, ItemCategory category) {
 
         if (percentaje > 1) {
@@ -262,45 +271,55 @@ public class WorldEvent {
 
             switch (option) {
                 case 1:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje + "% debido a la escasez de materias primas en los suministros de los artesanos!";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje
+                            + "% debido a la escasez de materias primas en los suministros de los artesanos!";
                     break;
 
                 case 2:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje + "%! El Gran Gremio ha impuesto nuevas tasas de fabricación obligatorias.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje
+                            + "%! El Gran Gremio ha impuesto nuevas tasas de fabricación obligatorias.";
                     break;
 
                 case 3:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje + "% porque el ejército del Rey ha confiscado la mitad de las existencias para sus filas.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje
+                            + "% porque el ejército del Rey ha confiscado la mitad de las existencias para sus filas.";
                     break;
 
                 case 4:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje + "% debido al repentino asalto y saqueo de los principales talleres de producción.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje
+                            + "% debido al repentino asalto y saqueo de los principales talleres de producción.";
                     break;
 
                 case 5:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje + "%! Una nueva regulación clerical prohíbe su venta a no iniciados sin pagar un extra.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje
+                            + "%! Una nueva regulación clerical prohíbe su venta a no iniciados sin pagar un extra.";
                     break;
 
                 case 6:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje + "% tras un sabotaje mágico que ha inutilizado los almacenes específicos del gremio.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje
+                            + "% tras un sabotaje mágico que ha inutilizado los almacenes específicos del gremio.";
                     break;
 
                 case 7:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje + "% por el aumento en los costes de transporte desde las lejanas tierras de producción.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje
+                            + "% por el aumento en los costes de transporte desde las lejanas tierras de producción.";
                     break;
 
                 case 8:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje + "%! Los maestros especialistas de este sector exigen salarios más altos debido al peligro de la región.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje
+                            + "%! Los maestros especialistas de este sector exigen salarios más altos debido al peligro de la región.";
                     break;
 
                 case 9:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje + "% debido a la alta demanda de los aventureros locales antes de la gran incursión.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje
+                            + "% debido a la alta demanda de los aventureros locales antes de la gran incursión.";
                     break;
 
                 case 10:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje + "%! Una extraña perturbación en el plano místico dificulta su creación.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha subido un " + percentaje
+                            + "%! Una extraña perturbación en el plano místico dificulta su creación.";
                     break;
-            
+
                 default:
                     this.finalMessage = "La escasez local aumenta el valor de este sector.";
                     break;
@@ -312,45 +331,55 @@ public class WorldEvent {
 
             switch (option) {
                 case 1:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje + "% gracias al descubrimiento de un nuevo yacimiento de materiales económicos!";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje
+                            + "% gracias al descubrimiento de un nuevo yacimiento de materiales económicos!";
                     break;
 
                 case 2:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje + "%! Los artesanos locales han refinado sus técnicas, reduciendo los tiempos de creación.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje
+                            + "%! Los artesanos locales han refinado sus técnicas, reduciendo los tiempos de creación.";
                     break;
 
                 case 3:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje + "% debido a que el ejército ha devuelto el excedente de las guarniciones al mercado.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje
+                            + "% debido a que el ejército ha devuelto el excedente de las guarniciones al mercado.";
                     break;
 
                 case 4:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje + "% tras la llegada masiva de refugiados de talleres vecinos dispuestos a comerciar a bajo coste.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje
+                            + "% tras la llegada masiva de refugiados de talleres vecinos dispuestos a comerciar a bajo coste.";
                     break;
 
                 case 5:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje + "%! El Ducado ha eliminado temporalmente los aranceles específicos para promover su uso.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje
+                            + "%! El Ducado ha eliminado temporalmente los aranceles específicos para promover su uso.";
                     break;
 
                 case 6:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje + "% gracias a un hechizo de duplicación en masa que salió bien en los almacenes.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje
+                            + "% gracias a un hechizo de duplicación en masa que salió bien en los almacenes.";
                     break;
 
                 case 7:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje + "%! Se han abierto nuevas y más eficientes rutas comerciales libres de monstruos.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje
+                            + "%! Se han abierto nuevas y más eficientes rutas comerciales libres de monstruos.";
                     break;
 
                 case 8:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje + "% porque los aprendices del gremio han lanzado una producción masiva para validar sus títulos.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje
+                            + "% porque los aprendices del gremio han lanzado una producción masiva para validar sus títulos.";
                     break;
 
                 case 9:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje + "% debido a un claro exceso de stock acumulado que el comerciante necesita liquidar ya.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje
+                            + "% debido a un claro exceso de stock acumulado que el comerciante necesita liquidar ya.";
                     break;
 
                 case 10:
-                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje + "%! Una bendición de la escuela de transmutación facilita mágicamente su ensamblaje.";
+                    this.finalMessage = "¡El precio de " + customMessage(category) + "ha bajado un " + percentaje
+                            + "%! Una bendición de la escuela de transmutación facilita mágicamente su ensamblaje.";
                     break;
-            
+
                 default:
                     this.finalMessage = "La sobreproducción hace que este tipo de bienes sea más accesible.";
                     break;

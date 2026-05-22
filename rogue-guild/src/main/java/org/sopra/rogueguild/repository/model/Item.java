@@ -39,4 +39,12 @@ public abstract class Item {
         }
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(ItemCategory category) {
+        this.category = category;
+    }
+
 }

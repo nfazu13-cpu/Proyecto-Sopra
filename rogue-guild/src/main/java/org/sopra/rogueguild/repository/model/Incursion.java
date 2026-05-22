@@ -38,7 +38,6 @@ public class Incursion {
                 player.addItem(id, this.itemREward);
                 break;
             case 3:
-                this.itemREward = null;
                 recompensaGold();
                 goldReward = (int) (Math.round(this.goldReward / 5.0) * 5);
                 player.setGold(player.getGold() + this.goldReward);
@@ -47,7 +46,7 @@ public class Incursion {
         }
     }
 
-    private void recompensaMenor() {
+    public void recompensaMenor() {
         this.goldReward = random.nextInt(100) + 1;
         Item itemMenor;
 
@@ -56,9 +55,15 @@ public class Incursion {
         } while (itemMenor.getBasePrice() > 50);
 
         this.itemREward = itemMenor;
+
+        if (itemREward == null) {
+            itemREward.setName("ninguno");
+        }
+
+        System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + itemREward.getName() + ".");
     }
 
-    private void recompensaItem() {
+    public void recompensaItem() {
         Item itemMayor;
 
         do {
@@ -66,10 +71,23 @@ public class Incursion {
         } while (itemMayor.getBasePrice() < 50);
 
         this.itemREward = itemMayor;
+
+        if (itemREward == null) {
+            itemREward.setName("ninguno");
+        }
+
+        System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + itemREward.getName() + ".");
     }
 
-    private void recompensaGold() {
+    public void recompensaGold() {
         this.goldReward = random.nextInt(500) + 1;
+        this.itemREward = null;
+
+        if (itemREward == null) {
+            itemREward.setName("ninguno");
+        }
+
+        System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + itemREward.getName() + ".");
     }
 
 }
