@@ -34,4 +34,5 @@ public class BuyResponse {
     public Item getItem() { return item; }
     public int getMissingGold() { return missingGold; }
     public Integer getRequestedId() { return requestedId; }
+
 }

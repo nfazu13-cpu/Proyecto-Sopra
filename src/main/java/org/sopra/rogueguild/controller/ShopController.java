@@ -38,7 +38,14 @@ public class ShopController {
                     view.buyResult(buyResponse);
                     break;
                 case 3:
-                    // TODO Logic to sell and add products to stock
+                    if (!player.getInventory().isEmpty()) { // SÍ tiene ítems
+                        player.printInventory();
+                        System.out.print("Introduce el ID del ítem a vender: ");
+                        int id = sc.nextInt();
+                        sellProcess(id);
+                    } else {
+                        System.out.println("Tu inventario está vacío. No tienes ítems para vender.");
+                    }
                     break;
                 case 4:
                     // TODO Logic to ...
@@ -46,9 +53,9 @@ public class ShopController {
                 case 0:
                     view.quitMessage();
                     break;
-                }
-                view.pressKeyMessage();
-                sc.nextLine();
+            }
+            view.pressKeyMessage();
+            sc.nextLine();
         } while (opt != 0);
     }
 
@@ -57,15 +64,39 @@ public class ShopController {
         if (item == null) {
             return BuyResponse.notFound(id);
         }
-        if (player.getGold() < item.getPrice()) {
+        if (player.getGold() < item.getBasePrice()) {
             return BuyResponse.notEnoughGold(item, player.getGold());
         }
         player.buy(item);
         repository.removeItem(id);
+        player.addItem(item);
         return BuyResponse.success(item);
     }
 
-    private void sellProcess(Item item) {
-        //TODO Sell process
+    private void sellProcess(int id) {
+
+        Item itemDeTienda = repository.getAllStock().get(id);
+
+        if (itemDeTienda == null) {
+            System.out.println("Ese ID de ítem no existe en el juego.");
+            return;
+        }
+
+        Item itemDelJugador = player.getInventory().stream().filter(i -> i.getName().equals(itemDeTienda.getName()))
+                .findFirst().orElse(null);
+
+        if (itemDelJugador == null) {
+            System.out.println("ID inválido. No tienes ese ítem en tu inventario.");
+            return;
+        }
+        player.removeItem(itemDelJugador);
+        repository.returnItem(id, itemDelJugador);
+
+        double precioVenta = itemDelJugador.getBasePrice() * 0.80;
+        double precioRedondeado = Math.round(precioVenta / 5.0) * 5.0;
+
+        player.setGold(player.getGold() + (int) precioRedondeado);
+        System.out.println("Has vendido " + itemDelJugador.getName() + " por " + (int) precioRedondeado + " monedas.");
     }
+
 }
