@@ -35,4 +35,8 @@ public abstract class Item {
         }
     }
 
+    public ItemCategory getCategory() {
+        return category;
+    }
+
 }
