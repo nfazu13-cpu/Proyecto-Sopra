@@ -59,6 +59,11 @@ public class ShopController {
                     break;
                 case 4:
                     System.out.println("Elige que incursion quieres hacer: ");
+                    System.out.println("1. Incursion de Conquista");
+                    System.out.println("2. Incursion de Saqueo");
+                    System.out.println("2. Incursion Menor");
+                    System.out.println("0. Salir de Incursiones");
+
                     int option = sc.nextInt();
                     incursionController.submenu(opt);
                     break;
