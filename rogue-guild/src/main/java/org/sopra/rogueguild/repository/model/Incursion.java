@@ -28,12 +28,18 @@ public class Incursion {
                 recompensaMenor();
                 this.goldReward = (int) (Math.round(this.goldReward / 5.0) * 5);
                 player.setGold(player.getGold() + this.goldReward);
+                if (player.getGold() > 500) {
+                    player.setGold(500);
+                }
                 id = random.nextInt(100) + 1;
                 player.addItem(this.id, this.itemREward);
                 break;
             case 2:
                 recompensaItem();
                 this.goldReward = 0;
+                if (player.getGold() > 500) {
+                    player.setGold(500);
+                }
                 id = random.nextInt(100) + 1;
                 player.addItem(id, this.itemREward);
                 break;
@@ -41,13 +47,16 @@ public class Incursion {
                 recompensaGold();
                 goldReward = (int) (Math.round(this.goldReward / 5.0) * 5);
                 player.setGold(player.getGold() + this.goldReward);
+                if (player.getGold() > 500) {
+                    player.setGold(500);
+                }
 
                 break;
         }
     }
 
     public void recompensaMenor() {
-        this.goldReward = random.nextInt(100) + 1;
+        this.goldReward = random.nextInt(30) + 1;
         Item itemMenor;
 
         do {

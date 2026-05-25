@@ -16,13 +16,13 @@ public class IncursionController {
 
         switch (option) {
             case 1:
-
+                incursionConquista();
                 break;
             case 2:
-
+                incursionSaqueo();
                 break;
             case 3:
-
+                incursionMenor();
                 break;
         }
     }
@@ -90,24 +90,24 @@ public class IncursionController {
 
         switch (option) {
             case 1:
-                Incursion saqueo1 = new Incursion("Saquea el palacio real en busca del Mapa qe necesita el mercader",
+                Incursion menor1 = new Incursion("Saquea el palacio real en busca del Mapa qe necesita el mercader",
                         "Saquea el Mapa");
-                saqueo1.recompensaGold();
+                menor1.recompensaMenor();
                 break;
 
             case 2:
-                Incursion saqueo2 = new Incursion("Saquea el oro del ogro dormilon", "Saquea al Ogro");
-                saqueo2.recompensaGold();
+                Incursion menor2 = new Incursion("Saquea el oro del ogro dormilon", "Saquea al Ogro");
+                menor2.recompensaMenor();
                 break;
 
             case 3:
-                Incursion saqueo3 = new Incursion("Saque el amuleto para el mago feliz ", "Saquea Amuleto");
-                saqueo3.recompensaGold();
+                Incursion menor3 = new Incursion("Saque el amuleto para el mago feliz ", "Saquea Amuleto");
+                menor3.recompensaMenor();
                 break;
 
             case 4:
-                Incursion saqueo4 = new Incursion("Saqueo de los nobles malvados", "Saqueo RobinHood");
-                saqueo4.recompensaGold();
+                Incursion menor4 = new Incursion("Saqueo de los nobles malvados", "Saqueo RobinHood");
+                menor4.recompensaMenor();
                 break;
 
         }

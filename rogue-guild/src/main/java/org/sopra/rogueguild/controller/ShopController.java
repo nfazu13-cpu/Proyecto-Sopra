@@ -16,8 +16,7 @@ public class ShopController {
     private final ShopRepository repository;
     private final Scanner sc;
     private final WorldEvent worldEvent;
-
-
+    private final IncursionController incursionController;
 
     public ShopController(Player p, ViewDisplay v, ShopRepository r) {
         this.player = p;
@@ -25,6 +24,8 @@ public class ShopController {
         this.repository = r;
         this.sc = new Scanner(System.in);
         this.worldEvent = new WorldEvent();
+        this.incursionController = new IncursionController();
+
     }
 
     public void start() {
@@ -57,7 +58,9 @@ public class ShopController {
                     }
                     break;
                 case 4:
-                    // TODO Logic to ...
+                    System.out.println("Elige que incursion quieres hacer: ");
+                    int option = sc.nextInt();
+                    incursionController.submenu(opt);
                     break;
                 case 0:
                     view.quitMessage();
