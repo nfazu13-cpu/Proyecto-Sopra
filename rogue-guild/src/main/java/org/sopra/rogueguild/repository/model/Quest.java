@@ -6,6 +6,7 @@ public class Quest {
     private String description;
     private int goldReward;
     private ArrayList<Item> requiredItems = new ArrayList<>();
+    private ArrayList<ItemCategory> requiredCategories = new ArrayList<>();
     private boolean isComplete;
 
     public Quest(String description, int goldReward, ArrayList<Item> requiredItems) {
@@ -15,8 +16,15 @@ public class Quest {
         this.isComplete = false;
     }
 
+    public Quest(String description, int goldReward, ArrayList<ItemCategory> requiredCategories) {
+        setGoldReward(goldReward);
+        this.description = description;
+        this.requiredCategories = requiredCategories;
+        this.isComplete = false;
+    }
 
-    public boolean checkRequierement(Player p) {
+
+    public boolean checkRequierement(Player p) { //Specific gear
         int countItem = 0;
 
         for (Item item : requiredItems) {
@@ -24,6 +32,22 @@ public class Quest {
                 countItem++;
             }
         }
+
+        if (countItem == requiredItems.size()) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+
+    public boolean checkRequierement(Player p, ItemCategory itemCategory) { //Specific caegory
+        int countItem = 0;
+
+        
+
+
 
         if (countItem == requiredItems.size()) {
             return true;
