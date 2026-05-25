@@ -19,44 +19,9 @@ public class Incursion {
         this.shortName = shortName;
     }
 
-    public void iniciarIncursion(Player player) {
-        int opcionRecompesa = random.nextInt(3) + 1;
-        Item itemMenor;
-
-        switch (opcionRecompesa) {
-            case 1:
-                recompensaMenor();
-                this.goldReward = (int) (Math.round(this.goldReward / 5.0) * 5);
-                player.setGold(player.getGold() + this.goldReward);
-                if (player.getGold() > 500) {
-                    player.setGold(500);
-                }
-                id = random.nextInt(100) + 1;
-                player.addItem(this.id, this.itemREward);
-                break;
-            case 2:
-                recompensaItem();
-                this.goldReward = 0;
-                if (player.getGold() > 500) {
-                    player.setGold(500);
-                }
-                id = random.nextInt(100) + 1;
-                player.addItem(id, this.itemREward);
-                break;
-            case 3:
-                recompensaGold();
-                goldReward = (int) (Math.round(this.goldReward / 5.0) * 5);
-                player.setGold(player.getGold() + this.goldReward);
-                if (player.getGold() > 500) {
-                    player.setGold(500);
-                }
-
-                break;
-        }
-    }
-
-    public void recompensaMenor() {
+    public void recompensaMenor(Player player) {
         this.goldReward = random.nextInt(30) + 1;
+
         Item itemMenor;
 
         do {
@@ -65,38 +30,56 @@ public class Incursion {
 
         this.itemREward = itemMenor;
 
-        if (itemREward == null) {
-            itemREward.setName("ninguno");
-        }
+        String nombreItem = (this.itemREward != null) ? this.itemREward.getName() : "ninguno";
+        System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + nombreItem + ".");
+        this.goldReward = (int) (Math.round(this.goldReward / 5.0) * 5);
+        player.setGold(player.getGold() + this.goldReward);
 
-        System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + itemREward.getName() + ".");
+        if (player.getGold() > 500) {
+            player.setGold(500);
+            System.out.println("Solo puedes tener hasta 500 de oro");
+        }
+        id = random.nextInt(100) + 1;
+        player.addItem(this.id, this.itemREward);
     }
 
-    public void recompensaItem() {
+    public void recompensaItem(Player player) {
         Item itemMayor;
 
         do {
             itemMayor = itemGenerator.randomItemGenerator();
-        } while (itemMayor.getBasePrice() < 50);
+        } while (itemMayor.getBasePrice() <= 50);
 
         this.itemREward = itemMayor;
 
-        if (itemREward == null) {
-            itemREward.setName("ninguno");
+        String nombreItem = (this.itemREward != null) ? this.itemREward.getName() : "ninguno";
+        System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + nombreItem + ".");
+        this.goldReward = 0;
+
+        if (player.getGold() > 500) {
+            player.setGold(500);
+            System.out.println("Solo puedes tener hasta 500 de oro");
         }
 
-        System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + itemREward.getName() + ".");
+        id = random.nextInt(100) + 1;
+        player.addItem(id, this.itemREward);
+
     }
 
-    public void recompensaGold() {
+    public void recompensaGold(Player player) {
         this.goldReward = random.nextInt(500) + 1;
         this.itemREward = null;
 
-        if (itemREward == null) {
-            itemREward.setName("ninguno");
-        }
+        String nombreItem = (this.itemREward != null) ? this.itemREward.getName() : "ninguno";
+        System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + nombreItem + ".");
 
-        System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + itemREward.getName() + ".");
+        goldReward = (int) (Math.round(this.goldReward / 5.0) * 5);
+        player.setGold(player.getGold() + this.goldReward);
+
+        if (player.getGold() > 500) {
+            player.setGold(500);
+            System.out.println("Solo puedes tener hasta 500 de oro");
+        }
     }
 
 }
