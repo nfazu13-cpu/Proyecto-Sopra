@@ -1,25 +1,27 @@
 package org.sopra.rogueguild.repository;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Random;
 
-import org.sopra.rogueguild.repository.model.Armor;
 import org.sopra.rogueguild.repository.model.Item;
-import org.sopra.rogueguild.repository.model.Weapon;
+import org.sopra.rogueguild.repository.model.ItemGenerator;
 
 public class ShopRepository {
     private Map<Integer, Item> stock;
+    private Random random = new Random();
+    private ItemGenerator itemGenerator = new ItemGenerator();
+    private int id;
 
     public ShopRepository() {
         stock = new LinkedHashMap<>();
         loadInitialStock();
     }
 
-    private void loadInitialStock() {
-        stock.put(1, new Weapon("Daga de las Sombras", 150, 10));
-        stock.put(2, new Weapon("Espada del Renegado", 350, 15));
-        stock.put(3, new Armor("Armadura del Sol Naciente", 200, 5));
+    public void loadInitialStock() {
+        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
+        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
+        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
     }
 
     public Item getItem(int id) {
