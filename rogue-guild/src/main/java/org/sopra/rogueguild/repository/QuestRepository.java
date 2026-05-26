@@ -6,7 +6,7 @@ import org.sopra.rogueguild.repository.model.ItemCategory;
 import org.sopra.rogueguild.repository.model.Quest;
 
 public class QuestRepository {
-    private HashMap<String, Quest> quests;
+    private HashMap<Integer, Quest> quests;
     
     public QuestRepository() {
         quests = new HashMap<>();
@@ -16,32 +16,46 @@ public class QuestRepository {
 
 
     private void loadMissionDanzaDeMuerte() {
-        Quest q1_DanzaDeMuerte = new Quest("", 115);
+        Quest q1_DanzaDeMuerte = new Quest("Danza de Muerte", "", 115);
 
         q1_DanzaDeMuerte.addRequierement(ItemCategory.WEAPON, 2);
 
-        quests.put("Danza de Muerte", q1_DanzaDeMuerte);
+        quests.put(q1_DanzaDeMuerte.getId(), q1_DanzaDeMuerte);
     }
 
     
     private void loadMissionCaballeroDelFenix() {
-        Quest q2_CaballeroDelFenix = new Quest("", 185);
+        Quest q2_CaballeroDelFenix = new Quest("Caballero del Fénix", "", 185);
 
         q2_CaballeroDelFenix.addRequierement(ItemCategory.WEAPON, 1);
         q2_CaballeroDelFenix.addRequierement(ItemCategory.HELMET, 1);
         q2_CaballeroDelFenix.addRequierement(ItemCategory.ARMOR, 1);
         q2_CaballeroDelFenix.addRequierement(ItemCategory.BOOTS, 1);
 
-        quests.put("Caballero del Fénix", q2_CaballeroDelFenix);
+        quests.put(q2_CaballeroDelFenix.getId(), q2_CaballeroDelFenix);
     }
 
 
-    public void printQuests() {
-        int count = 0;
-        for (String missionName : quests.keySet()) {
-            count++;
-            System.out.println(count + ". " + missionName + "\n" + quests.get(missionName) + "\n");
+    public void printUncompletedQuests() {
+        for (Integer id : quests.keySet()) {
+
+            Quest tempQuest = quests.get(id);
+
+            if (!tempQuest.getIsComplete()) {
+                System.out.println(quests.get(id) + "\n");
+            }
+            
         }
     }
+
+
+    public void printAllQuests() {
+        for (Integer id : quests.keySet()) {
+
+            System.out.println(quests.get(id) + "\n");
+            
+        }
+    }
+
 
 }

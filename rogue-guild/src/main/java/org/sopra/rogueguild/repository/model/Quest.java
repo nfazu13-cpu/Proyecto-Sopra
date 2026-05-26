@@ -4,16 +4,45 @@ import java.util.HashMap;
 
 public class Quest {
 
-    private String description;
+    private final String description;
+    private final String name;
     private int goldReward;
     private HashMap<ItemCategory, Integer> requirements = new HashMap<>();
     private boolean isComplete;
 
-    public Quest(String description, int goldReward) {
+    private static int maxID = 1;
+    private final int id;
+
+    public Quest (String name, String description, int goldReward) {
         setGoldReward(goldReward);
+        this.id = setAutoID();
+        this.name = name;
         this.description = description;
         this.isComplete = false;
     }
+
+
+    public int getId() {
+        return this.id;
+    }
+
+    public boolean getIsComplete() {
+        return this.isComplete;
+    }
+
+
+    public int setAutoID() {
+        return maxID++; 
+    }
+
+    private void setGoldReward(int goldReward) {
+        if (goldReward % 5 != 0) {
+            throw new IllegalArgumentException("La recompensa debe ser múltiplo de 5.");
+        }
+
+        this.goldReward = goldReward;
+    }
+
 
     public void addRequierement(ItemCategory itemCategory, int quantity) {
         if (validateItemCategory(itemCategory) && validateQuantity(quantity)) {
@@ -21,6 +50,7 @@ public class Quest {
         }
 
     }
+
 
     public boolean validateQuantity(int quantity) {
         if (quantity <= 0) {
@@ -30,6 +60,7 @@ public class Quest {
         return true;
     }
 
+
     public boolean validateItemCategory(ItemCategory itemCategory) {
         if (itemCategory == null) {
             throw new IllegalArgumentException("La categoría no puede ser null.");
@@ -37,6 +68,7 @@ public class Quest {
 
         return true;
     }
+
 
     public boolean checkRequierement(Player p) {
 
@@ -64,13 +96,14 @@ public class Quest {
 
     }
 
-    private void setGoldReward(int goldReward) {
-        if (goldReward % 5 != 0) {
-            throw new IllegalArgumentException("La recompensa debe ser múltiplo de 5.");
-        }
 
-        this.goldReward = goldReward;
+    public String checkStatus() {
+        if (isComplete) {
+            return "¡Has completado esta misión!";
+        }
+        return "Misión no completada aún.";
     }
+
 
     public void completeMission() {
         if (isComplete) {
@@ -80,16 +113,10 @@ public class Quest {
         this.isComplete = true;
     }
 
-    public String checkStatus() {
-        if (isComplete) {
-            return "¡Has completado esta misión!";
-        }
-        return "Misión no completada aún.";
-    }
 
     @Override
     public String toString() {
-        return "'" + description + "'\nRecompensa: " + goldReward + " (oro)" + "\n" + checkStatus() + "\nRequisitos: " + requirements;
+        return id + ". " + name + "\n'" + description + "'\nRecompensa: " + goldReward + " (oro)" + "\n" + checkStatus() + "\nRequisitos: " + requirements;
     }
 
 }

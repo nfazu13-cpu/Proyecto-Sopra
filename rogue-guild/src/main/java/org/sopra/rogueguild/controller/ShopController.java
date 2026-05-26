@@ -8,7 +8,6 @@ import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.repository.model.WorldEvent;
 import org.sopra.rogueguild.view.ViewDisplay;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
-import org.sopra.rogueguild.repository.QuestRepository;
 
 public class ShopController {
 
@@ -18,16 +17,17 @@ public class ShopController {
     private final Scanner sc;
     private final WorldEvent worldEvent;
     private final IncursionController incursionController;
-    private final QuestRepository questRepository;
+    private final QuestController questController;
+    
 
-    public ShopController(Player p, ViewDisplay v, ShopRepository r, QuestRepository q) {
+    public ShopController(Player p, ViewDisplay v, ShopRepository r, QuestController qc) {
         this.player = p;
         this.view = v;
         this.repository = r;
         this.sc = new Scanner(System.in);
         this.worldEvent = new WorldEvent();
         this.incursionController = new IncursionController();
-        this.questRepository = new QuestRepository();
+        this.questController = qc;
     }
 
     public void start() {
@@ -70,7 +70,7 @@ public class ShopController {
                     incursionController.submenu(option, player);
                     break;
                 case 5:
-                    questRepository.printQuests();
+                    questController.start();
                     break;
                 case 0:
                     view.quitMessage();
