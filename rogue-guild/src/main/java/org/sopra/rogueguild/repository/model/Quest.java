@@ -1,8 +1,9 @@
 package org.sopra.rogueguild.repository.model;
+
 import java.util.HashMap;
 
 public class Quest {
-    
+
     private String description;
     private int goldReward;
     private HashMap<ItemCategory, Integer> requirements = new HashMap<>();
@@ -14,7 +15,6 @@ public class Quest {
         this.isComplete = false;
     }
 
-    
     public void addRequierement(ItemCategory itemCategory, int quantity) {
         if (validateItemCategory(itemCategory) && validateQuantity(quantity)) {
             this.requirements.put(itemCategory, quantity);
@@ -38,34 +38,31 @@ public class Quest {
         return true;
     }
 
-
     public boolean checkRequierement(Player p) {
 
         HashMap<ItemCategory, Integer> auxRequirements = new HashMap<>();
         auxRequirements.putAll(requirements);
 
-
         for (Item item : p.getInventory().values()) {
             ItemCategory tempCategory = item.getCategory();
 
             if (auxRequirements.containsKey(tempCategory)) {
-                
+
                 int requiredQuantity = auxRequirements.get(tempCategory);
                 requiredQuantity--;
-                
+
                 if (requiredQuantity <= 0) {
                     auxRequirements.remove(tempCategory);
                 } else {
                     auxRequirements.put(tempCategory, requiredQuantity);
                 }
-                
+
             }
         }
 
         return auxRequirements.isEmpty();
 
     }
-
 
     private void setGoldReward(int goldReward) {
         if (goldReward % 5 != 0) {
@@ -74,7 +71,6 @@ public class Quest {
 
         this.goldReward = goldReward;
     }
-
 
     public void completeMission() {
         if (isComplete) {
@@ -93,8 +89,7 @@ public class Quest {
 
     @Override
     public String toString() {
-        return "'" + description + "'\n\nRecompensa: " + goldReward + " (oro)" + "\n" + checkStatus() + "\nRequisitos: " + requirements;
+        return "'" + description + "'\nRecompensa: " + goldReward + " (oro)" + "\n" + checkStatus() + "\nRequisitos: " + requirements;
     }
-
 
 }

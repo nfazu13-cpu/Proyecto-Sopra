@@ -10,6 +10,8 @@ public class QuestRepository {
     
     public QuestRepository() {
         quests = new HashMap<>();
+        loadMissionDanzaDeMuerte();
+        loadMissionCaballeroDelFenix();
     }
 
 
@@ -35,9 +37,10 @@ public class QuestRepository {
 
 
     public void printQuests() {
+        int count = 0;
         for (String missionName : quests.keySet()) {
-            
-            System.out.println("- - - " + missionName + " - - -\n" + quests.get(missionName));
+            count++;
+            System.out.println(count + ". " + missionName + "\n" + quests.get(missionName) + "\n");
         }
     }
 
