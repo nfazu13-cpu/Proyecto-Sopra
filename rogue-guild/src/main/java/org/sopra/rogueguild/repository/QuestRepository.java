@@ -15,6 +15,30 @@ public class QuestRepository {
     }
 
 
+    public int getMaxID() {
+        int maxID = 0;
+    
+        for (Quest quest : quests.values()) {
+            maxID = Math.max(maxID, quest.getId());
+        }
+        
+        return maxID;
+    }
+
+    public HashMap<Integer, Quest> getQuests() {
+        return quests;
+    }
+
+    
+    public boolean isEmpty() {
+        if (quests.isEmpty()) {
+            return true;
+        } 
+
+        return false;
+    }
+
+
     private void loadMissionDanzaDeMuerte() {
         Quest q1_DanzaDeMuerte = new Quest("Danza de Muerte", "", 115);
 

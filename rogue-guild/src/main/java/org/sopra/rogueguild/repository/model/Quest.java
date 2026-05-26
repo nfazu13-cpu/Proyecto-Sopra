@@ -26,6 +26,18 @@ public class Quest {
         return this.id;
     }
 
+    public static int getMaxID() {
+        return maxID;
+    }
+
+    public int getGoldReward() {
+        return goldReward;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public boolean getIsComplete() {
         return this.isComplete;
     }
@@ -70,32 +82,31 @@ public class Quest {
     }
 
 
-    public boolean checkRequierement(Player p) {
+    public HashMap<ItemCategory, Integer> checkRequierement(Player p) {
 
-        HashMap<ItemCategory, Integer> auxRequirements = new HashMap<>();
-        auxRequirements.putAll(requirements);
+        HashMap<ItemCategory, Integer> missingRequirements = new HashMap<>();
+        missingRequirements.putAll(this.requirements);
 
         for (Item item : p.getInventory().values()) {
             ItemCategory tempCategory = item.getCategory();
 
-            if (auxRequirements.containsKey(tempCategory)) {
+            if (missingRequirements.containsKey(tempCategory)) {
 
-                int requiredQuantity = auxRequirements.get(tempCategory);
+                int requiredQuantity = missingRequirements.get(tempCategory);
                 requiredQuantity--;
 
                 if (requiredQuantity <= 0) {
-                    auxRequirements.remove(tempCategory);
+                    missingRequirements.remove(tempCategory);
                 } else {
-                    auxRequirements.put(tempCategory, requiredQuantity);
+                    missingRequirements.put(tempCategory, requiredQuantity);
                 }
 
             }
         }
 
-        return auxRequirements.isEmpty();
+        return missingRequirements;
 
     }
-
 
     public String checkStatus() {
         if (isComplete) {
@@ -105,12 +116,13 @@ public class Quest {
     }
 
 
-    public void completeMission() {
-        if (isComplete) {
-            throw new IllegalArgumentException("No se puede volver a completar esta misión.");
+    public boolean completeMission() {
+        if (this.isComplete) {
+            return false;
         }
 
         this.isComplete = true;
+        return true;
     }
 
 

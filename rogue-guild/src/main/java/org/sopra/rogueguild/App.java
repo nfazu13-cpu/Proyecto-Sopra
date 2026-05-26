@@ -9,12 +9,14 @@ import org.sopra.rogueguild.controller.QuestController;
 public class App {
     public static void main(String[] args) {
         ShopRepository repository = new ShopRepository();
-        QuestController questController = new QuestController(); 
+        
         
         ViewDisplay view = new ViewDisplay();
         Player player = new Player("Iñigo Montolla", 500);
 
+        QuestController questController = new QuestController(player); 
         ShopController controller = new ShopController(player, view, repository, questController);
+        
         controller.start();
     }
 }
