@@ -1,64 +1,73 @@
 package org.sopra.rogueguild.repository.model;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Quest {
     
     private String description;
     private int goldReward;
-    private ArrayList<Item> requiredItems = new ArrayList<>();
-    private ArrayList<ItemCategory> requiredCategories = new ArrayList<>();
+    private HashMap<ItemCategory, Integer> requirements = new HashMap<>();
     private boolean isComplete;
 
-    public Quest(String description, int goldReward, ArrayList<Item> requiredItems) {
+    public Quest(String description, int goldReward) {
         setGoldReward(goldReward);
         this.description = description;
-        this.requiredItems = requiredItems;
         this.isComplete = false;
     }
 
-    public Quest(String description, int goldReward, ArrayList<ItemCategory> requiredCategories) {
-        setGoldReward(goldReward);
-        this.description = description;
-        this.requiredCategories = requiredCategories;
-        this.isComplete = false;
+    
+    public void addRequierement(ItemCategory itemCategory, int quantity) {
+        if (validateItemCategory(itemCategory) && validateQuantity(quantity)) {
+            this.requirements.put(itemCategory, quantity);
+        }
+
+    }
+
+    public boolean validateQuantity(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("La cantidad no puede ser cero o inferior.");
+        }
+
+        return true;
+    }
+
+    public boolean validateItemCategory(ItemCategory itemCategory) {
+        if (itemCategory == null) {
+            throw new IllegalArgumentException("La categoría no puede ser null.");
+        }
+
+        return true;
     }
 
 
-    public boolean checkRequierement(Player p) { //Specific gear
-        int countItem = 0;
+    public boolean checkRequierement(Player p) {
 
-        for (Item item : requiredItems) {
-            if (p.getInventory().containsValue(item)) {
-                countItem++;
+        HashMap<ItemCategory, Integer> auxRequirements = new HashMap<>();
+        auxRequirements.putAll(requirements);
+
+
+        for (Item item : p.getInventory().values()) {
+            ItemCategory tempCategory = item.getCategory();
+
+            if (auxRequirements.containsKey(tempCategory)) {
+                
+                int requiredQuantity = auxRequirements.get(tempCategory);
+                requiredQuantity--;
+                
+                if (requiredQuantity <= 0) {
+                    auxRequirements.remove(tempCategory);
+                } else {
+                    auxRequirements.put(tempCategory, requiredQuantity);
+                }
+                
             }
         }
 
-        if (countItem == requiredItems.size()) {
-            return true;
-        }
-
-        return false;
+        return auxRequirements.isEmpty();
 
     }
 
 
-    public boolean checkRequierement(Player p, ItemCategory itemCategory) { //Specific caegory
-        int countItem = 0;
-
-        
-
-
-
-        if (countItem == requiredItems.size()) {
-            return true;
-        }
-
-        return false;
-
-    }
-
-
-    public void setGoldReward(int goldReward) {
+    private void setGoldReward(int goldReward) {
         if (goldReward % 5 != 0) {
             throw new IllegalArgumentException("La recompensa debe ser múltiplo de 5.");
         }
@@ -75,6 +84,17 @@ public class Quest {
         this.isComplete = true;
     }
 
+    public String checkStatus() {
+        if (isComplete) {
+            return "¡Has completado esta misión!";
+        }
+        return "Misión no completada aún.";
+    }
+
+    @Override
+    public String toString() {
+        return "'" + description + "''\n\nRecomensa: " + goldReward + "(oro)" + "\n" + checkStatus() + "\nRequisitos: " + re;
+    }
 
 
 }
