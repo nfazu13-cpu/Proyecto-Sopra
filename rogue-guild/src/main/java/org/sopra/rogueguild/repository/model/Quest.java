@@ -93,7 +93,7 @@ public class Quest {
 
     @Override
     public String toString() {
-        return "'" + description + "''\n\nRecomensa: " + goldReward + "(oro)" + "\n" + checkStatus() + "\nRequisitos: " + re;
+        return "'" + description + "'\n\nRecompensa: " + goldReward + " (oro)" + "\n" + checkStatus() + "\nRequisitos: " + requirements;
     }
 
 

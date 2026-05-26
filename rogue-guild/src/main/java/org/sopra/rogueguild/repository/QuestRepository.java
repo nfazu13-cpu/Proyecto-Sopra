@@ -6,7 +6,6 @@ import org.sopra.rogueguild.repository.model.ItemCategory;
 import org.sopra.rogueguild.repository.model.Quest;
 
 public class QuestRepository {
-    private String name;
     private HashMap<String, Quest> quests;
     
     public QuestRepository() {
@@ -32,6 +31,14 @@ public class QuestRepository {
         q2_CaballeroDelFenix.addRequierement(ItemCategory.BOOTS, 1);
 
         quests.put("Caballero del Fénix", q2_CaballeroDelFenix);
+    }
+
+
+    public void printQuests() {
+        for (String missionName : quests.keySet()) {
+            
+            System.out.println("- - - " + missionName + " - - -\n" + quests.get(missionName));
+        }
     }
 
 }
