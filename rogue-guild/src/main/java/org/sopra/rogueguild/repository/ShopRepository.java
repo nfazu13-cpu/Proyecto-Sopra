@@ -19,10 +19,10 @@ public class ShopRepository {
     }
 
     public void loadInitialStock() {
+        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
+        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
+        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
         stock.clear();
-        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
-        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
-        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
     }
 
     public Item getItem(int id) {
