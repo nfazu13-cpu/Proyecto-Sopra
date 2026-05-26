@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 import org.sopra.rogueguild.repository.ShopRepository;
 import org.sopra.rogueguild.repository.model.Item;
+import org.sopra.rogueguild.repository.model.ItemCategory;
+import org.sopra.rogueguild.repository.model.ItemGenerator;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.repository.model.WorldEvent;
 import org.sopra.rogueguild.view.ViewDisplay;
@@ -72,16 +74,21 @@ public class ShopController {
                     System.out.println("0. Salir de Incursiones");
 
                     int option = sc.nextInt();
-                    sc.next();
+
                     incursionController.submenu(option, player);
                     break;
                 case 5:
                     questRepository.printQuests();
                     break;
                 case 6:
+                    System.out.println("Que quieres equiparte? ");
+                    System.out.println("1. Equip Armor");
+                    System.out.println("2. Equip Boots");
+                    System.out.println("3. Equip Helmet");
+                    System.out.println("4. Equip Weapon");
+
                     int op = sc.nextInt();
-                    sc.next();
-                    equipController.submenu(op);
+                    submenuEquipo(op);
                     break;
                 case 0:
                     view.quitMessage();
@@ -124,6 +131,28 @@ public class ShopController {
         player.setGold(player.getGold() + precioRedondeado);
 
         System.out.println("Has vendido " + itemDelJugador.getName() + " por " + precioRedondeado + " monedas.");
+    }
+
+    private void submenuEquipo(int option) {
+
+        switch (option) {
+            case 1:
+                player.printInventoryByCategory(ItemCategory.ARMOR);
+                equipController.equipArmor(option);
+                break;
+            case 2:
+                player.printInventoryByCategory(ItemCategory.BOOTS);
+                break;
+            case 3:
+                player.printInventoryByCategory(ItemCategory.HELMET);
+                break;
+            case 4:
+                player.printInventoryByCategory(ItemCategory.WEAPON);
+                break;
+            case 0:
+
+                break;
+        }
     }
 
 }
