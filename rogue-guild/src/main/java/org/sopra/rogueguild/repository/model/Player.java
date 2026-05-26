@@ -7,6 +7,7 @@ public class Player {
     private String name;
     private int gold;
     private Map<Integer, Item> inventory = new HashMap<>();
+    private ArrayList<Item> Armor = new ArrayList<Item>();
 
     public Player(String name, int gold) {
         this.name = name;
@@ -47,5 +48,20 @@ public class Player {
         for (Item item : inventory.values()) {
             System.out.println(item);
         }
+    }
+
+    public void printInventoryByCategory(ItemCategory category) {
+        System.out.println("--- Objetos de la categoría: " + category + " ---");
+        for (Item item : inventory.values()) {
+            if (item.getCategory() == category) {
+                System.out.println(item);
+            }
+        }
+    }
+
+    public void itemEquipped(Item item) {
+        System.out.println("Que quieres equipar?  ");
+        System.out.println("1 ");
+
     }
 }
