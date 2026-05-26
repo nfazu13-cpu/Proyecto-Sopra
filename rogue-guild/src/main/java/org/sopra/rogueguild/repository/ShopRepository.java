@@ -19,6 +19,7 @@ public class ShopRepository {
     }
 
     public void loadInitialStock() {
+        stock.clear();
         stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
         stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
         stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());

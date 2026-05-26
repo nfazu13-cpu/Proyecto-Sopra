@@ -67,6 +67,9 @@ public class ShopController {
                     int option = sc.nextInt();
                     incursionController.submenu(option, player);
                     break;
+                case 5:
+
+                    break;
                 case 0:
                     view.quitMessage();
                     break;
