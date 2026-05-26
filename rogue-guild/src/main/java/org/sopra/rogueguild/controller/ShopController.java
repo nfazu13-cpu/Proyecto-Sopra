@@ -19,8 +19,9 @@ public class ShopController {
     private final WorldEvent worldEvent;
     private final IncursionController incursionController;
     private final QuestRepository questRepository;
+    private final EquipoController equipController;
 
-    public ShopController(Player p, ViewDisplay v, ShopRepository r, QuestRepository q) {
+    public ShopController(Player p, ViewDisplay v, ShopRepository r, QuestRepository q, EquipoController e) {
         this.player = p;
         this.view = v;
         this.repository = r;
@@ -28,8 +29,12 @@ public class ShopController {
         this.worldEvent = new WorldEvent();
         this.incursionController = new IncursionController();
         this.questRepository = new QuestRepository();
+        this.equipController = new EquipoController();
     }
 
+    /**
+     * 
+     */
     public void start() {
         worldEvent.randomWorldEvent(repository);
         view.showWorldEventMessage(worldEvent);
@@ -67,10 +72,16 @@ public class ShopController {
                     System.out.println("0. Salir de Incursiones");
 
                     int option = sc.nextInt();
+                    sc.next();
                     incursionController.submenu(option, player);
                     break;
                 case 5:
                     questRepository.printQuests();
+                    break;
+                case 6:
+                    int op = sc.nextInt();
+                    sc.next();
+                    equipController.submenu(op);
                     break;
                 case 0:
                     view.quitMessage();
