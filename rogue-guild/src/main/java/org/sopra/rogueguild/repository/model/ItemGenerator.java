@@ -1,41 +1,34 @@
 package org.sopra.rogueguild.repository.model;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemGenerator {
 
-    private final String[] WEAPON_PREFIXES = { "Espada", "Hacha", "Daga", "Lanza", "Mandoble", "Arco", "Maza",
-            "Bastón" };
-    private final String[] ARMOR_PREFIXES = { "Armadura", "Cota", "Peto", "Coraza", "Malla" };
-    private final String[] POTION_PREFIXES = { "Poción", "Elixir", "Brebaje", "Ungüento", "Tintura" };
-    private final String[] HELMET_PREFIXES = { "Yelmo", "Casco", "Celada", "Capucha", "Visera" };
-    private final String[] BOOTS_PREFIXES = { "Botas", "Grebas", "Sandalias", "Escarpines" };
-    private final String[] OTHERS_PREFIXES = { "Piedra", "Mineral", "Colgante", "Metal" };
+    private final String[] WEAPON_PREFIXES = {"Espada", "Hacha", "Daga", "Lanza", "Mandoble", "Arco", "Maza", "Bastón"};
+    private final String[] ARMOR_PREFIXES = {"Armadura", "Cota", "Peto", "Coraza", "Malla"};
+    private final String[] POTION_PREFIXES = {"Poción", "Elixir", "Brebaje", "Ungüento", "Tintura"};
+    private final String[] HELMET_PREFIXES = {"Yelmo", "Casco", "Celada", "Capucha", "Visera"};
+    private final String[] BOOTS_PREFIXES = {"Botas", "Grebas", "Sandalias", "Escarpines"};
 
     private final String[] NATURE_SUFIXES = {
-            "de fuego", "de hielo", "del rayo", "de la tormenta", "de la sombra", "de la luz",
-            "de hierro", "de plata", "de obsidiana", "de acero rúnico", "de bronce antiguo",
-            "del dragón", "del fénix", "del caos", "del vacío", "del alba", "de la luna",
-            "del norte", "de las ruinas", "del bosque maldito", "de las profundidades", "de la montaña"
+        "de fuego", "de hielo", "del rayo", "de la tormenta", "de la sombra", "de la luz", 
+        "de hierro", "de plata", "de obsidiana", "de acero rúnico", "de bronce antiguo",  
+        "del dragón", "del fénix", "del caos", "del vacío", "del alba", "de la luna",      
+        "del norte", "de las ruinas", "del bosque maldito", "de las profundidades", "de la montaña" 
     };
 
     private final List<String> generatedNames = new ArrayList<>();
 
     public Item randomItemGenerator() {
-        Random random = new Random();
         String nameItem = "";
         int randomBasePrice = 0;
-        int randomPrefixType, randomPrefix;
+        int randomPrefixType;
         Item newItem = null;
 
         do {
-            int dado = random.nextInt(100) + 1;
 
-            if (dado > 5) {
-                randomPrefix = (int) (Math.random() * 5) + 1;
-            } else {
-                randomPrefix = 6;
-            }
+            int randomPrefix = (int) (Math.random() * 5) + 1;
 
             switch (randomPrefix) {
                 case 1:
@@ -43,10 +36,10 @@ public class ItemGenerator {
                     nameItem = WEAPON_PREFIXES[randomPrefixType];
                     nameItem += " " + NATURE_SUFIXES[(int) (Math.random() * NATURE_SUFIXES.length)];
 
-                    randomBasePrice = ((int) (Math.random() * 41) + 20) * 5; // 100 - 300
-
-                    int baseDamage = randomBasePrice / 10; // 10 - 30 according to price
-                    int randomDamage = baseDamage + (int)(Math.random() * 5); // +0 - +4
+                    randomBasePrice = ((int) (Math.random() * 41) + 20) * 5; // 100 - 300 gold
+                    
+                    int baseDamage = randomBasePrice / 10;
+                    int randomDamage = baseDamage + (int)(Math.random() * 5); // 10 - 34 damage
 
                     newItem = new Weapon(nameItem, randomBasePrice, randomDamage);
                     break;
@@ -56,10 +49,10 @@ public class ItemGenerator {
                     nameItem = ARMOR_PREFIXES[randomPrefixType];
                     nameItem += " " + NATURE_SUFIXES[(int) (Math.random() * NATURE_SUFIXES.length)];
 
-                    randomBasePrice = ((int) (Math.random() * 31) + 10) * 5; // 50 - 200
+                    randomBasePrice = ((int) (Math.random() * 31) + 10) * 5; // 50 - 200 gold
 
-                    int baseShield = randomBasePrice / 15; // 3 - 13 according to price
-                    int randomShield = baseShield + (int)(Math.random() * 3); // +0 - +2
+                    int baseShield = randomBasePrice / 15;
+                    int randomShield = baseShield + (int)(Math.random() * 3); // 3 - 15 defense
 
                     newItem = new Armor(nameItem, randomBasePrice, randomShield);
                     break;
@@ -69,9 +62,9 @@ public class ItemGenerator {
                     nameItem = POTION_PREFIXES[randomPrefixType];
                     nameItem += " " + NATURE_SUFIXES[(int) (Math.random() * NATURE_SUFIXES.length)];
 
-                    randomBasePrice = ((int) (Math.random() * 7) + 2) * 5; // 10 - 40
+                    randomBasePrice = ((int) (Math.random() * 7) + 2) * 5; // 10 - 40 gold
 
-                    newItem = new Potion(nameItem, randomBasePrice);
+                    newItem = new Potion(nameItem, randomBasePrice); 
                     break;
 
                 case 4:
@@ -79,9 +72,12 @@ public class ItemGenerator {
                     nameItem = HELMET_PREFIXES[randomPrefixType];
                     nameItem += " " + NATURE_SUFIXES[(int) (Math.random() * NATURE_SUFIXES.length)];
 
-                    randomBasePrice = ((int) (Math.random() * 27) + 4) * 5; // 20 - 150
+                    randomBasePrice = ((int) (Math.random() * 27) + 4) * 5; // 20 - 150 gold
 
-                    newItem = new Helmet(nameItem, randomBasePrice);
+                    int baseHelmetShield = randomBasePrice / 15;
+                    int helmetShield = baseHelmetShield + (int)(Math.random() * 3); // 1 - 12 defense
+
+                    newItem = new Helmet(nameItem, randomBasePrice, helmetShield);
                     break;
 
                 case 5:
@@ -89,20 +85,13 @@ public class ItemGenerator {
                     nameItem = BOOTS_PREFIXES[randomPrefixType];
                     nameItem += " " + NATURE_SUFIXES[(int) (Math.random() * NATURE_SUFIXES.length)];
 
-                    randomBasePrice = ((int) (Math.random() * 17) + 4) * 5; // 20 - 100
+                    randomBasePrice = ((int) (Math.random() * 17) + 4) * 5; // 20 - 100 gold
 
-                    newItem = new Boots(nameItem, randomBasePrice);
+                    int baseBootsShield = randomBasePrice / 33;
+                    int bootsShield = baseBootsShield + (int)(Math.random() * 3); // 1 - 5 defense
+
+                    newItem = new Boots(nameItem, randomBasePrice, bootsShield);
                     break;
-                case 6:
-                    randomPrefixType = (int) (Math.random() * OTHERS_PREFIXES.length);
-                    nameItem = OTHERS_PREFIXES[randomPrefixType];
-                    nameItem += " " + NATURE_SUFIXES[(int) (Math.random() * NATURE_SUFIXES.length)];
-
-                    randomBasePrice = ((int) (Math.random() * 11) + 50) * 5; // 250 - 300
-
-                    newItem = new Other(nameItem, randomBasePrice);
-                    break;
-
             }
 
         } while (generatedNames.contains(nameItem));
