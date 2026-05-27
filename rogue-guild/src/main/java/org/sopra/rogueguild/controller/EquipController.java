@@ -31,7 +31,7 @@ public class EquipController {
             System.out.println("2.Equipar Botas");
             System.out.println("3.Equipar Casco");
             System.out.println("4.Equipar Arma");
-            System.out.println("0.Equipar Armadura");
+            System.out.println("0.Salir");
 
             idEquipment = askForInt();
 
@@ -90,6 +90,7 @@ public class EquipController {
         if (idItem <= 0) {
             System.out.println("El id que estas poniendo no lo encuentro o no es valido");
         }
+
     }
 
     public int askForInt() {

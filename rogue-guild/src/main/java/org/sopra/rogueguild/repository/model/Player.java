@@ -33,6 +33,7 @@ public class Player {
     }
 
     public void setItemEquipped(HashMap<ItemCategory, Item[]> itemEquipped) {
+        this.itemEquipped = new HashMap<>();
         this.itemEquipped.put(ItemCategory.ARMOR, maxItems(1));
         this.itemEquipped.put(ItemCategory.BOOTS, maxItems(1));
         this.itemEquipped.put(ItemCategory.HELMET, maxItems(1));
