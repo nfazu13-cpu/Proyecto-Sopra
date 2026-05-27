@@ -13,7 +13,7 @@ public class Player {
     public Player(String name, int gold) {
         this.name = name;
         this.gold = gold;
-        setItemEquipped();
+        setItemEquipped(itemEquipped);
     }
 
     public String getName() {
@@ -32,17 +32,31 @@ public class Player {
         this.gold = gold;
     }
 
-    public void setItemEquipped() {
-        this.itemEquipped = new HashMap<>();
-
+    public void setItemEquipped(HashMap<ItemCategory, Item[]> itemEquipped) {
         this.itemEquipped.put(ItemCategory.ARMOR, maxItems(1));
         this.itemEquipped.put(ItemCategory.BOOTS, maxItems(1));
         this.itemEquipped.put(ItemCategory.HELMET, maxItems(1));
         this.itemEquipped.put(ItemCategory.WEAPON, maxItems(2));
     }
 
+    public void equipItem(Item nuevoItem) {
+        ItemCategory categoria = nuevoItem.getCategory();
+        Item[] ranuras = this.itemEquipped.get(categoria);
+
+        if (ranuras.length == 1) {
+            ranuras[0] = nuevoItem;
+        } else {
+            if (ranuras[0] == null) {
+                ranuras[0] = nuevoItem;
+            } else {
+                ranuras[1] = nuevoItem;
+            }
+        }
+
+    }
+
     private Item[] maxItems(int numMax) {
-        Item[] maxItems = new Item[numMax]; 
+        Item[] maxItems = new Item[numMax];
         return maxItems;
     }
 
@@ -77,12 +91,5 @@ public class Player {
             }
         }
     }
-
-
-    
-
-
-
-
 
 }
