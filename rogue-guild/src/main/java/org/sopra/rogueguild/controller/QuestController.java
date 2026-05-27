@@ -8,9 +8,8 @@ import org.sopra.rogueguild.repository.QuestRepository;
 import org.sopra.rogueguild.repository.model.Quest;
 import org.sopra.rogueguild.repository.model.ItemCategory;
 
-
 public class QuestController {
-    
+
     private final Player player;
     private final QuestRepository questRepository;
     private final Scanner sc = new Scanner(System.in);
@@ -21,7 +20,6 @@ public class QuestController {
         this.questRepository = new QuestRepository();
         this.player = p;
     }
-    
 
     public void start() {
         if (questRepository.isEmpty()) {
@@ -38,12 +36,12 @@ public class QuestController {
 
                 idMission = askForInt();
                 idMission = validateMissionID(idMission);
-                
+
                 if (idMission == -1) {
                     System.err.println("Parece que esa misión no está en la lista... \nPulsa 'ENTER' para continuar: ");
                     cleanBuffer();
                 }
-                
+
             } while (idMission == -1);
 
             if (idMission == 0) {
@@ -58,26 +56,24 @@ public class QuestController {
                 if (missingRequirements.isEmpty()) {
                     System.out.println("¡Cumples los requisitos para la misión!");
                     if (selected.completeMission()) {
-                        System.out.println("Por ello... ¡has sido capaz de finalizar la misión " + selected.getName() + " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
-                        
+                        System.out.println("Por ello... ¡has sido capaz de finalizar la misión " + selected.getName()
+                                + " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
+
                         int totalReward = player.getGold() + selected.getGoldReward();
                         player.setGold(totalReward);
                     } else {
                         System.err.println("Esta misión ya ha sido completada anteriormente.");
                     }
 
-
                 } else {
                     System.out.println("Para realizar esta misión, necesitas los siguientes objetos:");
                     System.out.println(missingRequirements);
-                } 
+                }
             }
-    
+
         }
 
-        
     }
-
 
     public Quest missionSelector(int idMission, Player player) {
 
@@ -94,17 +90,16 @@ public class QuestController {
         if (questRepository.getQuests().containsKey(idMission)) {
             return idMission;
         }
-        
+
         return -1;
     }
 
-    //TODO Hacer una clase padre con los dos métodos de abajo. Código IDÉNTICO en EquipController
     public int askForInt() {
         if (sc.hasNextInt()) {
             int number = sc.nextInt();
             cleanBuffer();
             return number;
-        } else { 
+        } else {
             cleanBuffer();
             return -1;
         }
@@ -113,6 +108,5 @@ public class QuestController {
     public void cleanBuffer() {
         sc.nextLine();
     }
-
 
 }
