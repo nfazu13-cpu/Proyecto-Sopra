@@ -86,7 +86,19 @@ public class QuestController {
 
     }
 
+    public int validateMissionID(int idMission) {
+        if (idMission == 0) {
+            return 0;
+        }
 
+        if (questRepository.getQuests().containsKey(idMission)) {
+            return idMission;
+        }
+        
+        return -1;
+    }
+
+    //TODO Hacer una clase padre con los dos métodos de abajo. Código IDÉNTICO en EquipController
     public int askForInt() {
         if (sc.hasNextInt()) {
             int number = sc.nextInt();
@@ -97,14 +109,6 @@ public class QuestController {
             return -1;
         }
     }
-
-    public int validateMissionID(int idMission) {
-        if (idMission < 0 || idMission > maxMissionID) {
-            return -1;
-        }
-        return idMission;
-    }
-
 
     public void cleanBuffer() {
         sc.nextLine();

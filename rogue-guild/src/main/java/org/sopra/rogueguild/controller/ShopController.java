@@ -19,9 +19,9 @@ public class ShopController {
     private final WorldEvent worldEvent;
     private final IncursionController incursionController;
     private final QuestController questController;
-    
+    private final EquipController equipController;
 
-    public ShopController(Player p, ViewDisplay v, ShopRepository r, QuestController qc) {
+    public ShopController(Player p, ViewDisplay v, ShopRepository r, QuestController qc, EquipController ec) {
         this.player = p;
         this.view = v;
         this.repository = r;
@@ -29,6 +29,7 @@ public class ShopController {
         this.worldEvent = new WorldEvent();
         this.incursionController = new IncursionController();
         this.questController = qc;
+        this.equipController = ec;
     }
 
     public void start() {
@@ -74,8 +75,7 @@ public class ShopController {
                     questController.start();
                     break;
                 case 6:
-                    
-                    
+                    equipController.start();
                     break;
                 case 0:
                     view.quitMessage();

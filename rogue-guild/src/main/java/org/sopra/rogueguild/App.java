@@ -4,6 +4,7 @@ import org.sopra.rogueguild.controller.ShopController;
 import org.sopra.rogueguild.repository.ShopRepository;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.view.ViewDisplay;
+import org.sopra.rogueguild.controller.EquipController;
 import org.sopra.rogueguild.controller.QuestController;
 
 public class App {
@@ -15,7 +16,8 @@ public class App {
         Player player = new Player("Iñigo Montolla", 500);
 
         QuestController questController = new QuestController(player); 
-        ShopController controller = new ShopController(player, view, repository, questController);
+        EquipController equipController = new EquipController(player);
+        ShopController controller = new ShopController(player, view, repository, questController, equipController);
         
         controller.start();
     }
