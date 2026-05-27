@@ -7,7 +7,6 @@ public class QuestInventory extends Quest {
 
     public QuestInventory(String name, String description, int goldReward) {
         super(name, description, goldReward);
-        this.type = 1;
     }
 
 

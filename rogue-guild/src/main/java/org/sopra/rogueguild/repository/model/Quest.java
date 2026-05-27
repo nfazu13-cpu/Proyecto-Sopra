@@ -9,7 +9,6 @@ public class Quest {
     private int goldReward;
     protected HashMap<ItemCategory, Integer> requirements = new HashMap<>();
     private boolean isComplete;
-    protected int type;
 
     private static int maxID = 1;
     private final int id;
@@ -37,10 +36,6 @@ public class Quest {
 
     public String getName() {
         return name;
-    }
-
-    public int getType() {
-        return type;
     }
 
     public boolean getIsComplete() {
