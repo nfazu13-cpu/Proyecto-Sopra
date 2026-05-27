@@ -8,4 +8,10 @@ public class Weapon extends Item {
         super(name, price, ItemCategory.WEAPON);
         this.damage = damage;
     }
+
+  @Override
+  public String toString() {
+      return super.toString() + "\nDaño: " + this.damage;
+  }
+
 }

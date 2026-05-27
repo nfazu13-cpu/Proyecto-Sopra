@@ -6,14 +6,8 @@ import org.sopra.rogueguild.repository.QuestRepository;
 import org.sopra.rogueguild.repository.model.Quest;
 import org.sopra.rogueguild.repository.model.ItemCategory;
 
-<<<<<<< HEAD
-
 public class QuestController extends UtilController {
-    
-=======
-public class QuestController {
 
->>>>>>> 76fdc96ebcded9c82cf74b8756cd1757d030a907
     private final Player player;
     private final QuestRepository questRepository;
 
@@ -96,23 +90,5 @@ public class QuestController {
 
         return -1;
     }
-
-<<<<<<< HEAD
-=======
-    public int askForInt() {
-        if (sc.hasNextInt()) {
-            int number = sc.nextInt();
-            cleanBuffer();
-            return number;
-        } else {
-            cleanBuffer();
-            return -1;
-        }
-    }
-
-    public void cleanBuffer() {
-        sc.nextLine();
-    }
->>>>>>> 76fdc96ebcded9c82cf74b8756cd1757d030a907
 
 }
