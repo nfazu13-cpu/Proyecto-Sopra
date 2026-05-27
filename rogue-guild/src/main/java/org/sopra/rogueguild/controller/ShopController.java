@@ -18,7 +18,6 @@ public class ShopController {
     private final WorldEvent worldEvent;
     private final IncursionController incursionController;
     private final QuestController questController;
-    
 
     public ShopController(Player p, ViewDisplay v, ShopRepository r, QuestController qc) {
         this.player = p;
@@ -71,6 +70,9 @@ public class ShopController {
                     break;
                 case 5:
                     questController.start();
+                    break;
+                case 6:
+
                     break;
                 case 0:
                     view.quitMessage();
