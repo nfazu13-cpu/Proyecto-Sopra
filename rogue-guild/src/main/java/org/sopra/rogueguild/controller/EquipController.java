@@ -5,20 +5,16 @@ import java.util.Map;
 import java.util.Scanner;
 
 import org.sopra.rogueguild.repository.model.Item;
+import org.sopra.rogueguild.repository.model.ItemCategory;
 import org.sopra.rogueguild.repository.model.Player;
 
 public class EquipController {
     Player player;
+
     private final Scanner sc = new Scanner(System.in);
 
     public EquipController(Player player) {
         this.player = player;
-    }
-
-    public Item equip(int id) {
-        Map<Integer, Item> inventarioJugador = player.getInventory();
-        Item item = inventarioJugador.get(id);
-        return item;
     }
 
     public void start() {
@@ -28,56 +24,80 @@ public class EquipController {
         } else {
 
             int idEquipment;
-            do {
-                player.printInventory();
 
-                System.out.println("[X] Seleciona el ID de la pieza de armadura que desées equipar:");
-                System.out.println("[0] Salir");
+            System.out.println("Que quieres equipar: ");
 
-                idEquipment = askForInt();
-                idEquipment = validateEquipmentID(idEquipment);
+            System.out.println("1.Equipar Armadura");
+            System.out.println("2.Equipar Botas");
+            System.out.println("3.Equipar Casco");
+            System.out.println("4.Equipar Arma");
+            System.out.println("0.Equipar Armadura");
 
-                    
-                if (idEquipment == -1) {
-                    System.err.println("Parece que ese objeto no está en el inventario... \nPulsa 'ENTER' para continuar: ");
-                    cleanBuffer();
-                }
+            idEquipment = askForInt();
 
-            } while (idEquipment == -1);
+            switch (idEquipment) {
+                case 1:
+                    player.printInventoryByCategory(ItemCategory.ARMOR);
+                    idEquipment = askForInt();
+                    validateEquipmentID(idEquipment);
+                    equip(idEquipment);
+                    break;
 
-            if (idEquipment == 0) {
-                System.out.println("Saliendo de la selección de equipamiento...");
-            } else {
+                case 2:
+                    player.printInventoryByCategory(ItemCategory.BOOTS);
+                    idEquipment = askForInt();
+                    validateEquipmentID(idEquipment);
+                    equip(idEquipment);
+                    break;
 
-                //TODO lógica de equipar items del inventario
+                case 3:
+                    player.printInventoryByCategory(ItemCategory.HELMET);
+                    idEquipment = askForInt();
+                    validateEquipmentID(idEquipment);
+                    equip(idEquipment);
+                    break;
 
+                case 4:
+                    player.printInventoryByCategory(ItemCategory.WEAPON);
+                    idEquipment = askForInt();
+                    validateEquipmentID(idEquipment);
+                    equip(idEquipment);
+                    break;
+                case 0:
+                    System.out.println("Saliendo de equipamiento...");
+                    break;
+                default:
+                    System.out.println("No es valido");
+                    break;
             }
 
         }
 
     }
 
+    public void equip(int id) {
+        Map<Integer, Item> inventarioJugador = player.getInventory();
+        Item item = inventarioJugador.get(id);
 
-    public int validateEquipmentID(int idItem) {
-        if (idItem == 0) {
-            return 0;
-        }
+        if (item != null) {
+            ItemCategory itemCategory = item.getCategory();
 
-        if (player.getInventory().containsKey(idItem)) {
-            return idItem;
+            player.equipItem(item);
         }
-        
-        return -1;
     }
 
+    public void validateEquipmentID(int idItem) {
+        if (idItem <= 0) {
+            System.out.println("El id que estas poniendo no lo encuentro o no es valido");
+        }
+    }
 
-    //TODO Hacer una clase padre con los dos métodos de abajo. Código IDÉNTICO en QuestController
     public int askForInt() {
         if (sc.hasNextInt()) {
             int number = sc.nextInt();
             cleanBuffer();
             return number;
-        } else { 
+        } else {
             cleanBuffer();
             return -1;
         }
