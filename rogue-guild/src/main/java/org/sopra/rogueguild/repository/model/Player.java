@@ -8,6 +8,7 @@ public class Player {
     private int gold;
     private Map<Integer, Item> inventory = new HashMap<>();
     private ArrayList<Item> Armor = new ArrayList<Item>();
+    private HashMap<ItemCategory, Item[]> itemEquipped;
 
     public Player(String name, int gold) {
         this.name = name;
@@ -28,6 +29,18 @@ public class Player {
 
     public void setGold(int gold) {
         this.gold = gold;
+    }
+
+    public void setItemEquipped(HashMap<ItemCategory, Item[]> itemEquipped) {
+        this.itemEquipped.put(ItemCategory.ARMOR, maxItems(1));
+        this.itemEquipped.put(ItemCategory.BOOTS, maxItems(1));
+        this.itemEquipped.put(ItemCategory.HELMET, maxItems(1));
+        this.itemEquipped.put(ItemCategory.WEAPON, maxItems(2));
+    }
+
+    private Item[] maxItems(int numMax) {
+        Item[] maxItems = new Item[numMax]; 
+        return maxItems;
     }
 
     public void buy(Item item) {
@@ -61,5 +74,12 @@ public class Player {
             }
         }
     }
+
+
+    
+
+
+
+
 
 }
