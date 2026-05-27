@@ -1,19 +1,16 @@
 package org.sopra.rogueguild.controller;
 
 import java.util.HashMap;
-import java.util.Scanner;
-
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.repository.QuestRepository;
 import org.sopra.rogueguild.repository.model.Quest;
 import org.sopra.rogueguild.repository.model.ItemCategory;
 
 
-public class QuestController {
+public class QuestController extends UtilController {
     
     private final Player player;
     private final QuestRepository questRepository;
-    private final Scanner sc = new Scanner(System.in);
 
     private int maxMissionID;
 
@@ -36,12 +33,12 @@ public class QuestController {
                 System.out.println("[X]¡Seleciona el ID de una misión para aventurarte en ella!:");
                 System.out.println("[0] Salir");
 
-                idMission = askForInt();
+                idMission = super.askForInt();
                 idMission = validateMissionID(idMission);
                 
                 if (idMission == -1) {
                     System.err.println("Parece que esa misión no está en la lista... \nPulsa 'ENTER' para continuar: ");
-                    cleanBuffer();
+                    super.cleanBuffer();
                 }
                 
             } while (idMission == -1);
@@ -94,24 +91,8 @@ public class QuestController {
         if (questRepository.getQuests().containsKey(idMission)) {
             return idMission;
         }
-        
+
         return -1;
-    }
-
-    //TODO Hacer una clase padre con los dos métodos de abajo. Código IDÉNTICO en EquipController
-    public int askForInt() {
-        if (sc.hasNextInt()) {
-            int number = sc.nextInt();
-            cleanBuffer();
-            return number;
-        } else { 
-            cleanBuffer();
-            return -1;
-        }
-    }
-
-    public void cleanBuffer() {
-        sc.nextLine();
     }
 
 
