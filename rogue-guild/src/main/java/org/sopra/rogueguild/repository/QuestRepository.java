@@ -15,7 +15,7 @@ public class QuestRepository {
         loadMissionGuardianDeAcero();
         loadMissionMaestroDeArmas();
         loadMissionViajeroErrante();
-        loadMissionCaminoDelCampeon();
+        loadMissionInfiltracionSilenciosa();
     }
 
 
@@ -63,40 +63,37 @@ public class QuestRepository {
         quests.put(q2_CaballeroDelFenix.getId(), q2_CaballeroDelFenix);
     }
 
-    //Baseds on the player's gear | IN
-    private void loadMissionGuardianDeAcero() {
-        Quest q3_GuardianDeAcero = new Quest("Guardián de Acero","Equipa una armadura pesada completa.", 150);
+    // Based on the player's gear | START
+        private void loadMissionGuardianDeAcero() {
+            Quest q3_GuardianDeAcero = new Quest("Guardián de Acero", "Equipa una armadura pesada completa (Defensa total > 22).", 150);
+            
 
-        q3_GuardianDeAcero.addRequierement(ItemCategory.ARMOR, getMaxID());
+            quests.put(q3_GuardianDeAcero.getId(), q3_GuardianDeAcero);
+        }
 
-    }
+        private void loadMissionMaestroDeArmas() {
+            Quest q4_MaestroDeArmas = new Quest("Maestro de Armas", "Demuestra dominio con armamento avanzado (Daño total > 55).", 220);
+            
 
+            quests.put(q4_MaestroDeArmas.getId(), q4_MaestroDeArmas);
+        }
 
-    private void loadMissionMaestroDeArmas() {
-        Quest q4_MaestroDeArmas = new Quest("Maestro de Armas", "Demuestra dominio con armamento avanzado.", 220);
-
-
-
-    }
-
-
-    private void loadMissionViajeroErrante() {
-        Quest q5_ViajeroErrante = new Quest("Viajero Errante", "Equipa equipo ligero para largas expediciones.", 140);
+        private void loadMissionViajeroErrante() {
+            Quest q5_ViajeroErrante = new Quest("Viajero Errante", "Equipa equipo ligero para esta expedición (Defensa total < 10).", 140);
 
 
+            quests.put(q5_ViajeroErrante.getId(), q5_ViajeroErrante);
+        }
 
-    }
+        private void loadMissionInfiltracionSilenciosa() {
+            Quest q6_InfiltracionSilenciosa = new Quest("Infiltración Silenciosa", 
+            "Infíltrate en el campamento enemigo usando armamento ligero y ocultable (Daño total < 20).", 180
+            );
 
 
-    private void loadMissionCaminoDelCampeon() {
-        Quest q5_ViajeroErrante = new Quest("Viajero Errante","Equipa equipo ligero para largas expediciones.", 140);
-
-
-
-
-    }
-
-    //Baseds on the player's gear | OUT
+            quests.put(q6_InfiltracionSilenciosa.getId(), q6_InfiltracionSilenciosa);
+        }
+        // Based on the player's gear | END
 
 
     public void printUncompletedQuests() {
