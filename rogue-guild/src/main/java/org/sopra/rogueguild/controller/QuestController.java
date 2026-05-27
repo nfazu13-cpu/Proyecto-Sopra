@@ -6,9 +6,14 @@ import org.sopra.rogueguild.repository.QuestRepository;
 import org.sopra.rogueguild.repository.model.Quest;
 import org.sopra.rogueguild.repository.model.ItemCategory;
 
+<<<<<<< HEAD
 
 public class QuestController extends UtilController {
     
+=======
+public class QuestController {
+
+>>>>>>> 76fdc96ebcded9c82cf74b8756cd1757d030a907
     private final Player player;
     private final QuestRepository questRepository;
 
@@ -18,7 +23,6 @@ public class QuestController extends UtilController {
         this.questRepository = new QuestRepository();
         this.player = p;
     }
-    
 
     public void start() {
         if (questRepository.isEmpty()) {
@@ -35,12 +39,12 @@ public class QuestController extends UtilController {
 
                 idMission = super.askForInt();
                 idMission = validateMissionID(idMission);
-                
+
                 if (idMission == -1) {
                     System.err.println("Parece que esa misión no está en la lista... \nPulsa 'ENTER' para continuar: ");
                     super.cleanBuffer();
                 }
-                
+
             } while (idMission == -1);
 
             if (idMission == 0) {
@@ -55,26 +59,24 @@ public class QuestController extends UtilController {
                 if (missingRequirements.isEmpty()) {
                     System.out.println("¡Cumples los requisitos para la misión!");
                     if (selected.completeMission()) {
-                        System.out.println("Por ello... ¡has sido capaz de finalizar la misión " + selected.getName() + " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
-                        
+                        System.out.println("Por ello... ¡has sido capaz de finalizar la misión " + selected.getName()
+                                + " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
+
                         int totalReward = player.getGold() + selected.getGoldReward();
                         player.setGold(totalReward);
                     } else {
                         System.err.println("Esta misión ya ha sido completada anteriormente.");
                     }
 
-
                 } else {
                     System.out.println("Para realizar esta misión, necesitas los siguientes objetos:");
                     System.out.println(missingRequirements);
-                } 
+                }
             }
-    
+
         }
 
-        
     }
-
 
     public Quest missionSelector(int idMission, Player player) {
 
@@ -95,5 +97,22 @@ public class QuestController extends UtilController {
         return -1;
     }
 
+<<<<<<< HEAD
+=======
+    public int askForInt() {
+        if (sc.hasNextInt()) {
+            int number = sc.nextInt();
+            cleanBuffer();
+            return number;
+        } else {
+            cleanBuffer();
+            return -1;
+        }
+    }
+
+    public void cleanBuffer() {
+        sc.nextLine();
+    }
+>>>>>>> 76fdc96ebcded9c82cf74b8756cd1757d030a907
 
 }
