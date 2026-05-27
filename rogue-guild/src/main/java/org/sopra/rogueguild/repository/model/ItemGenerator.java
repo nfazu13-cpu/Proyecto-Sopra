@@ -45,9 +45,9 @@ public class ItemGenerator {
 
                     randomBasePrice = ((int) (Math.random() * 41) + 20) * 5; // 100 - 300
 
-                    int randomDamage = 0;
-                    // TODO por ahora el random damage no cumple con nada establecido por los
-                    // tickets de Taiga
+                    int baseDamage = randomBasePrice / 10; // 10 - 30 according to price
+                    int randomDamage = baseDamage + (int)(Math.random() * 5); // +0 - +4
+
                     newItem = new Weapon(nameItem, randomBasePrice, randomDamage);
                     break;
 
@@ -58,9 +58,9 @@ public class ItemGenerator {
 
                     randomBasePrice = ((int) (Math.random() * 31) + 10) * 5; // 50 - 200
 
-                    int randomShield = 0;
-                    // TODO por ahora el random shield no cumple con nada establecido por los
-                    // tickets de Taiga
+                    int baseShield = randomBasePrice / 15; // 3 - 13 according to price
+                    int randomShield = baseShield + (int)(Math.random() * 3); // +0 - +2
+
                     newItem = new Armor(nameItem, randomBasePrice, randomShield);
                     break;
 

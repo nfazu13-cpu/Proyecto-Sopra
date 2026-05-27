@@ -12,6 +12,10 @@ public class QuestRepository {
         quests = new HashMap<>();
         loadMissionDanzaDeMuerte();
         loadMissionCaballeroDelFenix();
+        loadMissionGuardianDeAcero();
+        loadMissionMaestroDeArmas();
+        loadMissionViajeroErrante();
+        loadMissionCaminoDelCampeon();
     }
 
 
@@ -40,7 +44,7 @@ public class QuestRepository {
 
 
     private void loadMissionDanzaDeMuerte() {
-        Quest q1_DanzaDeMuerte = new Quest("Danza de Muerte", "", 115);
+        Quest q1_DanzaDeMuerte = new Quest("Danza de Muerte", "Debes tener equipadas 'dos armas'.", 115);
 
         q1_DanzaDeMuerte.addRequierement(ItemCategory.WEAPON, 2);
 
@@ -49,7 +53,7 @@ public class QuestRepository {
 
     
     private void loadMissionCaballeroDelFenix() {
-        Quest q2_CaballeroDelFenix = new Quest("Caballero del Fénix", "", 185);
+        Quest q2_CaballeroDelFenix = new Quest("Caballero del Fénix", "Debes tener equipada 'una armadura completa'.", 185);
 
         q2_CaballeroDelFenix.addRequierement(ItemCategory.WEAPON, 1);
         q2_CaballeroDelFenix.addRequierement(ItemCategory.HELMET, 1);
@@ -58,6 +62,41 @@ public class QuestRepository {
 
         quests.put(q2_CaballeroDelFenix.getId(), q2_CaballeroDelFenix);
     }
+
+    //Baseds on the player's gear | IN
+    private void loadMissionGuardianDeAcero() {
+        Quest q3_GuardianDeAcero = new Quest("Guardián de Acero","Equipa una armadura pesada completa.", 150);
+
+        q3_GuardianDeAcero.addRequierement(ItemCategory.ARMOR, getMaxID());
+
+    }
+
+
+    private void loadMissionMaestroDeArmas() {
+        Quest q4_MaestroDeArmas = new Quest("Maestro de Armas", "Demuestra dominio con armamento avanzado.", 220);
+
+
+
+    }
+
+
+    private void loadMissionViajeroErrante() {
+        Quest q5_ViajeroErrante = new Quest("Viajero Errante", "Equipa equipo ligero para largas expediciones.", 140);
+
+
+
+    }
+
+
+    private void loadMissionCaminoDelCampeon() {
+        Quest q5_ViajeroErrante = new Quest("Viajero Errante","Equipa equipo ligero para largas expediciones.", 140);
+
+
+
+
+    }
+
+    //Baseds on the player's gear | OUT
 
 
     public void printUncompletedQuests() {

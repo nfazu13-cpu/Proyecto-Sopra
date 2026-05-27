@@ -8,4 +8,10 @@ public class Armor extends Item {
     super(name, price, ItemCategory.ARMOR);
     this.shield = shield;
   }
+
+  @Override
+  public String toString() {
+      return super.toString() + "\nDefensa: " + this.shield;
+  }
+
 }
