@@ -32,27 +32,27 @@ public class EquipController extends UtilController {
             switch (idEquipment) {
                 case 1:
                     player.printInventoryByCategory(ItemCategory.ARMOR);
-                    idEquipment = askForInt();
+                    idEquipment = super.askForInt();
                     validateEquipmentID(idEquipment);
                     equip(idEquipment);
                     break;
                 case 2:
                     player.printInventoryByCategory(ItemCategory.BOOTS);
-                    idEquipment = askForInt();
+                    idEquipment = super.askForInt();
                     validateEquipmentID(idEquipment);
                     equip(idEquipment);
                     break;
 
                 case 3:
                     player.printInventoryByCategory(ItemCategory.HELMET);
-                    idEquipment = askForInt();
+                    idEquipment = super.askForInt();
                     validateEquipmentID(idEquipment);
                     equip(idEquipment);
                     break;
 
                 case 4:
                     player.printInventoryByCategory(ItemCategory.WEAPON);
-                    idEquipment = askForInt();
+                    idEquipment = super.askForInt();
                     validateEquipmentID(idEquipment);
                     equip(idEquipment);
                     break;
