@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import org.sopra.rogueguild.repository.ShopRepository;
 import org.sopra.rogueguild.repository.model.Item;
+import org.sopra.rogueguild.repository.model.ItemCategory;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.repository.model.WorldEvent;
 import org.sopra.rogueguild.view.ViewDisplay;
@@ -60,7 +61,7 @@ public class ShopController {
                     }
                     break;
                 case 4:
-                    System.out.println("Elige que incursion quieres hacer: ");
+                    System.out.println("Elige qué incursion quieres hacer: ");
                     System.out.println("1. Incursion de Conquista");
                     System.out.println("2. Incursion de Saqueo");
                     System.out.println("3. Incursion Menor");
@@ -71,6 +72,10 @@ public class ShopController {
                     break;
                 case 5:
                     questController.start();
+                    break;
+                case 6:
+                    
+                    
                     break;
                 case 0:
                     view.quitMessage();
