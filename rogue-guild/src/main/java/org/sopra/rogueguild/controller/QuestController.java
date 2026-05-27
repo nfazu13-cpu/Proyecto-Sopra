@@ -4,6 +4,8 @@ import java.util.HashMap;
 import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.repository.QuestRepository;
 import org.sopra.rogueguild.repository.model.Quest;
+import org.sopra.rogueguild.repository.model.QuestInventory;
+import org.sopra.rogueguild.repository.model.QuestStats;
 import org.sopra.rogueguild.repository.model.ItemCategory;
 
 public class QuestController extends UtilController {
@@ -46,30 +48,16 @@ public class QuestController extends UtilController {
 
             } else {
                 Quest selected = missionSelector(idMission, player);
-                System.out.println("Has seleccionado: " + selected.getId());
 
-                HashMap<ItemCategory, Integer> missingRequirements = selected.checkRequierement(player);
+                if (selected instanceof QuestInventory) {
+                    createInventoryMissionInstance(selected, player);
 
-                if (missingRequirements.isEmpty()) {
-                    System.out.println("¡Cumples los requisitos para la misión!");
-                    if (selected.completeMission()) {
-                        System.out.println("Por ello... ¡has sido capaz de finalizar la misión " + selected.getName()
-                                + " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
-
-                        int totalReward = player.getGold() + selected.getGoldReward();
-                        player.setGold(totalReward);
-                    } else {
-                        System.err.println("Esta misión ya ha sido completada anteriormente.");
-                    }
-
-                } else {
-                    System.out.println("Para realizar esta misión, necesitas los siguientes objetos:");
-                    System.out.println(missingRequirements);
+                } else if (selected instanceof QuestStats) {
+                    createStatsMissionInstance(selected, player);
                 }
             }
 
         }
-
     }
 
     public Quest missionSelector(int idMission, Player player) {
@@ -90,5 +78,36 @@ public class QuestController extends UtilController {
 
         return -1;
     }
+
+    public void createInventoryMissionInstance(Quest quest, Player player) {
+            QuestInventory selected = (QuestInventory) quest;
+            System.out.println("Has seleccionado: " + selected.getId());
+
+            HashMap<ItemCategory, Integer> missingRequirements = selected.checkRequierement(player);
+
+            if (missingRequirements.isEmpty()) {
+                System.out.println("¡Cumples los requisitos para la misión!");
+                if (selected.completeMission()) {
+                    System.out.println("Por ello... ¡has sido capaz de finalizar la misión " + selected.getName() + 
+                                       " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
+
+                    int totalReward = player.getGold() + selected.getGoldReward();
+                    player.setGold(totalReward);
+                } else {
+                    System.err.println("Esta misión ya ha sido completada anteriormente.");
+                }
+
+            } else {
+                System.out.println("Para realizar esta misión, necesitas los siguientes objetos:");
+                System.out.println(missingRequirements);
+            }
+        }
+
+        public void createStatsMissionInstance(Quest quest, Player player) {
+            QuestStats selected = (QuestStats) quest;
+            System.out.println("Has seleccionado: " + selected.getId());
+
+            // TODO lógica de comprobar  ataque y defensa de HU-15
+        }
 
 }

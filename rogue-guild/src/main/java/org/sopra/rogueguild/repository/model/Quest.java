@@ -7,8 +7,9 @@ public class Quest {
     private final String description;
     private final String name;
     private int goldReward;
-    private HashMap<ItemCategory, Integer> requirements = new HashMap<>();
+    protected HashMap<ItemCategory, Integer> requirements = new HashMap<>();
     private boolean isComplete;
+    protected int type;
 
     private static int maxID = 1;
     private final int id;
@@ -38,6 +39,10 @@ public class Quest {
         return name;
     }
 
+    public int getType() {
+        return type;
+    }
+
     public boolean getIsComplete() {
         return this.isComplete;
     }
@@ -47,22 +52,13 @@ public class Quest {
         return maxID++; 
     }
 
-    private void setGoldReward(int goldReward) {
+    protected void setGoldReward(int goldReward) {
         if (goldReward % 5 != 0) {
             throw new IllegalArgumentException("La recompensa debe ser múltiplo de 5.");
         }
 
         this.goldReward = goldReward;
     }
-
-
-    public void addRequierement(ItemCategory itemCategory, int quantity) {
-        if (validateItemCategory(itemCategory) && validateQuantity(quantity)) {
-            this.requirements.put(itemCategory, quantity);
-        }
-
-    }
-
 
     public boolean validateQuantity(int quantity) {
         if (quantity <= 0) {
@@ -79,33 +75,6 @@ public class Quest {
         }
 
         return true;
-    }
-
-
-    public HashMap<ItemCategory, Integer> checkRequierement(Player p) {
-
-        HashMap<ItemCategory, Integer> missingRequirements = new HashMap<>();
-        missingRequirements.putAll(this.requirements);
-
-        for (Item item : p.getInventory().values()) {
-            ItemCategory tempCategory = item.getCategory();
-
-            if (missingRequirements.containsKey(tempCategory)) {
-
-                int requiredQuantity = missingRequirements.get(tempCategory);
-                requiredQuantity--;
-
-                if (requiredQuantity <= 0) {
-                    missingRequirements.remove(tempCategory);
-                } else {
-                    missingRequirements.put(tempCategory, requiredQuantity);
-                }
-
-            }
-        }
-
-        return missingRequirements;
-
     }
 
     public String checkStatus() {
