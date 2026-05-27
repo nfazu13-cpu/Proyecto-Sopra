@@ -13,6 +13,7 @@ public class Player {
     public Player(String name, int gold) {
         this.name = name;
         this.gold = gold;
+        setItemEquipped();
     }
 
     public String getName() {
@@ -31,7 +32,9 @@ public class Player {
         this.gold = gold;
     }
 
-    public void setItemEquipped(HashMap<ItemCategory, Item[]> itemEquipped) {
+    public void setItemEquipped() {
+        this.itemEquipped = new HashMap<>();
+
         this.itemEquipped.put(ItemCategory.ARMOR, maxItems(1));
         this.itemEquipped.put(ItemCategory.BOOTS, maxItems(1));
         this.itemEquipped.put(ItemCategory.HELMET, maxItems(1));
