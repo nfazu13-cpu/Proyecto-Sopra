@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class QuestInventory extends Quest {
 
+    private HashMap<ItemCategory, Integer> requirements = new HashMap<>();
 
     public QuestInventory(String name, String description, int goldReward) {
         super(name, description, goldReward);
@@ -43,6 +44,11 @@ public class QuestInventory extends Quest {
 
     }
 
+
+    @Override
+    public String toString() {
+        return super.toString() + "\nRequisitos: " + requirements;
+    }
 
     
 }

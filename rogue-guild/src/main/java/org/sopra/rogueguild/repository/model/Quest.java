@@ -7,9 +7,7 @@ public class Quest {
     private final String description;
     private final String name;
     private int goldReward;
-    protected HashMap<ItemCategory, Integer> requirements = new HashMap<>();
     private boolean isComplete;
-
     private static int maxID = 1;
     private final int id;
 
@@ -92,7 +90,7 @@ public class Quest {
 
     @Override
     public String toString() {
-        return id + ". " + name + "\n'" + description + "'\nRecompensa: " + goldReward + " (oro)" + "\n" + checkStatus() + "\nRequisitos: " + requirements;
+        return id + ". " + name + "\n'" + description + "'\nRecompensa: " + goldReward + " (oro)" + "\n" + checkStatus();
     }
 
 }

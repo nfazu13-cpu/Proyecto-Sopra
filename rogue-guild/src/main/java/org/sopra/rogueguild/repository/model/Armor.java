@@ -1,17 +1,9 @@
 package org.sopra.rogueguild.repository.model;
 
-public class Armor extends Item {
-
-    private int shield;
+public class Armor extends Shield {
 
     public Armor(String name, int price, int shield) {
-      super(name, price, ItemCategory.ARMOR);
-      this.shield = shield;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + "\nDefensa: " + this.shield;
+        super(name, price, ItemCategory.ARMOR, shield);
     }
 
 }
