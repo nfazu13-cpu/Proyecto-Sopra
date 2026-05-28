@@ -12,7 +12,7 @@ public class QuestInventory extends Quest {
 
 
     public void addRequierement(ItemCategory itemCategory, int quantity) {
-        if (super.validateItemCategory(itemCategory) && super.validateQuantity(quantity)) {
+        if (validateItemCategory(itemCategory) && super.validateQuantity(quantity)) {
             this.requirements.put(itemCategory, quantity);
         }
 
@@ -42,6 +42,15 @@ public class QuestInventory extends Quest {
 
         return missingRequirements;
 
+    }
+
+
+    public boolean validateItemCategory(ItemCategory itemCategory) {
+        if (itemCategory == null) {
+            throw new IllegalArgumentException("La categoría no puede estar vacía.");
+        }
+
+        return true;
     }
 
 

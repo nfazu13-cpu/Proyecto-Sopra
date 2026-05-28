@@ -1,22 +1,25 @@
 package org.sopra.rogueguild.repository.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Quest {
 
     private final String description;
-    private final String name;
+    private String name;
     private int goldReward;
     private boolean isComplete;
     private static int maxID = 1;
     private final int id;
+    private static ArrayList<String> questList = new ArrayList<>();
 
     public Quest (String name, String description, int goldReward) {
         setGoldReward(goldReward);
+        setName(name);
         this.id = setAutoID();
-        this.name = name;
         this.description = description;
         this.isComplete = false;
+        questList.add(name);
     }
 
 
@@ -40,6 +43,13 @@ public class Quest {
         return this.isComplete;
     }
 
+    public void setName(String name) {
+        if (questList.contains(name)) {
+            throw new IllegalArgumentException("No puede repetirse el nombre de una misión.");
+        }
+
+        this.name = name;
+    }
 
     public int setAutoID() {
         return maxID++; 
@@ -56,15 +66,6 @@ public class Quest {
     public boolean validateQuantity(int quantity) {
         if (quantity <= 0) {
             throw new IllegalArgumentException("La cantidad no puede ser cero o inferior.");
-        }
-
-        return true;
-    }
-
-
-    public boolean validateItemCategory(ItemCategory itemCategory) {
-        if (itemCategory == null) {
-            throw new IllegalArgumentException("La categoría no puede ser null.");
         }
 
         return true;

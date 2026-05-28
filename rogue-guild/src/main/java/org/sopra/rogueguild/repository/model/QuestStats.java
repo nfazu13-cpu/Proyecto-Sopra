@@ -4,31 +4,97 @@ import java.util.HashMap;
 
 public class QuestStats extends Quest {
 
-    private HashMap<ItemCategory, Item[]> requirements = new HashMap<>();
+    private HashMap<ItemStatsType, Integer> requirements = new HashMap<>(); 
+    private HashMap<ItemStatsType, QuestStatsOperator> operators = new HashMap<>(); 
 
     public QuestStats(String name, String description, int goldReward) {
         super(name, description, goldReward);
     }
 
 
-    /*public void addRequierement(, int quantity) {
+    public void addRequierement(ItemStatsType requirementCategory, int quantity, QuestStatsOperator operator) {
+        if (validateStatsCategory(requirementCategory) && validateOperator(operator) && super.validateQuantity(quantity)) {
+            this.requirements.put(requirementCategory, quantity);
+            this.operators.put(requirementCategory, operator);
+        }
+
+    }
 
 
-    }*/
+    public HashMap<ItemStatsType, Integer> checkRequierement(Player p) {
 
+        int totalPlayerShield = 0;
+        int totalPlayerDamage = 0;
 
-    public HashMap<ItemCategory, Item[]> checkRequierement(Player p) {
+        for (Item[] item : p.getItemEquipped().values()) {
+            for (int i = 0; i < item.length; i++) {
 
-        HashMap<ItemCategory, Item[]> missingRequirements = new HashMap<>();
-        missingRequirements.putAll(this.requirements);
+                if (item[i] != null) {
+                    if (item[i] instanceof Shield s) {
+                        totalPlayerShield += s.getShield();
+                    } else if (item[i] instanceof Weapon w) {
+                        totalPlayerDamage += w.getDamage();
+                    }
+                }
+            }
+        }
 
+        HashMap<ItemStatsType, Integer> missingRequirements = new HashMap<>();
 
+        if (this.requirements.containsKey(ItemStatsType.SHIELD)) {
+            int requiredShield = this.requirements.get(ItemStatsType.SHIELD);
+            QuestStatsOperator operator = this.operators.get(ItemStatsType.SHIELD);
 
+            if (operator == QuestStatsOperator.GREATER_THAN) {
+                if (totalPlayerShield < requiredShield) {
+                    missingRequirements.put(ItemStatsType.SHIELD, (requiredShield - totalPlayerShield));
+                }
+            }
 
+            if (operator == QuestStatsOperator.LESS_THAN) {
+                if (totalPlayerShield > requiredShield) {
+                    missingRequirements.put(ItemStatsType.SHIELD, (totalPlayerShield - requiredShield));
+                }
+            }
+        }
+            
+        if (this.requirements.containsKey(ItemStatsType.DAMAGE)) {
+            int requiredDamage = this.requirements.get(ItemStatsType.DAMAGE);
+            QuestStatsOperator operator = this.operators.get(ItemStatsType.DAMAGE);
 
+            if (operator == QuestStatsOperator.GREATER_THAN) {
+                if (totalPlayerDamage < requiredDamage) {
+                    missingRequirements.put(ItemStatsType.DAMAGE, (requiredDamage - totalPlayerDamage));
+                }
+            }
+
+            if (operator == QuestStatsOperator.LESS_THAN) {
+                if (totalPlayerDamage > requiredDamage) {
+                    missingRequirements.put(ItemStatsType.DAMAGE, (totalPlayerDamage - requiredDamage));
+                } 
+            }
+            
+        }
         
         return missingRequirements;
 
+    }
+
+
+    public boolean validateStatsCategory(ItemStatsType requirementCategory) {
+        if (requirementCategory == null) {
+            throw new IllegalArgumentException("La categoría no puede estar vacía.");
+        }
+
+        return true;
+    }
+
+    public boolean validateOperator(QuestStatsOperator operator) {
+        if (operator == null) {
+            throw new IllegalArgumentException("La categoría no puede estar vacía.");
+        }
+
+        return true;
     }
 
 

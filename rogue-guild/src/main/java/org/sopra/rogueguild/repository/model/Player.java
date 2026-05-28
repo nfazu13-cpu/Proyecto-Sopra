@@ -30,6 +30,10 @@ public class Player {
         return inventory;
     }
 
+    public HashMap<ItemCategory, Item[]> getItemEquipped() {
+        return itemEquipped;
+    }
+
     public void setGold(int gold) {
         this.gold = gold;
     }

@@ -7,6 +7,7 @@ public class Weapon extends Item {
     public Weapon(String name, int price, int damage) {
         super(name, price, ItemCategory.WEAPON);
         this.damage = damage;
+        this.itemStatsType = ItemStatsType.DAMAGE;
     }
 
     @Override

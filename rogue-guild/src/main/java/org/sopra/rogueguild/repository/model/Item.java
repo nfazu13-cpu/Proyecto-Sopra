@@ -5,6 +5,7 @@ public abstract class Item {
     private int price;
     private final int basePrice;
     private ItemCategory category;
+    protected ItemStatsType itemStatsType;
 
     public Item(String name, int price, ItemCategory category) {
         this.name = name;
@@ -23,6 +24,10 @@ public abstract class Item {
 
     public ItemCategory getCategory() {
         return category;
+    }
+
+    public ItemStatsType getItemStatsType() {
+        return itemStatsType;
     }
 
     public String toString() {

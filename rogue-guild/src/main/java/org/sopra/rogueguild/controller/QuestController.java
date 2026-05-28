@@ -7,6 +7,7 @@ import org.sopra.rogueguild.repository.model.Quest;
 import org.sopra.rogueguild.repository.model.QuestInventory;
 import org.sopra.rogueguild.repository.model.QuestStats;
 import org.sopra.rogueguild.repository.model.ItemCategory;
+import org.sopra.rogueguild.repository.model.ItemStatsType;
 
 public class QuestController extends UtilController {
 
@@ -47,7 +48,7 @@ public class QuestController extends UtilController {
                 System.out.println("Saliendo del tablón de misiones...");
 
             } else {
-                Quest selected = missionSelector(idMission, player);
+                Quest selected = missionSelector(idMission);
 
                 if (selected instanceof QuestInventory) {
                     createInventoryMissionInstance(selected, player);
@@ -60,7 +61,7 @@ public class QuestController extends UtilController {
         }
     }
 
-    public Quest missionSelector(int idMission, Player player) {
+    public Quest missionSelector(int idMission) {
 
         Quest selectedQuest = questRepository.getQuests().get(idMission);
         return selectedQuest;
@@ -104,10 +105,29 @@ public class QuestController extends UtilController {
         }
 
         public void createStatsMissionInstance(Quest quest, Player player) {
+
+            // TODO lógica de comprobar  ataque y defensa de HU-15
             QuestStats selected = (QuestStats) quest;
             System.out.println("Has seleccionado: " + selected.getId());
 
-            // TODO lógica de comprobar  ataque y defensa de HU-15
+            HashMap<ItemStatsType, Integer> missingRequirements = selected.checkRequierement(player);
+
+            if (missingRequirements.isEmpty()) {
+                System.out.println("¡Cumples los requisitos para la misión!");
+                if (selected.completeMission()) {
+                    System.out.println("Por ello... ¡has sido capaz de finalizar la misión " + selected.getName() + 
+                                       " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
+
+                    int totalReward = player.getGold() + selected.getGoldReward();
+                    player.setGold(totalReward);
+                } else {
+                    System.err.println("Esta misión ya ha sido completada anteriormente.");
+                }
+
+            } else {
+                System.out.println("No cumples con los requisitos de estadísticas necesarios. Te falta o te pasas por:");
+                System.out.println(missingRequirements);
+            }
         }
 
 }
