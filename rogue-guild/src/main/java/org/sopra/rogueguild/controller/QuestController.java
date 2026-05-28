@@ -82,52 +82,55 @@ public class QuestController extends UtilController {
 
     public void createInventoryMissionInstance(Quest quest, Player player) {
         
-            QuestInventory selected = (QuestInventory) quest;
-            System.out.println("Has seleccionado: " + selected.getId());
-
-            HashMap<ItemCategory, Integer> missingRequirements = selected.checkRequierement(player);
-
-            if (missingRequirements.isEmpty()) {
-                System.out.println("¡Cumples los requisitos para la misión!");
-                if (selected.completeMission()) {
-                    System.out.println("Por ello... ¡has sido capaz de finalizar la misión " + selected.getName() + 
-                                       " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
-
-                    int totalReward = player.getGold() + selected.getGoldReward();
-                    player.setGold(totalReward);
-                } else {
-                    System.err.println("Esta misión ya ha sido completada anteriormente.");
-                }
-
+            if (quest.getIsComplete()) {
+                System.err.println("Esta misión ya ha sido completada anteriormente.");
             } else {
-                System.out.println("Para realizar esta misión, necesitas los siguientes objetos:");
-                System.out.println(missingRequirements);
+                QuestInventory selected = (QuestInventory) quest;
+                System.out.println("Has seleccionado: " + selected.getId());
+
+                HashMap<ItemCategory, Integer> missingRequirements = selected.checkRequierement(player);
+
+                if (missingRequirements.isEmpty()) {
+                    System.out.println("¡Cumples los requisitos para la misión! Por ello... ¡has sido capaz de finalizar la misión " + selected.getName() + 
+                                    " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
+
+                        int totalReward = player.getGold() + selected.getGoldReward();
+                        player.setGold(totalReward);
+                        selected.completeMission();
+
+                } else {
+                    System.out.println("Para realizar esta misión, necesitas los siguientes objetos:");
+                    System.out.println(missingRequirements);
+                }
             }
+
         }
 
         public void createStatsMissionInstance(Quest quest, Player player) {
 
-            QuestStats selected = (QuestStats) quest;
-            System.out.println("Has seleccionado: " + selected.getId());
-
-            HashMap<ItemStatsType, Integer> missingRequirements = selected.checkRequierement(player);
-
-            if (missingRequirements.isEmpty()) {
-                System.out.println("¡Cumples los requisitos para la misión!");
-                if (selected.completeMission()) {
-                    System.out.println("Por ello... ¡has sido capaz de finalizar la misión " + selected.getName() + 
-                                       " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
-
-                    int totalReward = player.getGold() + selected.getGoldReward();
-                    player.setGold(totalReward);
-                } else {
-                    System.err.println("Esta misión ya ha sido completada anteriormente.");
-                }
-
+            if (quest.getIsComplete()) {
+                System.err.println("Esta misión ya ha sido completada anteriormente.");
             } else {
-                System.out.println("No cumples con los requisitos de estadísticas necesarios. Te falta o te pasas por:");
-                System.out.println(missingRequirements);
+                QuestStats selected = (QuestStats) quest;
+                System.out.println("Has seleccionado: " + selected.getId());
+
+                HashMap<ItemStatsType, Integer> missingRequirements = selected.checkRequierement(player);
+
+                if (missingRequirements.isEmpty()) {
+                    System.out.println("¡Cumples los requisitos para la misión! Por ello... ¡has sido capaz de finalizar la misión " + selected.getName() + 
+                                    " con éxito, enhorabuena!\nAquí tienes tu pago: " + selected.getGoldReward());
+
+                        int totalReward = player.getGold() + selected.getGoldReward();
+                        player.setGold(totalReward);
+                        selected.completeMission();
+
+                } else {
+                    System.out.println("No cumples con los requisitos de estadísticas necesarios. Te falta o te pasas por:");
+                    System.out.println(missingRequirements);
+                }
             }
+
+
         }
 
 }

@@ -30,9 +30,10 @@ public class ShopController extends UtilController {
 
     public void start() {
 
+        worldEvent.randomWorldEvent(repository);
+
         int opt;
         do {
-            worldEvent.randomWorldEvent(repository);
 
             view.landingPage();
             view.playerStatus(player);
