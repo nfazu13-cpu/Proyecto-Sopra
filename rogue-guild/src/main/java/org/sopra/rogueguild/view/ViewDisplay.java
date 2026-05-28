@@ -2,9 +2,9 @@ package org.sopra.rogueguild.view;
 import java.io.PrintStream;
 import java.util.Map;
 
-import org.sopra.rogueguild.repository.model.Item;
-import org.sopra.rogueguild.repository.model.Player;
-import org.sopra.rogueguild.repository.model.WorldEvent;
+import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.repository.model.player.Player;
+import org.sopra.rogueguild.repository.model.event.WorldEvent;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.view.components.BannerView;
 import org.sopra.rogueguild.view.components.BuyResultView;

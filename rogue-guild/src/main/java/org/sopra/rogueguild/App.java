@@ -2,7 +2,7 @@ package org.sopra.rogueguild;
 
 import org.sopra.rogueguild.controller.ShopController;
 import org.sopra.rogueguild.repository.ShopRepository;
-import org.sopra.rogueguild.repository.model.Player;
+import org.sopra.rogueguild.repository.model.player.Player;
 import org.sopra.rogueguild.view.ViewDisplay;
 import org.sopra.rogueguild.controller.EquipController;
 import org.sopra.rogueguild.controller.QuestController;

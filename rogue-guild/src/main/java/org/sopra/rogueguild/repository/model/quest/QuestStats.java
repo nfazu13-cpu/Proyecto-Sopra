@@ -1,6 +1,12 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.quest;
 
 import java.util.HashMap;
+
+import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.repository.model.item.ItemStatsType;
+import org.sopra.rogueguild.repository.model.item.Shield;
+import org.sopra.rogueguild.repository.model.item.Weapon;
+import org.sopra.rogueguild.repository.model.player.Player;
 
 public class QuestStats extends Quest {
 

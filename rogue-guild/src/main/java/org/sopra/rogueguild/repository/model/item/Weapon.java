@@ -1,4 +1,4 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.item;
 
 public class Weapon extends Item {
 

@@ -2,12 +2,12 @@ package org.sopra.rogueguild.repository;
 
 import java.util.HashMap;
 
-import org.sopra.rogueguild.repository.model.ItemCategory;
-import org.sopra.rogueguild.repository.model.ItemStatsType;
-import org.sopra.rogueguild.repository.model.Quest;
-import org.sopra.rogueguild.repository.model.QuestInventory;
-import org.sopra.rogueguild.repository.model.QuestStats;
-import org.sopra.rogueguild.repository.model.QuestStatsOperator;
+import org.sopra.rogueguild.repository.model.item.ItemCategory;
+import org.sopra.rogueguild.repository.model.item.ItemStatsType;
+import org.sopra.rogueguild.repository.model.quest.Quest;
+import org.sopra.rogueguild.repository.model.quest.QuestInventory;
+import org.sopra.rogueguild.repository.model.quest.QuestStats;
+import org.sopra.rogueguild.repository.model.quest.QuestStatsOperator;
 
 public class QuestRepository {
     private HashMap<Integer, Quest> quests;

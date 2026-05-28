@@ -3,7 +3,7 @@ package org.sopra.rogueguild.view.components;
 import java.io.PrintStream;
 
 import static org.sopra.rogueguild.view.utils.Ansi.*;
-import org.sopra.rogueguild.repository.model.Player;
+import org.sopra.rogueguild.repository.model.player.Player;
 
 public class PlayerView {
     private final PrintStream out;

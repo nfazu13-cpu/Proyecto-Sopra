@@ -1,6 +1,10 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.quest;
 
 import java.util.HashMap;
+
+import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.repository.model.item.ItemCategory;
+import org.sopra.rogueguild.repository.model.player.Player;
 
 public class QuestInventory extends Quest {
 

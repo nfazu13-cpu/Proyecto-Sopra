@@ -4,8 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
-import org.sopra.rogueguild.repository.model.Item;
-import org.sopra.rogueguild.repository.model.ItemGenerator;
+import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.repository.model.item.ItemGenerator;
 
 public class ShopRepository {
     private Map<Integer, Item> stock;

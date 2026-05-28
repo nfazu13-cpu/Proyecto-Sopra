@@ -3,8 +3,9 @@ package org.sopra.rogueguild.controller;
 import java.lang.annotation.IncompleteAnnotationException;
 
 import org.sopra.rogueguild.repository.ShopRepository;
-import org.sopra.rogueguild.repository.model.Incursion;
-import org.sopra.rogueguild.repository.model.Player;
+import org.sopra.rogueguild.repository.model.player.Player;
+import org.sopra.rogueguild.repository.model.event.Incursion;
+
 
 import java.util.*;
 

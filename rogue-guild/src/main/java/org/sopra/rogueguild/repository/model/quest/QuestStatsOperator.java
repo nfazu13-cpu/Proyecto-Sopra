@@ -1,4 +1,4 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.quest;
 
 public enum QuestStatsOperator {
     GREATER_THAN, // >

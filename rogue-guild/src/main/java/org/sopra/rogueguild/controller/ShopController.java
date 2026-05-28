@@ -1,21 +1,18 @@
 package org.sopra.rogueguild.controller;
 
-import java.util.Scanner;
-
 import org.sopra.rogueguild.repository.ShopRepository;
-import org.sopra.rogueguild.repository.model.Item;
-import org.sopra.rogueguild.repository.model.ItemCategory;
-import org.sopra.rogueguild.repository.model.Player;
-import org.sopra.rogueguild.repository.model.WorldEvent;
 import org.sopra.rogueguild.view.ViewDisplay;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
+import org.sopra.rogueguild.repository.model.event.WorldEvent;
+import org.sopra.rogueguild.repository.model.player.Player;
+import org.sopra.rogueguild.repository.model.item.Item;
 
-public class ShopController {
+
+public class ShopController extends UtilController {
 
     private final Player player;
     private final ViewDisplay view;
     private final ShopRepository repository;
-    private final Scanner sc;
     private final WorldEvent worldEvent;
     private final IncursionController incursionController;
     private final QuestController questController;
@@ -25,7 +22,6 @@ public class ShopController {
         this.player = p;
         this.view = v;
         this.repository = r;
-        this.sc = new Scanner(System.in);
         this.worldEvent = new WorldEvent();
         this.incursionController = new IncursionController();
         this.questController = qc;
@@ -33,21 +29,24 @@ public class ShopController {
     }
 
     public void start() {
-        worldEvent.randomWorldEvent(repository);
-        view.showWorldEventMessage(worldEvent);
 
         int opt;
         do {
+            worldEvent.randomWorldEvent(repository);
+
             view.landingPage();
             view.playerStatus(player);
-            opt = Integer.parseInt(sc.nextLine());
+
+            opt = super.askForInt();
             switch (opt) {
                 case 1:
+                    view.showWorldEventMessage(worldEvent);
                     view.displayStock(repository.getAllStock(), false);
                     break;
                 case 2:
+                    view.showWorldEventMessage(worldEvent);
                     view.displayStock(repository.getAllStock(), true);
-                    int itemId = Integer.parseInt(sc.nextLine());
+                    int itemId = super.askForInt();
                     BuyResponse buyResponse = buyProcess(itemId);
                     view.buyResult(buyResponse);
                     break;
@@ -55,7 +54,7 @@ public class ShopController {
                     if (!player.getInventory().isEmpty()) { // SÍ tiene ítems
                         player.printInventory();
                         System.out.print("Introduce el ID del ítem a vender: ");
-                        int id = sc.nextInt();
+                        int id = super.askForInt();
                         sellProcess(id);
                     } else {
                         System.out.println("Tu inventario está vacío. No tienes ítems para vender.");
@@ -68,7 +67,7 @@ public class ShopController {
                     System.out.println("3. Incursion Menor");
                     System.out.println("0. Salir de Incursiones");
 
-                    int option = sc.nextInt();
+                    int option = super.askForInt();
                     incursionController.sr = this.repository;
                     incursionController.submenu(option, player);
                     break;
@@ -81,9 +80,12 @@ public class ShopController {
                 case 0:
                     view.quitMessage();
                     break;
+                default:
+                    System.out.println("Debe introducir una opción válida.");
+                    break;
             }
             view.pressKeyMessage();
-            sc.nextLine();
+            super.cleanBuffer();
         } while (opt != 0);
     }
 

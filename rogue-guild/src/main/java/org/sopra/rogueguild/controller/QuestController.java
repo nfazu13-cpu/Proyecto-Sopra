@@ -1,13 +1,13 @@
 package org.sopra.rogueguild.controller;
 
 import java.util.HashMap;
-import org.sopra.rogueguild.repository.model.Player;
 import org.sopra.rogueguild.repository.QuestRepository;
-import org.sopra.rogueguild.repository.model.Quest;
-import org.sopra.rogueguild.repository.model.QuestInventory;
-import org.sopra.rogueguild.repository.model.QuestStats;
-import org.sopra.rogueguild.repository.model.ItemCategory;
-import org.sopra.rogueguild.repository.model.ItemStatsType;
+import org.sopra.rogueguild.repository.model.player.Player;
+import org.sopra.rogueguild.repository.model.item.ItemStatsType;
+import org.sopra.rogueguild.repository.model.item.ItemCategory;
+import org.sopra.rogueguild.repository.model.quest.Quest;
+import org.sopra.rogueguild.repository.model.quest.QuestInventory;
+import org.sopra.rogueguild.repository.model.quest.QuestStats;
 
 public class QuestController extends UtilController {
 
@@ -81,6 +81,7 @@ public class QuestController extends UtilController {
     }
 
     public void createInventoryMissionInstance(Quest quest, Player player) {
+        
             QuestInventory selected = (QuestInventory) quest;
             System.out.println("Has seleccionado: " + selected.getId());
 
@@ -106,7 +107,6 @@ public class QuestController extends UtilController {
 
         public void createStatsMissionInstance(Quest quest, Player player) {
 
-            // TODO lógica de comprobar  ataque y defensa de HU-15
             QuestStats selected = (QuestStats) quest;
             System.out.println("Has seleccionado: " + selected.getId());
 

@@ -1,6 +1,10 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.event;
 
 import java.util.Random;
+
+import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.repository.model.item.ItemGenerator;
+import org.sopra.rogueguild.repository.model.player.Player;
 
 public class Incursion {
     private int goldReward;

@@ -1,6 +1,8 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.event;
 
 import org.sopra.rogueguild.repository.ShopRepository;
+import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.repository.model.item.ItemCategory;
 
 public class WorldEvent {
 

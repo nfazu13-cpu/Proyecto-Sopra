@@ -1,9 +1,10 @@
 package org.sopra.rogueguild.controller;
 
 import java.util.Map;
-import org.sopra.rogueguild.repository.model.Item;
-import org.sopra.rogueguild.repository.model.ItemCategory;
-import org.sopra.rogueguild.repository.model.Player;
+
+import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.repository.model.item.ItemCategory;
+import org.sopra.rogueguild.repository.model.player.Player;
 
 public class EquipController extends UtilController {
     Player player;

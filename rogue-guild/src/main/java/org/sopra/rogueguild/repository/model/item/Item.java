@@ -1,4 +1,4 @@
-package org.sopra.rogueguild.repository.model;
+package org.sopra.rogueguild.repository.model.item;
 
 public abstract class Item {
     private String name;
