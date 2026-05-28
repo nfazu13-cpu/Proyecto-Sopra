@@ -108,8 +108,20 @@ public class Player {
     }
 
     public void printInventory() {
-        for (Item item : inventory.values()) {
-            System.out.println(item);
+        if (inventory.isEmpty()) {
+            System.out.println("Vacio");
+        } else {
+            boolean esPrimero = true;
+            for (Item item : inventory.values()) {
+                if (esPrimero) {
+
+                    System.out.println(item);
+                    esPrimero = false;
+                } else {
+
+                    System.out.println("       |                     " + item);
+                }
+            }
         }
     }
 

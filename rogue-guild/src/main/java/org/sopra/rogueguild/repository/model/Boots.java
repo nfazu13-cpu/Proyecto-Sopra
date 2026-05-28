@@ -1,7 +1,7 @@
 package org.sopra.rogueguild.repository.model;
 
 public class Boots extends Item {
-    
+
     private int shield;
 
     public Boots(String name, int price, int shield) {
@@ -11,7 +11,7 @@ public class Boots extends Item {
 
     @Override
     public String toString() {
-        return super.toString() + "\nDefensa: " + this.shield;
+        return super.toString() + " Defensa: " + this.shield;
     }
 
 }
