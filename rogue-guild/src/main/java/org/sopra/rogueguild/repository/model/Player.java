@@ -56,25 +56,33 @@ public class Player {
                 System.out.println(itemAnterior + " ha vuelto al inventario.");
             }
         } else {
+
             if (ranuras[0] == null) {
+
                 ranuras[0] = nuevoItem;
                 System.out.println("Arma equipada en ranura 1.");
+
             } else if (ranuras[1] == null) {
+
                 ranuras[1] = nuevoItem;
                 System.out.println("Arma equipada en ranura 2.");
             } else {
+
                 int indiceReemplazo = 0;
-                // if (ranuras[1].getDamage() < ranuras[0].getDamage()) {
-                indiceReemplazo = 1; // El segundo arma hace menos daño
-                // }
+                Weapon arma1 = (Weapon) ranuras[1];
+                Weapon arma0 = (Weapon) ranuras[0];
+
+                if (arma1.getDamage() < arma0.getDamage()) {
+                    indiceReemplazo = 1;
+                }
 
                 Item armaAnterior = ranuras[indiceReemplazo];
                 ranuras[indiceReemplazo] = nuevoItem; // Reemplazo directo
                 System.out.println("Sustituida arma de menor daño: " + armaAnterior);
 
-                // El arma vieja vuelve al inventario
                 this.inventory.put(id, armaAnterior);
                 System.out.println(armaAnterior + " ha vuelto al inventario.");
+
             }
         }
 
@@ -100,8 +108,20 @@ public class Player {
     }
 
     public void printInventory() {
-        for (Item item : inventory.values()) {
-            System.out.println(item);
+        if (inventory.isEmpty()) {
+            System.out.println("Vacio");
+        } else {
+            boolean esPrimero = true;
+            for (Item item : inventory.values()) {
+                if (esPrimero) {
+
+                    System.out.println(item);
+                    esPrimero = false;
+                } else {
+
+                    System.out.println("       |                     " + item);
+                }
+            }
         }
     }
 

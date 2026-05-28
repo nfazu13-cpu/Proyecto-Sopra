@@ -11,7 +11,7 @@ public class Shield extends Item {
 
     @Override
     public String toString() {
-        return super.toString() + "\nDefensa: " + this.shield;
+        return super.toString() + "Defensa: " + this.shield;
     }
 
 }

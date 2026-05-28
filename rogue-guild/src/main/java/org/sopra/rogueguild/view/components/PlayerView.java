@@ -8,7 +8,9 @@ import org.sopra.rogueguild.repository.model.Player;
 public class PlayerView {
     private final PrintStream out;
 
-    public PlayerView(PrintStream out) { this.out = out; }
+    public PlayerView(PrintStream out) {
+        this.out = out;
+    }
 
     public void playerStatus(Player player) {
         out.println();
@@ -18,7 +20,8 @@ public class PlayerView {
         out.println("       | ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░");
         out.println("       | ░    NOMBRE:        " + player.getName());
         out.println("       | ░    ORO:           " + player.getGold() + " monedas");
-        out.println("       | ░    INVENTARIO:    Vacío"); // TODO: Implement
+        out.print("       | ░    INVENTARIO:    ");
+        player.printInventory();
         out.println();
     }
 }
