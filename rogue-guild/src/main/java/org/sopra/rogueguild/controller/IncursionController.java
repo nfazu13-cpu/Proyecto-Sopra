@@ -10,19 +10,22 @@ import java.util.*;
 
 public class IncursionController {
     Random random = new Random();
-    ShopRepository sr = new ShopRepository();
+    ShopRepository sr;
 
     public void submenu(int option, Player player) {
 
         switch (option) {
             case 1:
                 incursionConquista(player);
+                this.sr.loadInitialStock();
                 break;
             case 2:
                 incursionSaqueo(player);
+                this.sr.loadInitialStock();
                 break;
             case 3:
                 incursionMenor(player);
+                this.sr.loadInitialStock();
                 break;
             case 0:
                 System.out.println("Saliendo de incursiones...");
@@ -31,7 +34,6 @@ public class IncursionController {
                 System.out.println("Numero invalido");
                 break;
         }
-        sr.loadInitialStock();
     }
 
     public void incursionConquista(Player player) {

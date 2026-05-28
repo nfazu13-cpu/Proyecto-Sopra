@@ -69,6 +69,7 @@ public class ShopController {
                     System.out.println("0. Salir de Incursiones");
 
                     int option = sc.nextInt();
+                    incursionController.sr = this.repository;
                     incursionController.submenu(option, player);
                     break;
                 case 5:
