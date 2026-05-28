@@ -26,7 +26,7 @@ public class WorldEvent {
     }
 
     public double calcFactor() {
-        return Math.round(((int) (Math.random() * 9) + 2) * 0.05 * 100.0) / 100.0;
+        return Math.round(((int) (Math.random() * 9) + 2) * 0.05 * 100.0) / 100.0; // returns number between 0.10 and 0.50
     }
 
     public void randomWorldEvent(ShopRepository stock) {

@@ -12,9 +12,9 @@ public class ItemGenerator {
     private final String[] BOOTS_PREFIXES = {"Botas", "Grebas", "Sandalias", "Escarpines"};
 
     private final String[] NATURE_SUFIXES = {
-        "de fuego", "de hielo", "del rayo", "de la tormenta", "de la sombra", "de la luz", 
-        "de hierro", "de plata", "de obsidiana", "de acero rúnico", "de bronce antiguo",  
-        "del dragón", "del fénix", "del caos", "del vacío", "del alba", "de la luna",      
+        "de fuego", "de hielo", "del rayo", "de la tormenta", "de la sombra", "de la luz",
+        "de hierro", "de plata", "de obsidiana", "de acero rúnico", "de bronce antiguo",
+        "del dragón", "del fénix", "del caos", "del vacío", "del alba", "de la luna",
         "del norte", "de las ruinas", "del bosque maldito", "de las profundidades", "de la montaña" 
     };
 
