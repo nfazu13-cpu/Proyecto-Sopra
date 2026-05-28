@@ -9,9 +9,13 @@ public class Weapon extends Item {
         this.damage = damage;
     }
 
-  @Override
-  public String toString() {
-      return super.toString() + "\nDaño: " + this.damage;
-  }
+    @Override
+    public String toString() {
+        return super.toString() + "\nDaño: " + this.damage;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
 
 }
