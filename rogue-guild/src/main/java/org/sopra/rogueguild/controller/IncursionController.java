@@ -37,6 +37,8 @@ public class IncursionController {
         }
     }
 
+
+
     public void incursionConquista(Player player) {
         int option = random.nextInt(4) + 1;
 
@@ -109,7 +111,7 @@ public class IncursionController {
 
         switch (option) {
             case 1:
-                Incursion menor1 = new Incursion("Saquea el palacio real en busca del Mapa qe necesita el mercader",
+                Incursion menor1 = new Incursion("Saquea el palacio real en busca del Mapa que necesita el mercader",
                         "Saquea el Mapa");
                 menor1.recompensaMenor(player);
 

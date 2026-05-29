@@ -13,7 +13,6 @@ public class ShopController extends UtilController {
     private final Player player;
     private final ViewDisplay view;
     private final ShopRepository repository;
-    private final WorldEvent worldEvent;
     private final IncursionController incursionController;
     private final QuestController questController;
     private final EquipController equipController;
@@ -22,15 +21,12 @@ public class ShopController extends UtilController {
         this.player = p;
         this.view = v;
         this.repository = r;
-        this.worldEvent = new WorldEvent();
         this.incursionController = new IncursionController();
         this.questController = qc;
         this.equipController = ec;
     }
 
     public void start() {
-
-        worldEvent.randomWorldEvent(repository);
 
         int opt;
         do {
@@ -41,11 +37,11 @@ public class ShopController extends UtilController {
             opt = super.askForInt();
             switch (opt) {
                 case 1:
-                    view.showWorldEventMessage(worldEvent);
+                    view.showWorldEventMessage(repository.getCurrentEvent());
                     view.displayStock(repository.getAllStock(), false);
                     break;
                 case 2:
-                    view.showWorldEventMessage(worldEvent);
+                    view.showWorldEventMessage(repository.getCurrentEvent());
                     view.displayStock(repository.getAllStock(), true);
                     int itemId = super.askForInt();
                     BuyResponse buyResponse = buyProcess(itemId);
