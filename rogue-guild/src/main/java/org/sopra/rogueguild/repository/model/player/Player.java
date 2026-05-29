@@ -15,12 +15,13 @@ public class Player {
     private ArrayList<Item> Armor = new ArrayList<Item>();
     private HashMap<ItemCategory, Item[]> itemEquipped;
     private int id;
+    private int currentCity;
 
     public Player(String name, int gold) {
         setGold(gold);
         setItemEquipped(itemEquipped);
         this.name = name;
-        
+
     }
 
     public String getName() {
@@ -148,7 +149,7 @@ public class Player {
             if (item.getCategory() == category) {
                 System.out.println("ID: [" + id + "] - " + item);
             } else {
-                System.out.println("Mo hay de esta categoria");
+                System.out.println("No hay de esta categoria");
             }
         }
     }
