@@ -39,6 +39,8 @@ public class ShopController extends UtilController {
                 case 1:
                     view.showWorldEventMessage(repository.getCurrentEvent());
                     view.displayStock(repository.getAllStock(), false);
+                    //TODO Pruebas
+                    repository.printAllStock();
                     break;
                 case 2:
                     view.showWorldEventMessage(repository.getCurrentEvent());

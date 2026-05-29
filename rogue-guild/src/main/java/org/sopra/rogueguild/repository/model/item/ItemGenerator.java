@@ -18,13 +18,21 @@ public class ItemGenerator {
         "del norte", "de las ruinas", "del bosque maldito", "de las profundidades", "de la montaña" 
     };
 
+    private final List<Integer> generatedIDs = new ArrayList<>();
     private final List<String> generatedNames = new ArrayList<>();
 
     public Item randomItemGenerator() {
+        int randomID = 0;
         String nameItem = "";
         int randomBasePrice = 0;
         int randomPrefixType;
         Item newItem = null;
+
+        do {
+            randomID = (int) (Math.random() * 594) + 1;
+        } while (generatedIDs.contains(randomID));
+
+        generatedIDs.add(randomID);
 
         do {
 

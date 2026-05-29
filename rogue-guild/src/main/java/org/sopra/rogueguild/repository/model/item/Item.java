@@ -6,8 +6,10 @@ public abstract class Item {
     private final int basePrice;
     private ItemCategory category;
     protected ItemStatsType itemStatsType;
+    private final int id;
 
-    public Item(String name, int price, ItemCategory category) {
+    public Item(int id, String name, int price, ItemCategory category) {
+        this.id = id;
         this.name = name;
         this.price = price;
         this.category = category;
@@ -20,6 +22,10 @@ public abstract class Item {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public ItemCategory getCategory() {
