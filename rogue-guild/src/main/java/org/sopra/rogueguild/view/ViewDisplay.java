@@ -1,5 +1,6 @@
 package org.sopra.rogueguild.view;
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Map;
 
 import org.sopra.rogueguild.repository.model.item.Item;
@@ -43,8 +44,8 @@ public class ViewDisplay {
 
     public void playerStatus(Player player) { playerView.playerStatus(player); }
 
-    public void displayStock(Map<Integer, Item> itemMap, boolean isInPurchaseProcess) {
-        stockView.displayStock(itemMap, isInPurchaseProcess);
+    public void displayStock(List<Item> stock, boolean isInPurchaseProcess) {
+        stockView.displayStock(stock, isInPurchaseProcess);
     }
 
     public void buyResult(BuyResponse r) {

@@ -73,7 +73,7 @@ public class WorldEvent {
 
         int eventPrice;
 
-        for (Item item : stock.getAllStock().values()) {
+        for (Item item : stock.getStock()) {
 
             eventPrice = (int) (item.getBasePrice() * percentage);
             item.setPrice(eventPrice);
@@ -87,7 +87,7 @@ public class WorldEvent {
 
         int eventPrice;
 
-        for (Item item : stock.getAllStock().values()) {
+        for (Item item : stock.getStock()) {
 
             if (item.getCategory() == category) {
 

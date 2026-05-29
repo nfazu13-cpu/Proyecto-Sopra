@@ -38,15 +38,14 @@ public class ShopController extends UtilController {
             switch (opt) {
                 case 1:
                     view.showWorldEventMessage(repository.getCurrentEvent());
-                    view.displayStock(repository.getAllStock(), false);
-                    //TODO Pruebas
-                    repository.printAllStock();
+                    view.displayStock(repository.getStock(), false);
                     break;
                 case 2:
                     view.showWorldEventMessage(repository.getCurrentEvent());
-                    view.displayStock(repository.getAllStock(), true);
+                    view.displayStock(repository.getStock(), true);
                     int itemId = super.askForInt();
                     if (itemId != 0) {
+                        itemId--;
                         BuyResponse buyResponse = buyProcess(itemId);
                         view.buyResult(buyResponse);
                     }
@@ -91,18 +90,24 @@ public class ShopController extends UtilController {
     }
 
     private BuyResponse buyProcess(int id) {
-        Item item = repository.getItem(id);
-        if (item == null) {
+
+        if (id >= 0 && id < repository.getActualMaxSizeStock()) {
+            Item item = repository.getItem(id);
+            if (item == null) {
+                return BuyResponse.notFound(id);
+            }
+            if (player.getGold() < item.getBasePrice()) {
+                return BuyResponse.notEnoughGold(item, player.getGold());
+            }
+            player.buy(item);
+            repository.removeItem(id);
+            player.addItem(item.getId(), item);
+            return BuyResponse.success(item);
+        } else {
+            id++;
             return BuyResponse.notFound(id);
-        }
-        if (player.getGold() < item.getBasePrice()) {
-            return BuyResponse.notEnoughGold(item, player.getGold());
-        }
-        player.buy(item);
-        repository.removeItem(id);
-        player.addItem(id, item);
-        ;
-        return BuyResponse.success(item);
+        }   
+
     }
 
     private void sellProcess(int id) {
@@ -118,7 +123,7 @@ public class ShopController extends UtilController {
         int precioRedondeado = (int) (Math.round(precioVenta / 5.0) * 5.0);
 
         player.removeItem(id);
-        repository.returnItem(id, itemDelJugador);
+        repository.returnItem(itemDelJugador);
         player.setGold(player.getGold() + precioRedondeado);
 
         System.out.println("Has vendido " + itemDelJugador.getName() + " por " + precioRedondeado + " monedas.");

@@ -37,7 +37,7 @@ public abstract class Item {
     }
 
     public String toString() {
-        return name + " (" + price + " oro)";
+        return "[" + id + "] " + name + " (" + price + " oro)";
     }
 
     public int getBasePrice() {
