@@ -9,7 +9,7 @@ import org.sopra.rogueguild.repository.model.item.Weapon;
 public class Player {
 
     private String name;
-    private int gold;
+    private int gold = 0;
     private Map<Integer, Item> inventory = new HashMap<>();
     Random random = new Random();
     private ArrayList<Item> Armor = new ArrayList<Item>();
@@ -17,9 +17,10 @@ public class Player {
     private int id;
 
     public Player(String name, int gold) {
-        this.name = name;
-        this.gold = gold;
+        setGold(gold);
         setItemEquipped(itemEquipped);
+        this.name = name;
+        
     }
 
     public String getName() {
@@ -39,7 +40,13 @@ public class Player {
     }
 
     public void setGold(int gold) {
-        this.gold = gold;
+        if (gold < 0) {
+            this.gold = 0;
+        } else if (gold > 500) {
+            this.gold = 500;
+        } else {
+            this.gold = gold;
+        }
     }
 
     public void setItemEquipped(HashMap<ItemCategory, Item[]> itemEquipped) {

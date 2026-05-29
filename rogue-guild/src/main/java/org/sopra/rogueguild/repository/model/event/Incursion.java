@@ -39,10 +39,6 @@ public class Incursion {
         this.goldReward = (int) (Math.round(this.goldReward / 5.0) * 5);
         player.setGold(player.getGold() + this.goldReward);
 
-        if (player.getGold() > 500) {
-            player.setGold(500);
-            System.out.println("Solo puedes tener hasta 500 de oro");
-        }
         id = random.nextInt(100) + 1;
         player.addItem(this.id, this.itemREward);
     }
@@ -60,11 +56,6 @@ public class Incursion {
         System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + nombreItem + ".");
         this.goldReward = 0;
 
-        if (player.getGold() > 500) {
-            player.setGold(500);
-            System.out.println("Solo puedes tener hasta 500 de oro");
-        }
-
         id = random.nextInt(100) + 1;
         player.addItem(id, this.itemREward);
 
@@ -80,10 +71,6 @@ public class Incursion {
         goldReward = (int) (Math.round(this.goldReward / 5.0) * 5);
         player.setGold(player.getGold() + this.goldReward);
 
-        if (player.getGold() > 500) {
-            player.setGold(500);
-            System.out.println("Solo puedes tener hasta 500 de oro");
-        }
     }
 
 }

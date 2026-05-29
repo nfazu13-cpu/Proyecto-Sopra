@@ -4,6 +4,8 @@ import java.io.PrintStream;
 import java.util.Map;
 
 import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.view.utils.Ansi;
+import static org.sopra.rogueguild.view.utils.Ansi.*;
 
 public class StockView {
     private final PrintStream out;
@@ -31,8 +33,7 @@ public class StockView {
                                 "-", item.getName(), item.getPrice());
                     }
                 });
-
-        out.println("|| |                                               | ||");
+        out.println("|| |" + c(Ansi.GRAY, "  [0] Salir                                    ") + "| ||");
         out.println("|| \\_______________________________________________/ ||");
         out.println(" \\___________________________________________________/");
     }
