@@ -44,8 +44,10 @@ public class ShopController extends UtilController {
                     view.showWorldEventMessage(repository.getCurrentEvent());
                     view.displayStock(repository.getAllStock(), true);
                     int itemId = super.askForInt();
-                    BuyResponse buyResponse = buyProcess(itemId);
-                    view.buyResult(buyResponse);
+                    if (itemId != 0) {
+                        BuyResponse buyResponse = buyProcess(itemId);
+                        view.buyResult(buyResponse);
+                    }
                     break;
                 case 3:
                     if (!player.getInventory().isEmpty()) { // SÍ tiene ítems
