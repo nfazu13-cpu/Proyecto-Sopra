@@ -19,73 +19,7 @@ public class ShopController extends UtilController {
         this.repository = r;
     }
 
-<<<<<<< HEAD
     public BuyResponse buyProcess(int id) {
-=======
-    public void start() {
-
-        int opt;
-        do {
-
-            view.landingPage();
-            view.playerStatus(player);
-
-            opt = super.askForInt();
-            switch (opt) {
-                case 1:
-                    view.showWorldEventMessage(repository.getCurrentEvent());
-                    view.displayStock(repository.getAllStock(), false);
-                    break;
-                case 2:
-                    view.showWorldEventMessage(repository.getCurrentEvent());
-                    view.displayStock(repository.getAllStock(), true);
-                    int itemId = super.askForInt();
-                    if (itemId != 0) {
-                        BuyResponse buyResponse = buyProcess(itemId);
-                        view.buyResult(buyResponse);
-                    }
-                    break;
-                case 3:
-                    if (!player.getInventory().isEmpty()) { // SÍ tiene ítems
-                        player.printInventory();
-                        System.out.print("Introduce el ID del ítem a vender: ");
-                        int id = super.askForInt();
-                        sellProcess(id);
-                    } else {
-                        System.out.println("Tu inventario está vacío. No tienes ítems para vender.");
-                    }
-                    break;
-                case 4:
-                    System.out.println("Elige qué incursion quieres hacer: ");
-                    System.out.println("1. Incursion de Conquista");
-                    System.out.println("2. Incursion de Saqueo");
-                    System.out.println("3. Incursion Menor");
-                    System.out.println("0. Salir de Incursiones");
-
-                    int option = super.askForInt();
-                    incursionController.sr = this.repository;
-                    incursionController.submenu(option, player);
-                    break;
-                case 5:
-                    questController.start();
-                    break;
-                case 6:
-                    equipController.start();
-                    break;
-                case 0:
-                    view.quitMessage();
-                    break;
-                default:
-                    System.out.println("Debe introducir una opción válida.");
-                    break;
-            }
-            view.pressKeyMessage();
-            super.cleanBuffer();
-        } while (opt != 0);
-    }
-
-    private BuyResponse buyProcess(int id) {
->>>>>>> b4b4067673ff0d929052690065581d1aedc2b778
         Item item = repository.getItem(id);
         if (item == null) {
             return BuyResponse.notFound(id);
