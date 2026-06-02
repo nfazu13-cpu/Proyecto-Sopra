@@ -7,7 +7,7 @@ import java.util.Random;
 public class ItemGenerator {
 
     private final String[] WEAPON_PREFIXES = { "Espada", "Hacha", "Daga", "Lanza", "Mandoble", "Arco", "Maza", "Bastón" };
-    
+
     private final String[] ARMOR_PREFIXES = { "Armadura", "Cota", "Peto", "Coraza", "Malla" };
     private final String[] POTION_PREFIXES = { "Poción", "Elixir", "Brebaje", "Ungüento", "Tintura" };
     private final String[] HELMET_PREFIXES = { "Yelmo", "Casco", "Celada", "Capucha", "Visera" };
