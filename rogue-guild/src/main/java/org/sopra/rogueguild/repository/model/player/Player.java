@@ -5,6 +5,8 @@ import java.util.*;
 import org.sopra.rogueguild.repository.model.World.City;
 import org.sopra.rogueguild.repository.model.item.Item;
 import org.sopra.rogueguild.repository.model.item.ItemCategory;
+import org.sopra.rogueguild.repository.model.item.ItemGenerator;
+import org.sopra.rogueguild.repository.model.item.Potion;
 import org.sopra.rogueguild.repository.model.item.Weapon;
 
 public class Player {
@@ -17,11 +19,14 @@ public class Player {
     private HashMap<ItemCategory, Item[]> itemEquipped;
     private int id;
     private City currentCity;
+    static private int hitPoints;
+    private ItemGenerator itemGenerator;
 
     public Player(String name, int gold) {
         setGold(gold);
         setItemEquipped(itemEquipped);
         this.name = name;
+        this.hitPoints = 20;
 
     }
 
@@ -173,6 +178,14 @@ public class Player {
     }
 
     public void buy(Item item) {
+        if (item.getCategory() == ItemCategory.POTION) {
+            Potion potion = (Potion) item;
+            if (hitPoints < 20) {
+                hitPoints += potion.getHealPoints();
+            } else {
+                System.out.println("No se puede tener mas de 20 de vida");
+            }
+        }
         this.gold -= item.getBasePrice();
     }
 
@@ -210,7 +223,7 @@ public class Player {
             Item item = inventory.get(id);
 
             if (item.getCategory() == category) {
-                System.out.println("ID: [" + id + "] - " + item);
+                System.out.println(item);
             } else {
                 System.out.println("No hay de esta categoria");
             }

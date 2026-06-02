@@ -2,6 +2,7 @@ package org.sopra.rogueguild.repository.model.item;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ItemGenerator {
 
@@ -23,6 +24,7 @@ public class ItemGenerator {
     private final List<String> generatedNames = new ArrayList<>();
     private int maxCombination = 594;
     private boolean maxCombinationMade = false;
+    Random random = new Random();
 
     public Item randomItemGenerator() {
 
@@ -76,8 +78,9 @@ public class ItemGenerator {
                     nameItem += " " + NATURE_SUFIXES[(int) (Math.random() * NATURE_SUFIXES.length)];
 
                     randomBasePrice = ((int) (Math.random() * 7) + 2) * 5; // 10 - 40 gold
+                    int randomHealPoints = random.nextInt(20) + 1;
 
-                    newItem = new Potion(autoID, nameItem, randomBasePrice);
+                    newItem = new Potion(autoID, nameItem, randomBasePrice, randomHealPoints);
                     break;
 
                 case 4:
@@ -114,7 +117,6 @@ public class ItemGenerator {
 
         return newItem;
     }
-
 
     public boolean getMaxCombinationMade() {
         return maxCombinationMade;
