@@ -14,6 +14,7 @@ public class Incursion {
     private Random random = new Random();
     private int id;
 
+    
     public Incursion(String description, String shortName) {
         if (description == null || description.isBlank() || shortName == null || shortName.isBlank()) {
             throw new IllegalArgumentException("La descripción y el nombre corto no pueden estar vacíos.");
@@ -23,7 +24,9 @@ public class Incursion {
         this.shortName = shortName;
     }
 
+
     public void recompensaMenor(Player player) {
+
         this.goldReward = random.nextInt(30) + 1;
 
         Item itemMenor;
@@ -36,14 +39,16 @@ public class Incursion {
 
         String nombreItem = (this.itemREward != null) ? this.itemREward.getName() : "ninguno";
         System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + nombreItem + ".");
+
         this.goldReward = (int) (Math.round(this.goldReward / 5.0) * 5);
         player.setGold(player.getGold() + this.goldReward);
 
-        id = random.nextInt(100) + 1;
-        player.addItem(this.id, this.itemREward);
+        player.addItem(itemREward.getId(), itemREward);
     }
 
+
     public void recompensaItem(Player player) {
+
         Item itemMayor;
 
         do {
@@ -54,12 +59,12 @@ public class Incursion {
 
         String nombreItem = (this.itemREward != null) ? this.itemREward.getName() : "ninguno";
         System.out.println("Has obtenido " + goldReward + " de oro y el objeto " + nombreItem + ".");
+
         this.goldReward = 0;
 
-        id = random.nextInt(100) + 1;
-        player.addItem(id, this.itemREward);
-
+        player.addItem(itemREward.getId(), itemREward);
     }
+
 
     public void recompensaGold(Player player) {
         this.goldReward = random.nextInt(500) + 1;

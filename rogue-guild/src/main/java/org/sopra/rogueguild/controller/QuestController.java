@@ -1,6 +1,8 @@
 package org.sopra.rogueguild.controller;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import org.sopra.rogueguild.repository.QuestRepository;
 import org.sopra.rogueguild.repository.model.player.Player;
 import org.sopra.rogueguild.repository.model.item.ItemStatsType;
@@ -100,11 +102,57 @@ public class QuestController extends UtilController {
 
                 } else {
                     System.out.println("Para realizar esta misión, necesitas los siguientes objetos:");
-                    System.out.println(missingRequirements);
+
+                    for (HashMap.Entry<ItemCategory, Integer> requirement : missingRequirements.entrySet()) {
+                        ItemCategory itemCategory = requirement.getKey();
+                        String categoryString = "";
+
+                        if (missingRequirements.containsValue(1)) {
+                            categoryString = singularInventoryRequirement(itemCategory);
+                        } else {
+                            categoryString = pluralInventoryRequirement(itemCategory);
+                        }
+
+                        Integer quantity = requirement.getValue();
+                        
+                        System.out.println("Necesitas ALMACENAR " + quantity + " " + categoryString + " más.");
+                    }
+                    
                 }
             }
 
         }
+
+
+        public String singularInventoryRequirement(ItemCategory ic) {
+            if (ic == ItemCategory.ARMOR) {
+                return "pechera";
+            } else if (ic == ItemCategory.HELMET) {
+                return "casco";
+            } else if (ic == ItemCategory.BOOTS) {
+                return "botas";
+            } else if (ic == ItemCategory.WEAPON) {
+                return "arma";
+            } else if (ic == ItemCategory.POTION) {
+                return "poción";
+            } else return "otro";
+        }
+
+
+        public String pluralInventoryRequirement(ItemCategory ic) {
+            if (ic == ItemCategory.ARMOR) {
+                return "pecheras";
+            } else if (ic == ItemCategory.HELMET) {
+                return "cascos";
+            } else if (ic == ItemCategory.BOOTS) {
+                return "botas";
+            } else if (ic == ItemCategory.WEAPON) {
+                return "armas";
+            } else if (ic == ItemCategory.POTION) {
+                return "pociones";
+            } else return "otros";
+        }
+
 
         public void createStatsMissionInstance(Quest quest, Player player) {
 
@@ -125,8 +173,21 @@ public class QuestController extends UtilController {
                         selected.completeMission();
 
                 } else {
-                    System.out.println("No cumples con los requisitos de estadísticas necesarios. Te falta o te pasas por:");
-                    System.out.println(missingRequirements);
+                    System.out.println("No cumples con los requisitos de estadísticas necesarios.");
+                    
+                    for (HashMap.Entry<ItemStatsType, Integer> requirement : missingRequirements.entrySet()) {
+                        String stat = "";
+                        if (requirement.getKey() == ItemStatsType.DAMAGE) {
+                            stat = "daño";
+                        } else if (requirement.getKey() == ItemStatsType.SHIELD) {
+                            stat = "armadura";
+                        }
+
+                        int quantity = requirement.getValue();
+
+                        System.out.println("Te falta o te pasas por " + quantity + " de " + stat);
+
+                    }
                 }
             }
 

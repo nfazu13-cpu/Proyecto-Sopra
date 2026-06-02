@@ -16,8 +16,7 @@ public class ShopRepository {
     private Random random = new Random();
     private ItemGenerator itemGenerator = new ItemGenerator();
     private WorldEvent currentEvent;
-    private int id;
-    private int maxSizeRepository = 3;
+    private int initialStockSize = 3;
     private int actualMaxSizeStock;
 
     public ShopRepository() {
@@ -29,7 +28,7 @@ public class ShopRepository {
         stock.clear();
 
         if (!itemGenerator.getMaxCombinationMade()) {
-            for (int i = 0; i < maxSizeRepository; i++) {
+            for (int i = 0; i < initialStockSize; i++) {
                 Item newItem = itemGenerator.randomItemGenerator();
                 if (newItem == null) {
                     break; 
@@ -49,6 +48,39 @@ public class ShopRepository {
 
     public Item getItem(int id) {
         return stock.get(id);
+    }
+
+    public Item getItemById(int itemId) {
+        for (Item item : stock) {
+            if (item.getId() == itemId) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public void removeItemById(int itemId) {
+
+        Item itemToRemove = null;
+
+        for (Item item : stock) {
+            if (item.getId() == itemId) {
+                itemToRemove = item;
+                break;
+            }
+        }
+
+        if (itemToRemove != null) {
+            stock.remove(itemToRemove);
+            actualMaxSizeStock--;
+
+            if (stock.isEmpty()) {
+                System.out.println(
+                    "\n[!] La tienda se ha quedado sin existencias. El mercader repone el inventario..."
+                );
+                loadInitialStock();
+            }
+        }
     }
 
     public List<Item> getStock() {

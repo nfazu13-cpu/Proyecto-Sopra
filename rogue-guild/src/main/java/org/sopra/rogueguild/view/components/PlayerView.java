@@ -21,7 +21,9 @@ public class PlayerView {
         out.println("       | ░    NOMBRE:        " + player.getName());
         out.println("       | ░    ORO:           " + player.getGold() + " monedas");
         out.print("       | ░    INVENTARIO:    ");
-        player.printInventory();
+        player.printInventoryMenu();
+        out.print("       | ░    EQUIPADO:    ");
+        player.printEquipmentMenu();
         out.println();
     }
 }

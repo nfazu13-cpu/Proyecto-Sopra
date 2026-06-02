@@ -21,22 +21,23 @@ public class ShopController extends UtilController {
 
     BuyResponse buyProcess(int id) {
 
-        if (id >= 0 && id < repository.getActualMaxSizeStock()) {
-            Item item = repository.getItem(id);
-            if (item == null) {
-                return BuyResponse.notFound(id);
-            }
-            if (player.getGold() < item.getBasePrice()) {
-                return BuyResponse.notEnoughGold(item, player.getGold());
-            }
-            player.buy(item);
-            repository.removeItem(id);
-            player.addItem(item.getId(), item);
-            return BuyResponse.success(item);
-        } else {
-            id++;
+        Item item = repository.getItemById(id);
+
+        if (item == null) {
             return BuyResponse.notFound(id);
         }
+
+        if (player.getGold() < item.getBasePrice()) {
+            return BuyResponse.notEnoughGold(item, player.getGold());
+        }
+
+        player.buy(item);
+
+        repository.removeItemById(id);
+
+        player.addItem(item.getId(), item);
+
+        return BuyResponse.success(item);
     }
 
 

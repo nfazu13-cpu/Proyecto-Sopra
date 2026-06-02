@@ -34,28 +34,32 @@ public class EquipController extends UtilController {
                 case 1:
                     player.printInventoryByCategory(ItemCategory.ARMOR);
                     idEquipment = super.askForInt();
-                    validateEquipmentID(idEquipment);
-                    equip(idEquipment);
+                    if (validateEquipmentID(idEquipment)) {
+                        equip(idEquipment);
+                    }
                     break;
                 case 2:
                     player.printInventoryByCategory(ItemCategory.BOOTS);
                     idEquipment = super.askForInt();
-                    validateEquipmentID(idEquipment);
-                    equip(idEquipment);
+                    if (validateEquipmentID(idEquipment)) {
+                        equip(idEquipment);
+                    }
                     break;
 
                 case 3:
                     player.printInventoryByCategory(ItemCategory.HELMET);
                     idEquipment = super.askForInt();
-                    validateEquipmentID(idEquipment);
-                    equip(idEquipment);
+                    if (validateEquipmentID(idEquipment)) {
+                        equip(idEquipment);
+                    }
                     break;
 
                 case 4:
                     player.printInventoryByCategory(ItemCategory.WEAPON);
                     idEquipment = super.askForInt();
-                    validateEquipmentID(idEquipment);
-                    equip(idEquipment);
+                    if (validateEquipmentID(idEquipment)) {
+                        equip(idEquipment);
+                    }
                     break;
                 case 0:
                     System.out.println("Saliendo de equipamiento...");
@@ -81,11 +85,18 @@ public class EquipController extends UtilController {
 
     }
 
-    public void validateEquipmentID(int idItem) {
+    public boolean validateEquipmentID(int idItem) {
         if (idItem <= 0) {
-            System.out.println("El id que estas poniendo no lo encuentro o no es valido");
+            System.out.println("ID inválido");
+            return false;
         }
 
+        if (!player.getInventory().containsKey(idItem)) {
+            System.out.println("No tienes ese ítem en el inventario");
+            return false;
+        }
+
+        return true;
     }
 
 }

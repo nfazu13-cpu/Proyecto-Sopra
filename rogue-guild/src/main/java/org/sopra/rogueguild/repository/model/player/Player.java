@@ -17,7 +17,6 @@ public class Player {
     Random random = new Random();
     private ArrayList<Item> Armor = new ArrayList<Item>();
     private HashMap<ItemCategory, Item[]> itemEquipped;
-    private int id;
     private City currentCity;
     static private int hitPoints;
     private ItemGenerator itemGenerator;
@@ -64,50 +63,55 @@ public class Player {
         this.itemEquipped.put(ItemCategory.WEAPON, maxItems(2));
     }
 
-    public void equipItem(Item nuevoItem) {
-        ItemCategory categoria = nuevoItem.getCategory();
-        Item[] ranuras = this.itemEquipped.get(categoria);
+    public void equipItem(Item newItem) {
+        ItemCategory category = newItem.getCategory();
+        Item[] slots = this.itemEquipped.get(category);
 
-        if (ranuras.length == 1) {
-            ranuras[0] = nuevoItem;
-            Item itemAnterior = ranuras[0];
+        if (slots.length == 1) {
 
-            if (itemAnterior != null) {
-                id = random.nextInt();
-                this.inventory.put(id, itemAnterior);
-                System.out.println(itemAnterior + " ha vuelto al inventario.");
+            Item previousItem = slots[0];
+
+            slots[0] = newItem;
+
+            if (previousItem != null) {
+                this.inventory.put(previousItem.getId(), previousItem);
+                System.out.println(previousItem + " ha vuelto al inventario.");
             }
+
         } else {
 
-            if (ranuras[0] == null) {
+            if (slots[0] == null) {
 
-                ranuras[0] = nuevoItem;
+                slots[0] = newItem;
                 System.out.println("Arma equipada en ranura 1.");
 
-            } else if (ranuras[1] == null) {
+            } else if (slots[1] == null) {
 
-                ranuras[1] = nuevoItem;
+                slots[1] = newItem;
                 System.out.println("Arma equipada en ranura 2.");
+
             } else {
 
-                int indiceReemplazo = 0;
-                Weapon arma1 = (Weapon) ranuras[1];
-                Weapon arma0 = (Weapon) ranuras[0];
+                int replacementIndex = 0;
+                Weapon weapon1 = (Weapon) slots[1];
+                Weapon weapon0 = (Weapon) slots[0];
 
-                if (arma1.getDamage() < arma0.getDamage()) {
-                    indiceReemplazo = 1;
+                if (weapon1.getDamage() < weapon0.getDamage()) {
+                    replacementIndex = 1;
                 }
 
-                Item armaAnterior = ranuras[indiceReemplazo];
-                ranuras[indiceReemplazo] = nuevoItem; // Reemplazo directo
-                System.out.println("Sustituida arma de menor daño: " + armaAnterior);
+                Item previousItem = slots[replacementIndex];
 
-                this.inventory.put(id, armaAnterior);
-                System.out.println(armaAnterior + " ha vuelto al inventario.");
+                slots[replacementIndex] = newItem;
 
+                System.out.println("Sustituida arma de menor daño: " + previousItem);
+
+                if (previousItem != null) {
+                    this.inventory.put(previousItem.getId(), previousItem);
+                    System.out.println(previousItem + " ha vuelto al inventario.");
+                }
             }
         }
-
     }
 
     public void travelTo(City destino) {
@@ -189,19 +193,20 @@ public class Player {
         this.gold -= item.getBasePrice();
     }
 
-    public void addItem(int repositoryId, Item item) {
-        inventory.put(repositoryId, item);
+    public void addItem(int itemId, Item item) {
+        inventory.put(itemId, item);
     }
 
+    
     public void removeItem(int repositoryId) {
         if (inventory.remove(repositoryId) == null) {
             System.out.println("El objeto seleccionado no se encuentra en el inventario.");
         }
     }
 
-    public void printInventory() {
+    public void printInventoryMenu() {
         if (inventory.isEmpty()) {
-            System.out.println("Vacio");
+            System.out.println("Vacío");
         } else {
             boolean esPrimero = true;
             for (Item item : inventory.values()) {
@@ -211,8 +216,19 @@ public class Player {
                     esPrimero = false;
                 } else {
 
-                    System.out.println("       |                     " + item);
+                    System.out.println("       | ░                   " + item);
                 }
+            }
+        }
+    }
+
+
+    public void printInventory() {
+        if (inventory.isEmpty()) {
+            System.out.println("Vacío");
+        } else {
+            for (Item item : inventory.values()) {
+                System.out.println(item);
             }
         }
     }
@@ -228,6 +244,56 @@ public class Player {
                 System.out.println("No hay de esta categoria");
             }
         }
+    }
+
+    public void printEquipmentMenu() {
+        boolean first = true;
+        for (Map.Entry<ItemCategory, Item[]> equipement : itemEquipped.entrySet()) {
+            ItemCategory category = equipement.getKey();
+            Item[] slots = equipement.getValue();
+
+            String categoryStr = transcriptCat(category);
+
+            if (first) {
+                System.out.println(categoryStr);
+                first = false;
+            } else {
+                System.out.println("       | ░                 " + categoryStr);
+            }
+            
+            
+            for (int i = 0; i < slots.length; i++) {
+                Item item = slots[i];
+                
+                String slotPrefix = "";
+                
+                if (slots.length > 1) {
+                    slotPrefix = "  Ranura " + (i + 1) + ":";
+                } else {
+                    slotPrefix = "  Ranura Única:";
+                }
+                
+                if (item != null) {
+                    System.out.println("       | ░                 " + slotPrefix + " " + item);
+                } else {
+                    System.out.println("       | ░                 " + slotPrefix + " " + "[vacía]");
+                }
+            }
+        }
+    }
+
+    public String transcriptCat(ItemCategory ic) {
+        if (ic == ItemCategory.ARMOR) {
+            return "- PECHERA";
+        } else if (ic == ItemCategory.HELMET) {
+            return "- CASCO";
+        } else if (ic == ItemCategory.BOOTS) {
+            return "- BOTAS";
+        } else if (ic == ItemCategory.WEAPON) {
+            return "- ARMAS";
+        } else if (ic == ItemCategory.POTION) {
+            return "- POCIONES";
+        }else return "- OTROS";
     }
 
 }

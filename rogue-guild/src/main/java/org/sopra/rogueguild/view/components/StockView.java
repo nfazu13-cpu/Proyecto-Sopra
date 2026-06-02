@@ -48,7 +48,7 @@ public class StockView {
             }
 
             if (inPurchase) {
-                out.printf(" || |  [%d] %-26s %-11s %4d oro         | ||%n", i + 1, item.getName(), stats, item.getPrice());
+                out.printf(" || |  [%d] %-26s %-11s %4d oro         | ||%n", item.getId(), item.getName(), stats, item.getPrice());
             } else {
                 out.printf(" || |  [-] %-26s %-11s %4d oro         | ||%n", item.getName(), stats, item.getPrice());
             }

@@ -42,9 +42,10 @@ public class Menu extends UtilController {
                 case 2:
                     view.showWorldEventMessage(repository.getCurrentEvent());
                     view.displayStock(repository.getStock(), true);
+                    
                     int itemId = super.askForInt();
+                    
                     if (itemId != 0) {
-                        itemId--;
                         BuyResponse buyResponse = shopController.buyProcess(itemId);
                         view.buyResult(buyResponse);
                     }

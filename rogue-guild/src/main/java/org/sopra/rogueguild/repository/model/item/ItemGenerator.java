@@ -41,6 +41,7 @@ public class ItemGenerator {
         int randomPrefixType;
         Item newItem = null;
 
+
         do {
 
             int randomPrefix = (int) (Math.random() * 5) + 1;
