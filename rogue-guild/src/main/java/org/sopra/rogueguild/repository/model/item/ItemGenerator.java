@@ -84,7 +84,8 @@ public class ItemGenerator {
                     nameItem += " " + NATURE_SUFIXES[(int) (Math.random() * NATURE_SUFIXES.length)];
 
                     randomBasePrice = ((int) (Math.random() * 7) + 2) * 5; // 10 - 40 gold
-                    int randomHealPoints = random.nextInt(20) + 1;
+                    
+                    int randomHealPoints = randomBasePrice / 4;
 
                     newItem = new Potion(autoID, nameItem, randomBasePrice, randomHealPoints);
                     break;

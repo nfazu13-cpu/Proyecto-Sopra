@@ -18,7 +18,7 @@ public class Player {
     private ArrayList<Item> Armor = new ArrayList<Item>();
     private HashMap<ItemCategory, Item[]> itemEquipped;
     private City currentCity;
-    static private int hitPoints;
+    private int hitPoints;
     private ItemGenerator itemGenerator;
 
     public Player(String name, int gold) {
@@ -53,6 +53,14 @@ public class Player {
         } else {
             this.gold = gold;
         }
+    }
+
+    public void setHitPoints(int hitPoints) {
+        this.hitPoints = hitPoints;
+    }
+
+    public int getHitPoints() {
+        return hitPoints;
     }
 
     public void setItemEquipped(HashMap<ItemCategory, Item[]> itemEquipped) {
@@ -182,20 +190,34 @@ public class Player {
     }
 
     public void buy(Item item) {
+
         if (item.getCategory() == ItemCategory.POTION) {
             Potion potion = (Potion) item;
-            if (hitPoints < 20) {
-                hitPoints += potion.getHealPoints();
-            } else {
-                System.out.println("No se puede tener mas de 20 de vida");
+            int oldHealth = hitPoints;
+
+            hitPoints += potion.getHealPoints();
+
+            System.out.println("La poción ha modificado tu vida en " + (hitPoints - oldHealth) + ".");
+
+            if (hitPoints >= 20) {
+                hitPoints = 20;
+                System.out.println("¡Tu vida está al máximo!");
+            }
+
+            if (hitPoints <= 0) { 
+                hitPoints = 0; 
+                System.out.println("Todos te recordarán...");
             }
         }
+
         this.gold -= item.getBasePrice();
     }
+
 
     public void addItem(int itemId, Item item) {
         inventory.put(itemId, item);
     }
+
 
     public void removeItem(int repositoryId) {
         if (inventory.remove(repositoryId) == null) {

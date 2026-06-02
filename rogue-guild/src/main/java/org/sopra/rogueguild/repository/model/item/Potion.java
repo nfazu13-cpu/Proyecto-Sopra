@@ -1,10 +1,7 @@
 package org.sopra.rogueguild.repository.model.item;
 
-import org.sopra.rogueguild.repository.model.player.Player;
-
 public class Potion extends Item {
     private int healPoints;
-    private Player player;
 
     public Potion(int id, String name, int price, int healPoints) {
         super(id, name, price, ItemCategory.POTION);
@@ -16,7 +13,26 @@ public class Potion extends Item {
     }
 
     public void setHealPoints(int healPoints) {
-        this.healPoints = healPoints;
+        int newHealth = 0;
+        newHealth = this.healPoints + healPoints;
+
+        if (newHealth > 20) {
+            this.healPoints = 20;
+            return;
+        }
+
+        if (newHealth < 0) {
+            this.healPoints = 0;
+            return;
+        }
+
+        this.healPoints = newHealth;
+        return;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + "Sana: " + this.healPoints;
     }
 
 }

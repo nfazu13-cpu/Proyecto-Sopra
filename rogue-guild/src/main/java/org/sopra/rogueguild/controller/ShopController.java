@@ -7,6 +7,7 @@ import org.sopra.rogueguild.repository.model.event.WorldEvent;
 import org.sopra.rogueguild.repository.model.player.Player;
 import org.sopra.rogueguild.repository.model.item.Item;
 import org.sopra.rogueguild.repository.model.item.ItemCategory;
+import org.sopra.rogueguild.repository.model.item.Potion;
 
 public class ShopController extends UtilController {
 
@@ -24,20 +25,15 @@ public class ShopController extends UtilController {
 
         Item item = repository.getItemById(id);
 
-        if (item == null) {
-            return BuyResponse.notFound(id);
-        }
+        if (item == null) return BuyResponse.notFound(id);
 
-        if (player.getGold() < item.getBasePrice()) {
+        if (player.getGold() < item.getBasePrice())
             return BuyResponse.notEnoughGold(item, player.getGold());
-        }
 
         player.buy(item);
-
         repository.removeItemById(id);
-        if (item.getCategory() == ItemCategory.POTION) {
-            player.removeItem(id);
-        } else {
+
+        if (item.getCategory() != ItemCategory.POTION) {
             player.addItem(item.getId(), item);
         }
 

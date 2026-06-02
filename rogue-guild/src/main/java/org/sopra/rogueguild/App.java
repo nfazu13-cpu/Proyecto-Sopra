@@ -14,6 +14,8 @@ public class App {
 
         ViewDisplay view = new ViewDisplay();
         Player player = new Player("Iñigo Montolla", 500);
+        
+        player.setHitPoints(12);
 
         QuestController questController = new QuestController(player);
         EquipController equipController = new EquipController(player);

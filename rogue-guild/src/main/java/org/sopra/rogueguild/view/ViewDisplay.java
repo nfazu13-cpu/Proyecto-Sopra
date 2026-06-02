@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.repository.model.item.ItemCategory;
 import org.sopra.rogueguild.repository.model.player.Player;
 import org.sopra.rogueguild.repository.model.event.WorldEvent;
 import org.sopra.rogueguild.controller.dto.BuyResponse;
@@ -48,7 +49,7 @@ public class ViewDisplay {
         stockView.displayStock(stock, isInPurchaseProcess);
     }
 
-    public void buyResult(BuyResponse r) {
-        buyResultView.show(r);
+    public void buyResult(BuyResponse r, ItemCategory ic) {
+        buyResultView.show(r, ic);
     }
 }

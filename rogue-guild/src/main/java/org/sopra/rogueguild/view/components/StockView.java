@@ -8,6 +8,7 @@ import org.sopra.rogueguild.repository.model.item.Armor;
 import org.sopra.rogueguild.repository.model.item.Boots;
 import org.sopra.rogueguild.repository.model.item.Helmet;
 import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.repository.model.item.Potion;
 import org.sopra.rogueguild.repository.model.item.Weapon;
 import org.sopra.rogueguild.view.utils.Ansi;
 import static org.sopra.rogueguild.view.utils.Ansi.*;
@@ -35,13 +36,16 @@ public class StockView {
                 stats = "Daño: " + ((Weapon) item).getDamage();
 
             } else if (item instanceof Armor) {
-                stats = "Def: " + ((Armor) item).getShield();
+                stats = "Def.: " + ((Armor) item).getShield();
 
             } else if (item instanceof Helmet) {
-                stats = "Def: " + ((Helmet) item).getShield();
+                stats = "Def.: " + ((Helmet) item).getShield();
                 
             } else if (item instanceof Boots) {
-                stats = "Def: " + ((Boots) item).getShield();
+                stats = "Def.: " + ((Boots) item).getShield();
+
+            }  else if (item instanceof Potion) {
+                stats = "Sana: " + ((Potion) item).getHealPoints();
 
             } else {
                 stats = "";

@@ -2,9 +2,11 @@ package org.sopra.rogueguild.controller;
 
 import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.repository.ShopRepository;
+import org.sopra.rogueguild.repository.model.item.Item;
 import org.sopra.rogueguild.repository.model.player.Player;
 import org.sopra.rogueguild.view.ViewDisplay;
 import org.sopra.rogueguild.controller.ShopController;
+import org.sopra.rogueguild.repository.model.item.ItemCategory;
 
 public class Menu extends UtilController {
     private final Player player;
@@ -42,12 +44,18 @@ public class Menu extends UtilController {
                 case 2:
                     view.showWorldEventMessage(repository.getCurrentEvent());
                     view.displayStock(repository.getStock(), true);
-                    
+
                     int itemId = super.askForInt();
-                    
+
                     if (itemId != 0) {
-                        BuyResponse buyResponse = shopController.buyProcess(itemId);
-                        view.buyResult(buyResponse);
+                        Item item = repository.getItemById(itemId);
+
+                        if (item != null) {
+                            BuyResponse buyResponse = shopController.buyProcess(itemId);
+                            view.buyResult(buyResponse, item.getCategory());
+                        } else {
+                            System.out.println("Ese item no existe.");
+                        }
                     }
                     break;
                 case 3:
