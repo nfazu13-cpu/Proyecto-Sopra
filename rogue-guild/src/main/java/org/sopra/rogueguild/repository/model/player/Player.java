@@ -254,17 +254,23 @@ public class Player {
         }
     }
 
-    public void printInventoryByCategory(ItemCategory category) {
-        System.out.println("--- Objetos de la categoría: " + category + " ---");
+    public boolean printInventoryByCategory(ItemCategory category) {
+        System.out.println("--- Objetos de la categoria: " + category + " ---");
+        boolean encontrado = false;
+
         for (Integer id : inventory.keySet()) {
             Item item = inventory.get(id);
-
-            if (item.getCategory() == category) {
+            if (item != null && item.getCategory() == category) {
                 System.out.println(item);
-            } else {
-                System.out.println("No hay de esta categoria");
+                encontrado = true;
             }
         }
+
+        if (!encontrado) {
+            System.out.println("No hay de esta categoria");
+        }
+
+        return encontrado;
     }
 
     public void printEquipmentMenu() {

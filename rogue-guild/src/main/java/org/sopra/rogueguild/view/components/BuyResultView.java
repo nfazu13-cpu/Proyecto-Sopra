@@ -12,6 +12,7 @@ public class BuyResultView {
 
     public void show(BuyResponse r, ItemCategory ic) {
         switch (r.getStatus()) {
+
         case SUCCESS: 
                 if (ic != ItemCategory.POTION) {
                     messages.showMessage("[+] " + r.getItem().getName() + " ya está en tu equipo!");
@@ -21,6 +22,7 @@ public class BuyResultView {
                 messages.showMessage("[!] Ese objeto (" + r.getRequestedId() + ") no existe en nuestra tienda.");
                 break;
         case NOT_ENOUGH_GOLD:
+
                 messages.showMessage("[!] No tienes suficiente oro. Te faltan " + r.getMissingGold() + " monedas.");
                 break;
         }

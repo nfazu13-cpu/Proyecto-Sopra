@@ -7,10 +7,9 @@ public class City {
     private String nombre;
     private List<City> ciudadesConectadas = new ArrayList<>();
 
-    // Constructor simplificado: una ciudad nace con su nombre y luego se le añaden
-    // conexiones
     public City(String nombre) {
         this.nombre = nombre;
+        this.ciudadesConectadas = new ArrayList<>();
     }
 
     public void añadirCamino(City otraCiudad) {
@@ -23,7 +22,6 @@ public class City {
         }
     }
 
-    // Getters y Setters
     public String getNombre() {
         return nombre;
     }
