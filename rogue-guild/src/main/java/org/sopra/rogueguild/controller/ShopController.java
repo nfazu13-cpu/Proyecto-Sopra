@@ -6,6 +6,7 @@ import org.sopra.rogueguild.controller.dto.BuyResponse;
 import org.sopra.rogueguild.repository.model.event.WorldEvent;
 import org.sopra.rogueguild.repository.model.player.Player;
 import org.sopra.rogueguild.repository.model.item.Item;
+import org.sopra.rogueguild.repository.model.item.ItemCategory;
 
 public class ShopController extends UtilController {
 
@@ -34,12 +35,14 @@ public class ShopController extends UtilController {
         player.buy(item);
 
         repository.removeItemById(id);
-
-        player.addItem(item.getId(), item);
+        if (item.getCategory() == ItemCategory.POTION) {
+            player.removeItem(id);
+        } else {
+            player.addItem(item.getId(), item);
+        }
 
         return BuyResponse.success(item);
     }
-
 
     public void sellProcess(int id) {
 

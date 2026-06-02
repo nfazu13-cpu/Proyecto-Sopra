@@ -197,11 +197,11 @@ public class Player {
         inventory.put(itemId, item);
     }
 
-    
     public void removeItem(int repositoryId) {
         if (inventory.remove(repositoryId) == null) {
-            System.out.println("El objeto seleccionado no se encuentra en el inventario.");
+            System.out.println("El objeto seleccionado ya no se encuentra en el inventario.");
         }
+
     }
 
     public void printInventoryMenu() {
@@ -221,7 +221,6 @@ public class Player {
             }
         }
     }
-
 
     public void printInventory() {
         if (inventory.isEmpty()) {
@@ -260,19 +259,18 @@ public class Player {
             } else {
                 System.out.println("       | ░                 " + categoryStr);
             }
-            
-            
+
             for (int i = 0; i < slots.length; i++) {
                 Item item = slots[i];
-                
+
                 String slotPrefix = "";
-                
+
                 if (slots.length > 1) {
                     slotPrefix = "  Ranura " + (i + 1) + ":";
                 } else {
                     slotPrefix = "  Ranura Única:";
                 }
-                
+
                 if (item != null) {
                     System.out.println("       | ░                 " + slotPrefix + " " + item);
                 } else {
@@ -293,7 +291,8 @@ public class Player {
             return "- ARMAS";
         } else if (ic == ItemCategory.POTION) {
             return "- POCIONES";
-        }else return "- OTROS";
+        } else
+            return "- OTROS";
     }
 
 }
