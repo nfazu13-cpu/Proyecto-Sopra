@@ -173,7 +173,7 @@ public class QuestController extends UtilController {
                         selected.completeMission();
 
                 } else {
-                    System.out.println("No cumples con los requisitos de estadísticas necesarios. Te falta o te pasas por:");
+                    System.out.println("No cumples con los requisitos de estadísticas necesarios.");
                     
                     for (HashMap.Entry<ItemStatsType, Integer> requirement : missingRequirements.entrySet()) {
                         String stat = "";
@@ -183,7 +183,9 @@ public class QuestController extends UtilController {
                             stat = "armadura";
                         }
 
-                        
+                        int quantity = requirement.getValue();
+
+                        System.out.println("Te falta o te pasas por " + quantity + " de " + stat);
 
                     }
                 }

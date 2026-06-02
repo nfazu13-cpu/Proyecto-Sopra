@@ -51,6 +51,39 @@ public class ShopRepository {
         return stock.get(id);
     }
 
+    public Item getItemById(int itemId) {
+        for (Item item : stock) {
+            if (item.getId() == itemId) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public void removeItemById(int itemId) {
+
+        Item itemToRemove = null;
+
+        for (Item item : stock) {
+            if (item.getId() == itemId) {
+                itemToRemove = item;
+                break;
+            }
+        }
+
+        if (itemToRemove != null) {
+            stock.remove(itemToRemove);
+            actualMaxSizeStock--;
+
+            if (stock.isEmpty()) {
+                System.out.println(
+                    "\n[!] La tienda se ha quedado sin existencias. El mercader repone el inventario..."
+                );
+                loadInitialStock();
+            }
+        }
+    }
+
     public List<Item> getStock() {
         return stock;
     }

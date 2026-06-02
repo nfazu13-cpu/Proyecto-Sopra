@@ -39,6 +39,9 @@ public class ItemGenerator {
         int randomPrefixType;
         Item newItem = null;
 
+        //TODO BORRAR ES SOLO DE PRUEBAS
+        System.out.println("Generando item con ID: " + autoID);
+
         do {
 
             int randomPrefix = (int) (Math.random() * 5) + 1;
