@@ -4,8 +4,8 @@ public class Shield extends Item {
 
     private int shield;
 
-    public Shield(String name, int price, ItemCategory category, int shield) {
-        super(name, price, category);
+    public Shield(int id, String name, int price, ItemCategory category, int shield) {
+        super(id, name, price, category);
         this.shield = shield;
         this.itemStatsType = ItemStatsType.SHIELD;
     }

@@ -2,8 +2,8 @@ package org.sopra.rogueguild.repository.model.item;
 
 public class Boots extends Shield {
 
-    public Boots(String name, int price, int shield) {
-        super(name, price, ItemCategory.BOOTS, shield);
+    public Boots(int id, String name, int price, int shield) {
+        super(id, name, price, ItemCategory.BOOTS, shield);
     }
 
 }

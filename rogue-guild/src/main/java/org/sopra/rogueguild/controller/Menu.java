@@ -37,21 +37,24 @@ public class Menu extends UtilController {
             switch (opt) {
                 case 1:
                     view.showWorldEventMessage(repository.getCurrentEvent());
-                    view.displayStock(repository.getAllStock(), false);
+                    view.displayStock(repository.getStock(), false);
                     break;
                 case 2:
                     view.showWorldEventMessage(repository.getCurrentEvent());
-                    view.displayStock(repository.getAllStock(), true);
+                    view.displayStock(repository.getStock(), true);
                     int itemId = super.askForInt();
-                    BuyResponse buyResponse = this.shopController.buyProcess(itemId);
-                    view.buyResult(buyResponse);
+                    if (itemId != 0) {
+                        itemId--;
+                        BuyResponse buyResponse = shopController.buyProcess(itemId);
+                        view.buyResult(buyResponse);
+                    }
                     break;
                 case 3:
                     if (!player.getInventory().isEmpty()) { // SÍ tiene ítems
                         player.printInventory();
                         System.out.print("Introduce el ID del ítem a vender: ");
                         int id = super.askForInt();
-                        this.shopController.sellProcess(id);
+                        shopController.sellProcess(id);
                     } else {
                         System.out.println("Tu inventario está vacío. No tienes ítems para vender.");
                     }
@@ -84,4 +87,5 @@ public class Menu extends UtilController {
             super.cleanBuffer();
         } while (opt != 0);
     }
+    
 }

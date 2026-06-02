@@ -1,37 +1,62 @@
 package org.sopra.rogueguild.repository;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import org.sopra.rogueguild.repository.model.event.WorldEvent;
 import org.sopra.rogueguild.repository.model.item.Item;
 import org.sopra.rogueguild.repository.model.item.ItemGenerator;
+import org.sopra.rogueguild.repository.model.item.ItemStatsType;
 
 public class ShopRepository {
-    private Map<Integer, Item> stock;
+    private List<Item> stock;
     private Random random = new Random();
     private ItemGenerator itemGenerator = new ItemGenerator();
     private WorldEvent currentEvent;
     private int id;
+    private int maxSizeRepository = 3;
+    private int actualMaxSizeStock;
 
     public ShopRepository() {
-        stock = new LinkedHashMap<>();
+        stock = new ArrayList<>();
         loadInitialStock();
     }
 
     public void loadInitialStock() {
         stock.clear();
-        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
-        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
-        stock.put(id = random.nextInt(100) + 1, itemGenerator.randomItemGenerator());
 
-        this.currentEvent = new WorldEvent();
-        this.currentEvent.randomWorldEvent(this);
+        if (!itemGenerator.getMaxCombinationMade()) {
+            for (int i = 0; i < maxSizeRepository; i++) {
+                Item newItem = itemGenerator.randomItemGenerator();
+                if (newItem == null) {
+                    break; 
+                }
+                actualMaxSizeStock++;
+                stock.add(newItem);
+            }
+
+            if (!stock.isEmpty()) {
+                this.currentEvent = new WorldEvent();
+                this.currentEvent.randomWorldEvent(this);
+            }
+        } else {
+            System.err.println("Se ha alcanzado el límite de combinaciones de objetos generados por partida.");
+        }
     }
 
     public Item getItem(int id) {
         return stock.get(id);
+    }
+
+    public List<Item> getStock() {
+        return stock;
+    }
+
+    public int getActualMaxSizeStock() {
+        return actualMaxSizeStock;
     }
 
     public WorldEvent getCurrentEvent() {
@@ -39,6 +64,7 @@ public class ShopRepository {
     }
 
     public void removeItem(int id) {
+        actualMaxSizeStock--;
         stock.remove(id);
 
         if (stock.isEmpty()) {
@@ -47,11 +73,20 @@ public class ShopRepository {
         }
     }
 
-    public void returnItem(int id, Item item) {
-        stock.put(id, item);
+    public void returnItem(Item item) {
+        stock.add(item);
     }
 
-    public Map<Integer, Item> getAllStock() {
-        return stock;
+    public void printAllStock() {
+        if (stock.isEmpty()) {
+            System.out.println("Vacío.");
+        } else {
+            for (Item item : stock) {
+                System.out.println(item);
+            }
+        }
+
+
     }
+
 }

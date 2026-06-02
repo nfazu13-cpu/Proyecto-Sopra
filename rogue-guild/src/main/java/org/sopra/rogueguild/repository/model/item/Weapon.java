@@ -4,8 +4,8 @@ public class Weapon extends Item {
 
     private int damage;
 
-    public Weapon(String name, int price, int damage) {
-        super(name, price, ItemCategory.WEAPON);
+    public Weapon(int id, String name, int price, int damage) {
+        super(id, name, price, ItemCategory.WEAPON);
         this.damage = damage;
         this.itemStatsType = ItemStatsType.DAMAGE;
     }
