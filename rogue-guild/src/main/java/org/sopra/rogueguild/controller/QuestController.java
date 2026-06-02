@@ -100,6 +100,7 @@ public class QuestController extends UtilController {
 
                 } else {
                     System.out.println("Para realizar esta misión, necesitas los siguientes objetos:");
+                    //TODO Cambiar esto por texto en español
                     System.out.println(missingRequirements);
                 }
             }
@@ -126,6 +127,7 @@ public class QuestController extends UtilController {
 
                 } else {
                     System.out.println("No cumples con los requisitos de estadísticas necesarios. Te falta o te pasas por:");
+                    //TODO Cambiar esto por texto en español
                     System.out.println(missingRequirements);
                 }
             }
