@@ -2,6 +2,7 @@ package org.sopra.rogueguild.repository.model.player;
 
 import java.util.*;
 
+import org.sopra.rogueguild.repository.model.World.City;
 import org.sopra.rogueguild.repository.model.item.Item;
 import org.sopra.rogueguild.repository.model.item.ItemCategory;
 import org.sopra.rogueguild.repository.model.item.Weapon;
@@ -15,7 +16,7 @@ public class Player {
     private ArrayList<Item> Armor = new ArrayList<Item>();
     private HashMap<ItemCategory, Item[]> itemEquipped;
     private int id;
-    private int currentCity;
+    private City currentCity;
 
     public Player(String name, int gold) {
         setGold(gold);
@@ -102,6 +103,68 @@ public class Player {
             }
         }
 
+    }
+
+    public void travelTo(City destino) {
+
+        if (currentCity == null || destino == null) {
+            System.out.println("Error: El origen o el destino no son válidos.");
+            return;
+        }
+
+        if (currentCity.equals(destino)) {
+            System.out.println("Ya te encuentras en la ciudad de " + destino.getNombre());
+            return;
+        }
+
+        Queue<City> cola = new LinkedList<>();
+        Set<City> visitados = new HashSet<>();
+        Map<City, City> mapaPadres = new HashMap<>();
+
+        cola.add(currentCity);
+        visitados.add(currentCity);
+        boolean caminoEncontrado = false;
+
+        while (!cola.isEmpty()) {
+            City actual = cola.poll();
+
+            if (actual.equals(destino)) {
+                caminoEncontrado = true;
+                break;
+            }
+
+            for (City vecino : actual.getCiudadesConectadas()) {
+                if (!visitados.contains(vecino)) {
+                    visitados.add(vecino);
+                    mapaPadres.put(vecino, actual);
+                    cola.add(vecino);
+                }
+            }
+        }
+
+        if (!caminoEncontrado) {
+            System.out.println("El viaje no se realiza: No existe una ruta posible entre "
+                    + currentCity.getNombre() + " y " + destino.getNombre() + ".");
+            return;
+        }
+
+        List<City> rutaCompleta = new ArrayList<>();
+        City paso = destino;
+        while (paso != null) {
+            rutaCompleta.add(0, paso);
+            paso = mapaPadres.get(paso);
+        }
+
+        System.out.println("Iniciando viaje desde: " + currentCity.getNombre());
+
+        for (int i = 1; i < rutaCompleta.size(); i++) {
+            City siguientePaso = rutaCompleta.get(i);
+            System.out.println("-> Avanzando paso a paso a: " + siguientePaso.getNombre());
+
+            this.currentCity = siguientePaso;
+        }
+
+        System.out.println("¡Viaje finalizado con éxito! Ciudad actual: " + currentCity.getNombre());
     }
 
     private Item[] maxItems(int numMax) {
