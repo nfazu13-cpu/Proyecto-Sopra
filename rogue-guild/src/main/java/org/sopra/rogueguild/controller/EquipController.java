@@ -32,33 +32,45 @@ public class EquipController extends UtilController {
 
             switch (idEquipment) {
                 case 1:
-                    player.printInventoryByCategory(ItemCategory.ARMOR);
-                    idEquipment = super.askForInt();
-                    if (validateEquipmentID(idEquipment)) {
-                        equip(idEquipment);
+                    boolean hayArmaduras = player.printInventoryByCategory(ItemCategory.ARMOR);
+
+                    if (hayArmaduras) {
+                        idEquipment = super.askForInt();
+                        if (validateEquipmentID(idEquipment)) {
+                            equip(idEquipment);
+                        }
                     }
                     break;
                 case 2:
-                    player.printInventoryByCategory(ItemCategory.BOOTS);
-                    idEquipment = super.askForInt();
-                    if (validateEquipmentID(idEquipment)) {
-                        equip(idEquipment);
+                    boolean hayBotas = player.printInventoryByCategory(ItemCategory.BOOTS);
+
+                    if (hayBotas) {
+                        idEquipment = super.askForInt();
+                        if (validateEquipmentID(idEquipment)) {
+                            equip(idEquipment);
+                        }
                     }
                     break;
 
                 case 3:
-                    player.printInventoryByCategory(ItemCategory.HELMET);
-                    idEquipment = super.askForInt();
-                    if (validateEquipmentID(idEquipment)) {
-                        equip(idEquipment);
+                    boolean hayCasco = player.printInventoryByCategory(ItemCategory.HELMET);
+
+                    if (hayCasco) {
+                        idEquipment = super.askForInt();
+                        if (validateEquipmentID(idEquipment)) {
+                            equip(idEquipment);
+                        }
                     }
                     break;
 
                 case 4:
-                    player.printInventoryByCategory(ItemCategory.WEAPON);
-                    idEquipment = super.askForInt();
-                    if (validateEquipmentID(idEquipment)) {
-                        equip(idEquipment);
+                    boolean hayArmas = player.printInventoryByCategory(ItemCategory.WEAPON);
+
+                    if (hayArmas) {
+                        idEquipment = super.askForInt();
+                        if (validateEquipmentID(idEquipment)) {
+                            equip(idEquipment);
+                        }
                     }
                     break;
                 case 0:
@@ -95,7 +107,6 @@ public class EquipController extends UtilController {
             System.out.println("No tienes ese ítem en el inventario");
             return false;
         }
-
         return true;
     }
 
