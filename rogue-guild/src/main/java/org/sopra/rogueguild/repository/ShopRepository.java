@@ -16,8 +16,7 @@ public class ShopRepository {
     private Random random = new Random();
     private ItemGenerator itemGenerator = new ItemGenerator();
     private WorldEvent currentEvent;
-    private int id;
-    private int maxSizeRepository = 3;
+    private int initialStockSize = 3;
     private int actualMaxSizeStock;
 
     public ShopRepository() {
@@ -29,7 +28,7 @@ public class ShopRepository {
         stock.clear();
 
         if (!itemGenerator.getMaxCombinationMade()) {
-            for (int i = 0; i < maxSizeRepository; i++) {
+            for (int i = 0; i < initialStockSize; i++) {
                 Item newItem = itemGenerator.randomItemGenerator();
                 if (newItem == null) {
                     break; 
