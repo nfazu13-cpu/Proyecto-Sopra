@@ -1,26 +1,29 @@
 package org.sopra.rogueguild.repository.model.World;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class City {
-    private HashMap<Integer, String> ciudades = new HashMap<>();
     private String nombre;
-    private int road;
+    private List<City> ciudadesConectadas = new ArrayList<>();
 
-    public City(HashMap<Integer, String> ciudades, String nombre, int road) {
-        this.ciudades = ciudades;
+    // Constructor simplificado: una ciudad nace con su nombre y luego se le añaden
+    // conexiones
+    public City(String nombre) {
         this.nombre = nombre;
-        this.road = road;
     }
 
-    public HashMap<Integer, String> getCiudades() {
-        return ciudades;
+    public void añadirCamino(City otraCiudad) {
+        if (!this.ciudadesConectadas.contains(otraCiudad)) {
+            this.ciudadesConectadas.add(otraCiudad);
+        }
+
+        if (!otraCiudad.getCiudadesConectadas().contains(this)) {
+            otraCiudad.getCiudadesConectadas().add(this);
+        }
     }
 
-    public void setCiudades(HashMap<Integer, String> ciudades) {
-        this.ciudades = ciudades;
-    }
-
+    // Getters y Setters
     public String getNombre() {
         return nombre;
     }
@@ -29,12 +32,11 @@ public class City {
         this.nombre = nombre;
     }
 
-    public int getRoad() {
-        return road;
+    public List<City> getCiudadesConectadas() {
+        return ciudadesConectadas;
     }
 
-    public void setRoad(int road) {
-        this.road = road;
+    public void setCiudadesConectadas(List<City> ciudadesConectadas) {
+        this.ciudadesConectadas = ciudadesConectadas;
     }
-
 }
