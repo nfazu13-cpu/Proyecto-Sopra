@@ -12,6 +12,7 @@ public class ItemGenerator {
     private final String[] POTION_PREFIXES = { "Poción", "Elixir", "Brebaje", "Ungüento", "Tintura" };
     private final String[] HELMET_PREFIXES = { "Yelmo", "Casco", "Celada", "Capucha", "Visera" };
     private final String[] BOOTS_PREFIXES = { "Botas", "Grebas", "Sandalias", "Escarpines" };
+    private final String[] OTHERS_PREFIXES = { "Piedra", "Mineral", "Colgante", "Metal" };
 
     private final String[] NATURE_SUFIXES = {
             "de fuego", "de hielo", "del rayo", "de la tormenta", "de la sombra", "de la luz",
@@ -41,12 +42,16 @@ public class ItemGenerator {
         int randomPrefixType;
         Item newItem = null;
 
-
         do {
 
-            int randomPrefix = (int) (Math.random() * 5) + 1;
+            int dado = random.nextInt(100) + 1;
+            if (dado > 5) {
+                randomPrefixType = (int) (Math.random() * 5) + 1;
+            } else {
+                randomPrefixType = 6;
+            }
 
-            switch (randomPrefix) {
+            switch (randomPrefixType) {
                 case 1:
                     randomPrefixType = (int) (Math.random() * WEAPON_PREFIXES.length);
                     nameItem = WEAPON_PREFIXES[randomPrefixType];
@@ -108,6 +113,15 @@ public class ItemGenerator {
                     int bootsShield = baseBootsShield + (int) (Math.random() * 3); // 1 - 5 defense
 
                     newItem = new Boots(autoID, nameItem, randomBasePrice, bootsShield);
+                    break;
+                case 6:
+                    randomPrefixType = (int) (Math.random() * OTHERS_PREFIXES.length);
+                    nameItem = OTHERS_PREFIXES[randomPrefixType];
+                    nameItem += " " + NATURE_SUFIXES[(int) (Math.random() * NATURE_SUFIXES.length)];
+
+                    randomBasePrice = ((int) (Math.random() * 11) + 50) * 5; // 250 - 300
+
+                    newItem = new Other(autoID, nameItem, randomBasePrice);
                     break;
             }
 
