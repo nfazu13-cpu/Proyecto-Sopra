@@ -93,7 +93,7 @@ public class Quest {
 
     @Override
     public String toString() {
-        return Ansi.c(Ansi.PURP, id + ". " +  name) + "\n'" + description + Ansi.c(Ansi.GOLD, "'\n\nRecompensa: " + goldReward + " (oro)") + "\n\n" + checkStatus();
+        return Ansi.c(Ansi.PURP, id + ". " +  name) + "\n'" + description + "'" + Ansi.c(Ansi.GOLD, "\n\nRecompensa: " + goldReward + " (oro)") + "\n\n" + checkStatus();
     }
 
     public void printRequirements() { }
