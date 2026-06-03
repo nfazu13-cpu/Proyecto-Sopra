@@ -19,7 +19,7 @@ public class QuestInventory extends Quest {
         if (validateItemCategory(itemCategory) && super.validateQuantity(quantity)) {
             this.requirements.put(itemCategory, quantity);
         }
-
+        
     }
 
     public HashMap<ItemCategory, Integer> checkRequierement(Player p) {

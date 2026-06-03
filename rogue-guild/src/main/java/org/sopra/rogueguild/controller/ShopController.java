@@ -25,11 +25,14 @@ public class ShopController extends UtilController {
 
         Item item = repository.getItemById(id);
 
-        if (item == null) return BuyResponse.notFound(id);
+        if (item == null) {
+            return BuyResponse.notFound(id);
+        }
 
-        if (player.getGold() < item.getBasePrice())
+        if (player.getGold() < item.getBasePrice()) {
             return BuyResponse.notEnoughGold(item, player.getGold());
-
+        }
+        
         player.buy(item);
         repository.removeItemById(id);
 

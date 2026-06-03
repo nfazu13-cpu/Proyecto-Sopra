@@ -13,11 +13,9 @@ import org.sopra.rogueguild.repository.model.item.ItemStatsType;
 
 public class ShopRepository {
     private List<Item> stock;
-    private Random random = new Random();
     private ItemGenerator itemGenerator = new ItemGenerator();
     private WorldEvent currentEvent;
     private int initialStockSize = 3;
-    private int actualMaxSizeStock;
 
     public ShopRepository() {
         stock = new ArrayList<>();
@@ -33,7 +31,6 @@ public class ShopRepository {
                 if (newItem == null) {
                     break; 
                 }
-                actualMaxSizeStock++;
                 stock.add(newItem);
             }
 
@@ -72,7 +69,6 @@ public class ShopRepository {
 
         if (itemToRemove != null) {
             stock.remove(itemToRemove);
-            actualMaxSizeStock--;
 
             if (stock.isEmpty()) {
                 System.out.println(
@@ -87,16 +83,11 @@ public class ShopRepository {
         return stock;
     }
 
-    public int getActualMaxSizeStock() {
-        return actualMaxSizeStock;
-    }
-
     public WorldEvent getCurrentEvent() {
         return currentEvent;
     }
 
     public void removeItem(int id) {
-        actualMaxSizeStock--;
         stock.remove(id);
 
         if (stock.isEmpty()) {
