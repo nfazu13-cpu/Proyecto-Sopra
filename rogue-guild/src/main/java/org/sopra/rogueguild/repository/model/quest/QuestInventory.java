@@ -61,16 +61,15 @@ public class QuestInventory extends Quest {
 
     @Override
     public void printRequirements() {
-        System.out.println("Requisitos de " + Ansi.c(Ansi.BLUE,"INVENTARIO:"));
         for (HashMap.Entry<ItemCategory, Integer> requirements : this.requirements.entrySet()) {
             if (requirements.getKey() == ItemCategory.ARMOR) {
-                System.out.println("Armadura: " + requirements.getValue());
+                System.out.println("│ Armadura: " + requirements.getValue() + "                                  │");
             } else if (requirements.getKey() == ItemCategory.HELMET) {
-                System.out.println("Casco: " + requirements.getValue());
+                System.out.println("│ Casco: " + requirements.getValue() + "                                     │");
             } else if (requirements.getKey() == ItemCategory.BOOTS) {
-                System.out.println("Botas: " + requirements.getValue());
+                System.out.println("│ Botas: " + requirements.getValue() + "                                     │");
             } else if (requirements.getKey() == ItemCategory.WEAPON) {
-                System.out.println("Armas: " + requirements.getValue());
+                System.out.println("│ Armas: " + requirements.getValue() + "                                     │");
             }
         }
     }

@@ -70,7 +70,7 @@ public class PlayerView {
 
         out.println(" || |                                                          | ||");
         out.println(" || |  [X] Introduce el ID del item a vender:                  | ||");
-        out.println(" || |  " + Ansi.c(Ansi.GRAY,"[0] Salir:") + "                                              | ||");
+        out.println(" || |  " + Ansi.c(Ansi.GRAY,"[0] Salir") + "                                               | ||");
         out.println(" || \\__________________________________________________________/ ||");
         out.println("  \\______________________________________________________________/");
 

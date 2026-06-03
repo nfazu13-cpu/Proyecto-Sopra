@@ -106,11 +106,10 @@ public class QuestStats extends Quest {
 
     @Override
     public void printRequirements() {
-        System.out.println("Requisitos de " + Ansi.c(Ansi.BLUE,"EQUIPAMIENTO:"));
         for (HashMap.Entry<ItemStatsType, Integer> requirement : requirements.entrySet()) {
 
             ItemStatsType stat = requirement.getKey();
-            int value = requirement.getValue();
+            int requiretValue = requirement.getValue();
 
             QuestStatsOperator operator = operators.get(stat);
 
@@ -123,9 +122,9 @@ public class QuestStats extends Quest {
             }
 
             if (stat == ItemStatsType.SHIELD) {
-                System.out.println("Armadura: " + operatorChar + " " + value);
+                System.out.println("│ Armadura: " + operatorChar + " " + requiretValue + "                               │");
             } else if (stat == ItemStatsType.DAMAGE) {
-                System.out.println("Daño: " + operatorChar + " " + value);
+                System.out.println("│ Daño: " + operatorChar + " " + requiretValue + "                                   │");
             }
         }
     }
