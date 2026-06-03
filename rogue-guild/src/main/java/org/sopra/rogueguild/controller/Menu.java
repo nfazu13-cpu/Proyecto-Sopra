@@ -76,7 +76,7 @@ public class Menu extends UtilController {
                     break;
                 case 3:
                     if (!player.getInventory().isEmpty()) { // SÍ tiene ítems
-                        player.printInventory();
+                        view.displayPlayerInventory(player.getInventory());
                         System.out.print("Introduce el ID del ítem a vender: ");
                         int id = super.askForInt();
                         shopController.sellProcess(id);

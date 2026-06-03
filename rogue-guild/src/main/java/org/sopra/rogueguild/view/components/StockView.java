@@ -16,8 +16,8 @@ import static org.sopra.rogueguild.view.utils.Ansi.*;
 public class StockView {
     private final PrintStream out;
 
-    public StockView(PrintStream out) { 
-        this.out = out; 
+    public StockView(PrintStream out) {
+        this.out = out;
     }
 
     public void displayStock(List<Item> stock, boolean inPurchase) {
@@ -30,7 +30,7 @@ public class StockView {
 
         for (int i = 0; i < stock.size(); i++) {
             Item item = stock.get(i);
-            
+
             String stats = "";
             if (item instanceof Weapon) {
                 stats = "Daño: " + ((Weapon) item).getDamage();
@@ -40,11 +40,11 @@ public class StockView {
 
             } else if (item instanceof Helmet) {
                 stats = "Def.: " + ((Helmet) item).getShield();
-                
+
             } else if (item instanceof Boots) {
                 stats = "Def.: " + ((Boots) item).getShield();
 
-            }  else if (item instanceof Potion) {
+            } else if (item instanceof Potion) {
                 stats = "Sana: " + ((Potion) item).getHealPoints();
 
             } else {
@@ -52,13 +52,15 @@ public class StockView {
             }
 
             if (inPurchase) {
-                out.printf(" || |  [%d] %-26s %-11s %4d oro         | ||%n", item.getId(), item.getName(), stats, item.getPrice());
+                out.printf(" || |  [%d] %-26s %-11s %4d oro         | ||%n", item.getId(), item.getName(), stats,
+                        item.getPrice());
             } else {
                 out.printf(" || |  [-] %-26s %-11s %4d oro         | ||%n", item.getName(), stats, item.getPrice());
             }
         }
-        
-        out.println(" || |" + Ansi.c(Ansi.GRAY, "  [0] Salir                                                    ") + "| ||");
+
+        out.println(" || |" + Ansi.c(Ansi.GRAY, "  [0] Salir                                                    ")
+                + "| ||");
         out.println(" || \\_______________________________________________________________/ ||");
         out.println("  \\___________________________________________________________________/");
     }

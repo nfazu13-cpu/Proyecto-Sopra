@@ -1,4 +1,5 @@
 package org.sopra.rogueguild.view;
+
 import java.io.PrintStream;
 import java.util.List;
 import java.util.Map;
@@ -33,17 +34,33 @@ public class ViewDisplay {
         this.buyResultView = new BuyResultView(messages);
     }
 
-    public void landingPage() { banner.landingPage(); }
-    public void showMessage(String msg) { messages.showMessage(msg); }
-    public void pressKeyMessage() { messages.pressKeyMessage(); }
-    public void quitMessage() { messages.quitMessage(); }
-    public void showPrompt(String prompt) { messages.showPrompt(prompt); }
-    
-    public void showWorldEventMessage(WorldEvent worldEvent) { 
-        messages.showMessage(worldEvent.getFinalMessage()); 
+    public void landingPage() {
+        banner.landingPage();
     }
 
-    public void playerStatus(Player player) { playerView.playerStatus(player); }
+    public void showMessage(String msg) {
+        messages.showMessage(msg);
+    }
+
+    public void pressKeyMessage() {
+        messages.pressKeyMessage();
+    }
+
+    public void quitMessage() {
+        messages.quitMessage();
+    }
+
+    public void showPrompt(String prompt) {
+        messages.showPrompt(prompt);
+    }
+
+    public void showWorldEventMessage(WorldEvent worldEvent) {
+        messages.showMessage(worldEvent.getFinalMessage());
+    }
+
+    public void playerStatus(Player player) {
+        playerView.playerStatus(player);
+    }
 
     public void displayStock(List<Item> stock, boolean isInPurchaseProcess) {
         stockView.displayStock(stock, isInPurchaseProcess);
@@ -52,4 +69,9 @@ public class ViewDisplay {
     public void buyResult(BuyResponse r, ItemCategory ic) {
         buyResultView.show(r, ic);
     }
+
+    public void displayPlayerInventory(Map<Integer, Item> inventory) {
+        playerView.displayPlayerInventory(inventory);
+    }
+
 }
