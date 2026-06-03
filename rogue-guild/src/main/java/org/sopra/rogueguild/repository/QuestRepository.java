@@ -52,7 +52,7 @@ public class QuestRepository {
 
     private void loadMissionDanzaDeMuerte() {
         QuestInventory q1_DanzaDeMuerte = new QuestInventory("Danza de Muerte", 
-        "Debes tener equipadas dos armas.", 115);
+        "Debes tener almacenadas dos armas.", 115);
 
         q1_DanzaDeMuerte.addRequierement(ItemCategory.WEAPON, 2);
 
@@ -62,7 +62,7 @@ public class QuestRepository {
     
     private void loadMissionCaballeroDelFenix() {
         QuestInventory q2_CaballeroDelFenix = new QuestInventory("Caballero del Fénix", 
-        "Debes tener equipada una armadura completa.", 185);
+        "Debes tener almacenada una armadura completa.", 185);
 
         q2_CaballeroDelFenix.addRequierement(ItemCategory.WEAPON, 1);
         q2_CaballeroDelFenix.addRequierement(ItemCategory.HELMET, 1);
