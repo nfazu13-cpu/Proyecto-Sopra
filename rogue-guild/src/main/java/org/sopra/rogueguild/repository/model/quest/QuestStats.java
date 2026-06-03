@@ -103,10 +103,30 @@ public class QuestStats extends Quest {
         return true;
     }
 
-
     @Override
-    public String toString() {
-        return super.toString() + "\nRequisitos: " + requirements;
+    public void printRequirements() {
+        System.out.println("Requisitos de EQUIPAMIENTO:");
+        for (HashMap.Entry<ItemStatsType, Integer> requirement : requirements.entrySet()) {
+
+            ItemStatsType stat = requirement.getKey();
+            int value = requirement.getValue();
+
+            QuestStatsOperator operator = operators.get(stat);
+
+            char operatorChar = ' ';
+
+            if (operator == QuestStatsOperator.GREATER_THAN) {
+                operatorChar = '>';
+            } else if (operator == QuestStatsOperator.LESS_THAN) {
+                operatorChar = '<';
+            }
+
+            if (stat == ItemStatsType.SHIELD) {
+                System.out.println("Armadura: " + operatorChar + " " + value);
+            } else if (stat == ItemStatsType.DAMAGE) {
+                System.out.println("Daño: " + operatorChar + " " + value);
+            }
+        }
     }
     
 }

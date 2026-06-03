@@ -10,6 +10,7 @@ import org.sopra.rogueguild.repository.model.item.ItemCategory;
 import org.sopra.rogueguild.repository.model.quest.Quest;
 import org.sopra.rogueguild.repository.model.quest.QuestInventory;
 import org.sopra.rogueguild.repository.model.quest.QuestStats;
+import org.sopra.rogueguild.view.utils.Ansi;
 
 public class QuestController extends UtilController {
 
@@ -34,7 +35,7 @@ public class QuestController extends UtilController {
             int idMission;
             do {
                 System.out.println("[X]¡Seleciona el ID de una misión para aventurarte en ella!:");
-                System.out.println("[0] Salir");
+                System.out.println(Ansi.c(Ansi.GRAY, "[0] Salir"));
 
                 idMission = super.askForInt();
                 idMission = validateMissionID(idMission);
@@ -185,7 +186,7 @@ public class QuestController extends UtilController {
 
                         int quantity = requirement.getValue();
 
-                        System.out.println("Te falta o te pasas por " + quantity + " de " + stat);
+                        System.out.println("Te falta EQUIPAR O DESEQUIPAR un total de " + quantity + " de " + stat + ".");
 
                     }
                 }
