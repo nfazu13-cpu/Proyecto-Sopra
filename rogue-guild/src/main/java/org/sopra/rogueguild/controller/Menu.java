@@ -42,31 +42,84 @@ public class Menu extends UtilController {
                     view.displayStock(repository.getStock(), false);
                     break;
                 case 2:
-                    view.showWorldEventMessage(repository.getCurrentEvent());
-                    view.displayStock(repository.getStock(), true);
 
-                    int itemId = super.askForInt();
+                    int itemId;
 
-                    if (itemId != 0) {
+                    do {
+                        view.showWorldEventMessage(repository.getCurrentEvent());
+                        view.displayStock(repository.getStock(), true);
+
+                        itemId = super.askForInt();
+
+                        if (itemId == 0) {
+                            break;
+                        }
+
                         Item item = repository.getItemById(itemId);
 
                         if (item != null) {
+
                             BuyResponse buyResponse = shopController.buyProcess(itemId);
                             view.buyResult(buyResponse, item.getCategory());
+
+                            view.pressKeyMessage();
+                            super.cleanBuffer();
+
                         } else {
                             System.out.println("Ese item no existe.");
+                            view.pressKeyMessage();
+                            super.cleanBuffer();
                         }
-                    }
+
+                    } while (true);
+
                     break;
                 case 3:
-                    if (!player.getInventory().isEmpty()) {
+                    if (!player.getInventory().isEmpty()) { // SÍ tiene ítems
                         player.printInventory();
                         System.out.print("Introduce el ID del ítem a vender: ");
                         int id = super.askForInt();
                         shopController.sellProcess(id);
                     } else {
                         System.out.println("Tu inventario está vacío. No tienes ítems para vender.");
+                        break;
                     }
+
+                    int id;
+
+                    do {
+                        if (player.getInventory().isEmpty()) {
+                            System.out.println("Tu inventario se ha quedado vacío.");
+                            break;
+                        }
+
+                        player.printInventory();
+
+                        System.out.println("\n[X] Introduce el ID del ítem a vender:");
+                        System.out.println("[0] Salir");
+
+                        id = super.askForInt();
+
+                        if (id != 0) {
+
+                            Item item = player.getInventory().get(id);
+
+                            if (item != null) {
+                                shopController.sellProcess(id);
+                                System.out.println("Item vendido correctamente.");
+
+                            } else {
+                                System.out.println("Ese item no existe en tu inventario.");
+                            }
+
+                            if (!player.getInventory().isEmpty()) {
+                                view.pressKeyMessage();
+                                super.cleanBuffer();
+                            }
+                        }
+
+                    } while (id != 0 && !player.getInventory().isEmpty());
+
                     break;
                 case 4:
                     System.out.println("Elige qué incursion quieres hacer: ");
