@@ -21,6 +21,7 @@ public class QuestInventory extends Quest {
         }
         
     }
+    
 
     public HashMap<ItemCategory, Integer> checkRequierement(Player p) {
 
@@ -57,10 +58,20 @@ public class QuestInventory extends Quest {
         return true;
     }
 
-
     @Override
-    public String toString() {
-        return super.toString() + "\nRequisitos: " + requirements;
+    public void printRequirements() {
+        System.out.println("Requisitos de INVENTARIO:");
+        for (HashMap.Entry<ItemCategory, Integer> requirements : this.requirements.entrySet()) {
+            if (requirements.getKey() == ItemCategory.ARMOR) {
+                System.out.println("Armadura: " + requirements.getValue());
+            } else if (requirements.getKey() == ItemCategory.HELMET) {
+                System.out.println("Casco: " + requirements.getValue());
+            } else if (requirements.getKey() == ItemCategory.BOOTS) {
+                System.out.println("Botas: " + requirements.getValue());
+            } else if (requirements.getKey() == ItemCategory.WEAPON) {
+                System.out.println("Armas: " + requirements.getValue());
+            }
+        }
     }
 
     

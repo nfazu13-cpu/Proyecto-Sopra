@@ -91,7 +91,9 @@ public class Quest {
 
     @Override
     public String toString() {
-        return id + ". " + name + "\n'" + description + "'\nRecompensa: " + goldReward + " (oro)" + "\n" + checkStatus();
+        return id + ". " + name + "\n'" + description + "'\n\nRecompensa: " + goldReward + " (oro)" + "\n\n" + checkStatus();
     }
+
+    public void printRequirements() { }
 
 }
