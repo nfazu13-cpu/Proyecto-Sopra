@@ -66,7 +66,7 @@ public class IncursionController {
 
         if (conquista != null) {
             Incursion.mostrarPantallaIncursion(conquista);
-            conquista.recompensaGold(player);
+            conquista.recompensaItem(player);
         }
 
     }
@@ -136,7 +136,7 @@ public class IncursionController {
 
         if (menor != null) {
             Incursion.mostrarPantallaIncursion(menor);
-            menor.recompensaGold(player);
+            menor.recompensaMenor(player);
         }
 
     }

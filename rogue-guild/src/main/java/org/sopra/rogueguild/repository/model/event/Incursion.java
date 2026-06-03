@@ -52,6 +52,7 @@ public class Incursion {
         this.itemREward = itemMenor;
 
         String nombreItem = (this.itemREward != null) ? this.itemREward.getName() : "ninguno";
+
         System.out.println("┌──────────────────────────────────────────────┐");
         System.out.println("│               ¡BOTÍN OBTENIDO!               │");
         System.out.println("├──────────────────────────────────────────────┤");
