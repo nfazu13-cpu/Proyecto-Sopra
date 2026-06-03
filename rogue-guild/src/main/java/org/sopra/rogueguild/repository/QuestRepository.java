@@ -8,6 +8,7 @@ import org.sopra.rogueguild.repository.model.quest.Quest;
 import org.sopra.rogueguild.repository.model.quest.QuestInventory;
 import org.sopra.rogueguild.repository.model.quest.QuestStats;
 import org.sopra.rogueguild.repository.model.quest.QuestStatsOperator;
+import org.sopra.rogueguild.view.utils.Ansi;
 
 public class QuestRepository {
     private HashMap<Integer, Quest> quests;
@@ -133,25 +134,27 @@ public class QuestRepository {
     // Based on the player's gear | END
 
     private void imprimirCajaMision(Quest quest) {
-        String reset = "\u001B[0m";
-        String morado = "\u001B[35m";
-        String amarillo = "\u001B[33m";
-        String rojo = "\u001B[31m";
-        String verde = "\u001B[32m";
 
-        String lineaTitulo = " [" + quest.getId() + "] " + morado + quest.getName() + reset;
-        String lineaRecompensa = " Recompensa: " + amarillo + quest.getGoldReward() + " (oro)" + reset;
+        String lineaTitulo = Ansi.c(Ansi.PURP,
+                " [" + quest.getId() + "] " + quest.getName());
+
+        String lineaRecompensa = " Recompensa: "
+                + Ansi.c(Ansi.GOLD, quest.getGoldReward() + " (oro)");
+
         String lineaEstado = " Estado: "
-                + (quest.getIsComplete() ? verde + "COMPLETADA" : rojo + "Misión no completada aún") + reset;
+                + (quest.getIsComplete()
+                    ? Ansi.c(Ansi.GREEN, "Completada")
+                    : Ansi.c(Ansi.RED, "No completada"));
 
         System.out.println("┌──────────────────────────────────────────────┐");
-        System.out.println("│                TABLÓN DE MISIONES            │");
-        System.out.println("├──────────────────────────────────────────────┤");
         System.out.printf("│ %-53s │\n", lineaTitulo);
+        System.out.println("├──────────────────────────────────────────────┤");
+
         System.out.println("│  Descripción:                                │");
 
         String desc = quest.getDescription();
         int anchoMax = 40;
+
         for (int i = 0; i < desc.length(); i += anchoMax) {
             String fragmento = desc.substring(i, Math.min(i + anchoMax, desc.length()));
             System.out.printf("│    %-41s │\n", fragmento);
@@ -160,11 +163,20 @@ public class QuestRepository {
         System.out.println("├──────────────────────────────────────────────┤");
         System.out.printf("│ %-53s │\n", lineaRecompensa);
         System.out.printf("│ %-53s │\n", lineaEstado);
-        System.out.println("└──────────────────────────────────────────────┘");
 
-        System.out.println("┌── ⚔️ REQUISITOS DE EQUIPAMIENTO ──────────────┐");
+        System.out.println("├──────────────────────────────────────────────┤");
 
-        quest.printRequirements();
+        if (quest instanceof QuestInventory qi) {
+
+            System.out.println("│ Debes " + Ansi.c(Ansi.BLUE, "ALMACENAR") + "...:                          │");
+
+            qi.printRequirements(); 
+        } else if (quest instanceof QuestStats qs) {
+
+            System.out.println("│ Debes " + Ansi.c(Ansi.BLUE, "EQUIPAR") + "...:                            │");
+
+            qs.printRequirements(); 
+        }
 
         System.out.println("└──────────────────────────────────────────────┘\n");
     }

@@ -13,6 +13,7 @@ import org.sopra.rogueguild.repository.model.item.Item;
 import org.sopra.rogueguild.repository.model.item.Potion;
 import org.sopra.rogueguild.repository.model.item.Weapon;
 import org.sopra.rogueguild.repository.model.player.Player;
+import org.sopra.rogueguild.view.utils.Ansi;
 
 public class PlayerView {
     private final PrintStream out;
@@ -38,12 +39,12 @@ public class PlayerView {
     }
 
     public void displayPlayerInventory(Map<Integer, Item> inventory) {
-        System.out.println("  ______________________________________________________  ");
-        System.out.println(" /                                                      \\ ");
-        System.out.println(" | ||                                                || | ");
-        System.out.println(" | ||              INVENTARIO DEL JUGADOR            || | ");
-        System.out.println(" | ||                                                || | ");
-        System.out.println(" | ||________________________________________________|| | ");
+        out.println("   ______________________________________________________________");
+        out.println("  /  __________________________________________________________  \\");
+        out.println(" || /                                                          \\ ||");
+        out.println(" || |                  INVENTARIO DEL JUGADOR                  | ||");
+        out.println(" || | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ | ||");
+        out.println(" || |                                                          | ||");
 
         // Recorremos el mapa usando sus entradas (ID y Objeto)
         for (Map.Entry<Integer, Item> entry : inventory.entrySet()) {
@@ -69,6 +70,15 @@ public class PlayerView {
         System.out.println(" | ||                                                || | ");
         System.out.println(" | || [0] Volver al menú                           || | ");
         System.out.println(" | ||________________________________________________|| | ");
+            System.out.printf(" || |  [%d] %-26s %-11s              | ||\n",
+                    id, item.getName(), stats);
+        }
+
+        out.println(" || |                                                          | ||");
+        out.println(" || |  [X] Introduce el ID del item a vender:                  | ||");
+        out.println(" || |  " + Ansi.c(Ansi.GRAY,"[0] Salir") + "                                               | ||");
+        out.println(" || \\__________________________________________________________/ ||");
+        out.println("  \\______________________________________________________________/");
     }
 
 }
