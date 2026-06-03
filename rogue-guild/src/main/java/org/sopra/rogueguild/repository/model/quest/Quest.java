@@ -3,6 +3,8 @@ package org.sopra.rogueguild.repository.model.quest;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.sopra.rogueguild.view.utils.Ansi;
+
 public class Quest {
 
     private final String description;
@@ -73,9 +75,9 @@ public class Quest {
 
     public String checkStatus() {
         if (isComplete) {
-            return "¡Has completado esta misión!";
+            return Ansi.c(Ansi.GREEN, "¡Has completado esta misión!");
         }
-        return "Misión no completada aún.";
+        return Ansi.c(Ansi.RED, "Misión no completada aún.");
     }
 
 
@@ -91,7 +93,7 @@ public class Quest {
 
     @Override
     public String toString() {
-        return id + ". " + name + "\n'" + description + "'\n\nRecompensa: " + goldReward + " (oro)" + "\n\n" + checkStatus();
+        return Ansi.c(Ansi.PURP, id + ". " +  name) + "\n'" + description + Ansi.c(Ansi.GOLD, "'\n\nRecompensa: " + goldReward + " (oro)") + "\n\n" + checkStatus();
     }
 
     public void printRequirements() { }

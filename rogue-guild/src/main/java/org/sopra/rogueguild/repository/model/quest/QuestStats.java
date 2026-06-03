@@ -7,6 +7,7 @@ import org.sopra.rogueguild.repository.model.item.ItemStatsType;
 import org.sopra.rogueguild.repository.model.item.Shield;
 import org.sopra.rogueguild.repository.model.item.Weapon;
 import org.sopra.rogueguild.repository.model.player.Player;
+import org.sopra.rogueguild.view.utils.Ansi;
 
 public class QuestStats extends Quest {
 
@@ -105,7 +106,7 @@ public class QuestStats extends Quest {
 
     @Override
     public void printRequirements() {
-        System.out.println("Requisitos de EQUIPAMIENTO:");
+        System.out.println("Requisitos de " + Ansi.c(Ansi.BLUE,"EQUIPAMIENTO:"));
         for (HashMap.Entry<ItemStatsType, Integer> requirement : requirements.entrySet()) {
 
             ItemStatsType stat = requirement.getKey();

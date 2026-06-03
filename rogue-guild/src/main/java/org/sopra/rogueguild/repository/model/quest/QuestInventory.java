@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.sopra.rogueguild.repository.model.item.Item;
 import org.sopra.rogueguild.repository.model.item.ItemCategory;
 import org.sopra.rogueguild.repository.model.player.Player;
+import org.sopra.rogueguild.view.utils.Ansi;
 
 public class QuestInventory extends Quest {
 
@@ -60,7 +61,7 @@ public class QuestInventory extends Quest {
 
     @Override
     public void printRequirements() {
-        System.out.println("Requisitos de INVENTARIO:");
+        System.out.println("Requisitos de " + Ansi.c(Ansi.BLUE,"INVENTARIO:"));
         for (HashMap.Entry<ItemCategory, Integer> requirements : this.requirements.entrySet()) {
             if (requirements.getKey() == ItemCategory.ARMOR) {
                 System.out.println("Armadura: " + requirements.getValue());
