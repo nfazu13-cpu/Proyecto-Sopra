@@ -32,7 +32,7 @@ public class ShopController extends UtilController {
         if (player.getGold() < item.getBasePrice()) {
             return BuyResponse.notEnoughGold(item, player.getGold());
         }
-        
+
         player.buy(item);
         repository.removeItemById(id);
 

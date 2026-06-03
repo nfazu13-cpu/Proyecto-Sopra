@@ -49,6 +49,7 @@ public class Player {
         if (gold < 0) {
             this.gold = 0;
         } else if (gold > 500) {
+            System.out.println("No puedes tener mas de 500  monedas");
             this.gold = 500;
         } else {
             this.gold = gold;
@@ -197,15 +198,15 @@ public class Player {
 
             hitPoints += potion.getHealPoints();
 
-            System.out.println("La poción ha modificado tu vida en " + (hitPoints - oldHealth) + ".");
+            System.out.println("La poción ha curado " + (hitPoints - oldHealth) + ".");
 
             if (hitPoints >= 20) {
                 hitPoints = 20;
                 System.out.println("¡Tu vida está al máximo!");
             }
 
-            if (hitPoints <= 0) { 
-                hitPoints = 0; 
+            if (hitPoints <= 0) {
+                hitPoints = 0;
                 System.out.println("Todos te recordarán...");
             }
         }
@@ -213,11 +214,9 @@ public class Player {
         this.gold -= item.getBasePrice();
     }
 
-
     public void addItem(int itemId, Item item) {
         inventory.put(itemId, item);
     }
-
 
     public void removeItem(int repositoryId) {
         if (inventory.remove(repositoryId) == null) {

@@ -6,7 +6,6 @@ import org.sopra.rogueguild.repository.ShopRepository;
 import org.sopra.rogueguild.repository.model.player.Player;
 import org.sopra.rogueguild.repository.model.event.Incursion;
 
-
 import java.util.*;
 
 public class IncursionController {
@@ -32,12 +31,10 @@ public class IncursionController {
                 System.out.println("Saliendo de incursiones...");
                 break;
             default:
-                System.out.println("Numero invalido");
+                System.out.println("Opcion no valida");
                 break;
         }
     }
-
-
 
     public void incursionConquista(Player player) {
         int option = random.nextInt(4) + 1;

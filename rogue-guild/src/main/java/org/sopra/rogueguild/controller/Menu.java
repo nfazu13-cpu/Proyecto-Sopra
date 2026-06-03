@@ -59,7 +59,7 @@ public class Menu extends UtilController {
                     }
                     break;
                 case 3:
-                    if (!player.getInventory().isEmpty()) { // SÍ tiene ítems
+                    if (!player.getInventory().isEmpty()) {
                         player.printInventory();
                         System.out.print("Introduce el ID del ítem a vender: ");
                         int id = super.askForInt();
@@ -96,5 +96,5 @@ public class Menu extends UtilController {
             super.cleanBuffer();
         } while (opt != 0);
     }
-    
+
 }
