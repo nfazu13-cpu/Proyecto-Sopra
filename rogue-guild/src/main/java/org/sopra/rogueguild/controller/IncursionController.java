@@ -38,101 +38,105 @@ public class IncursionController {
 
     public void incursionConquista(Player player) {
         int option = random.nextInt(4) + 1;
+        Incursion conquista = null;
 
         switch (option) {
             case 1:
-                Incursion conquista1 = new Incursion("Tienes que conquitar la aldea de rufianes al norte",
+                conquista = new Incursion("Tienes que conquitar la aldea de rufianes al norte",
                         "Conquista Rufianes");
-                conquista1.recompensaItem(player);
 
                 break;
 
             case 2:
-                Incursion conquista2 = new Incursion("Tienes que conquistar el pais vecino", "Conquista Paises");
-                conquista2.recompensaItem(player);
+                conquista = new Incursion("Tienes que conquistar el pais vecino", "Conquista Paises");
 
                 break;
 
             case 3:
-                Incursion conquista3 = new Incursion("Conquista a la bestia durmeinte", "Conquista Bestias");
-                conquista3.recompensaItem(player);
+                conquista = new Incursion("Conquista a la bestia durmeinte", "Conquista Bestias");
 
                 break;
 
             case 4:
-                Incursion conquista4 = new Incursion("Conquista el pueblo de dragones del sur", "Conquista Dragones");
-                conquista4.recompensaItem(player);
+                conquista = new Incursion("Conquista el pueblo de dragones del sur", "Conquista Dragones");
 
                 break;
 
+        }
+
+        if (conquista != null) {
+            Incursion.mostrarPantallaIncursion(conquista);
+            conquista.recompensaGold(player);
         }
 
     }
 
     public void incursionSaqueo(Player player) {
         int option = random.nextInt(4) + 1;
+        Incursion saqueo = null;
 
         switch (option) {
             case 1:
-                Incursion saqueo1 = new Incursion("Saquea el palacio real en busca del Mapa qe necesita el mercader",
+                saqueo = new Incursion("Saquea el palacio real en busca del Mapa qe necesita el mercader",
                         "Saquea el Mapa");
-                saqueo1.recompensaGold(player);
 
                 break;
 
             case 2:
-                Incursion saqueo2 = new Incursion("Saquea el oro del ogro dormilon", "Saquea al Ogro");
-                saqueo2.recompensaGold(player);
-                ;
+                saqueo = new Incursion("Saquea el oro del ogro dormilon", "Saquea al Ogro");
 
                 break;
 
             case 3:
-                Incursion saqueo3 = new Incursion("Saque el amuleto para el mago feliz ", "Saquea Amuleto");
-                saqueo3.recompensaGold(player);
+                saqueo = new Incursion("Saque el amuleto para el mago feliz ", "Saquea Amuleto");
 
                 break;
 
             case 4:
-                Incursion saqueo4 = new Incursion("Saqueo de los nobles malvados", "Saqueo RobinHood");
-                saqueo4.recompensaGold(player);
+                saqueo = new Incursion("Saqueo de los nobles malvados", "Saqueo RobinHood");
 
                 break;
 
+        }
+
+        if (saqueo != null) {
+            Incursion.mostrarPantallaIncursion(saqueo);
+            saqueo.recompensaGold(player);
         }
 
     }
 
     public void incursionMenor(Player player) {
         int option = random.nextInt(4) + 1;
+        Incursion menor = null;
 
         switch (option) {
             case 1:
-                Incursion menor1 = new Incursion("Saquea el palacio real en busca del Mapa que necesita el mercader",
+                menor = new Incursion("Saquea el palacio real en busca del Mapa que necesita el mercader",
                         "Saquea el Mapa");
-                menor1.recompensaMenor(player);
 
                 break;
 
             case 2:
-                Incursion menor2 = new Incursion("Saquea el oro del ogro dormilon", "Saquea al Ogro");
-                menor2.recompensaMenor(player);
+                menor = new Incursion("Saquea el oro del ogro dormilon", "Saquea al Ogro");
 
                 break;
 
             case 3:
-                Incursion menor3 = new Incursion("Saquea el amuleto para el mago feliz ", "Saquea Amuleto");
-                menor3.recompensaMenor(player);
-                sr.loadInitialStock();
+                menor = new Incursion("Saquea el amuleto para el mago feliz ", "Saquea Amuleto");
 
                 break;
 
             case 4:
-                Incursion menor4 = new Incursion("Saqueo de los nobles malvados", "Saqueo RobinHood");
-                menor4.recompensaMenor(player);
+                menor = new Incursion("Saqueo de los nobles malvados", "Saqueo RobinHood");
 
                 break;
 
+        }
+
+        if (menor != null) {
+            Incursion.mostrarPantallaIncursion(menor);
+            menor.recompensaGold(player);
         }
 
     }
