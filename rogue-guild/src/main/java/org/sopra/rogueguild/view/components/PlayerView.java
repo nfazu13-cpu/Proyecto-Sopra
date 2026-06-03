@@ -63,13 +63,11 @@ public class PlayerView {
                 stats = "Sana: " + ((Potion) item).getHealPoints();
             }
 
-            // ⭐ Aquí usamos el 'id' real del mapa en el [%d]
-            System.out.printf(" | ||  [%d] %-26s %-11s    || |\n",
-                    id, item.getName(), stats);
+            System.out.printf(" | || [%d] %-26.26s %-11.11s     || |\n", id, item.getName(), stats);
         }
 
         System.out.println(" | ||                                                || | ");
-        System.out.println(" | || Volver al menú                                 || | ");
+        System.out.println(" | || [0] Volver al menú                           || | ");
         System.out.println(" | ||________________________________________________|| | ");
     }
 
