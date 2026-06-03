@@ -75,15 +75,6 @@ public class Menu extends UtilController {
 
                     break;
                 case 3:
-                    if (!player.getInventory().isEmpty()) { // SÍ tiene ítems
-                        view.displayPlayerInventory(player.getInventory());
-                        System.out.print("Introduce el ID del ítem a vender: ");
-                        int id = super.askForInt();
-                        shopController.sellProcess(id);
-                    } else {
-                        System.out.println("Tu inventario está vacío. No tienes ítems para vender.");
-                        break;
-                    }
 
                     int id;
 
@@ -93,10 +84,7 @@ public class Menu extends UtilController {
                             break;
                         }
 
-                        player.printInventory();
-
-                        System.out.println("\n[X] Introduce el ID del ítem a vender:");
-                        System.out.println("[0] Salir");
+                        view.displayPlayerInventory(player.getInventory());
 
                         id = super.askForInt();
 
