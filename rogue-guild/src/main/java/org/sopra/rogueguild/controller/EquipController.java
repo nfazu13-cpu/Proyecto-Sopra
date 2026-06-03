@@ -93,7 +93,6 @@ public class EquipController extends UtilController {
             ItemCategory itemCategory = item.getCategory();
 
             player.equipItem(item);
-            //TODO PRUEBAS
             player.getInventory().remove(id);
         }
 
