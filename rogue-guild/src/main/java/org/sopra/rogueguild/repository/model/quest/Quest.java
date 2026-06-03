@@ -15,7 +15,7 @@ public class Quest {
     private final int id;
     private static ArrayList<String> questList = new ArrayList<>();
 
-    public Quest (String name, String description, int goldReward) {
+    public Quest(String name, String description, int goldReward) {
         setGoldReward(goldReward);
         setName(name);
         this.id = setAutoID();
@@ -23,7 +23,6 @@ public class Quest {
         this.isComplete = false;
         questList.add(name);
     }
-
 
     public int getId() {
         return this.id;
@@ -54,7 +53,7 @@ public class Quest {
     }
 
     public int setAutoID() {
-        return maxID++; 
+        return maxID++;
     }
 
     protected void setGoldReward(int goldReward) {
@@ -80,7 +79,6 @@ public class Quest {
         return Ansi.c(Ansi.RED, "Misión no completada aún.");
     }
 
-
     public boolean completeMission() {
         if (this.isComplete) {
             return false;
@@ -90,12 +88,17 @@ public class Quest {
         return true;
     }
 
-
     @Override
     public String toString() {
-        return Ansi.c(Ansi.PURP, id + ". " +  name) + "\n'" + description + "'" + Ansi.c(Ansi.GOLD, "\n\nRecompensa: " + goldReward + " (oro)") + "\n\n" + checkStatus();
+        return Ansi.c(Ansi.PURP, id + ". " + name) + "\n'" + description + "'"
+                + Ansi.c(Ansi.GOLD, "\n\nRecompensa: " + goldReward + " (oro)") + "\n\n" + checkStatus();
     }
 
-    public void printRequirements() { }
+    public void printRequirements() {
+    }
+
+    public String getDescription() {
+        return description;
+    }
 
 }

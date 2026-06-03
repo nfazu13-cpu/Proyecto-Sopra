@@ -11,7 +11,7 @@ import org.sopra.rogueguild.repository.model.quest.QuestStatsOperator;
 
 public class QuestRepository {
     private HashMap<Integer, Quest> quests;
-    
+
     public QuestRepository() {
         quests = new HashMap<>();
         loadMissionDanzaDeMuerte();
@@ -24,14 +24,13 @@ public class QuestRepository {
         loadMissionAsesinoDeLaSombra();
     }
 
-
     public int getMaxID() {
         int maxID = 0;
-    
+
         for (Quest quest : quests.values()) {
             maxID = Math.max(maxID, quest.getId());
         }
-        
+
         return maxID;
     }
 
@@ -39,11 +38,10 @@ public class QuestRepository {
         return quests;
     }
 
-    
     public boolean isEmpty() {
         if (quests.isEmpty()) {
             return true;
-        } 
+        }
 
         return false;
     }
@@ -51,18 +49,17 @@ public class QuestRepository {
     // Based on the player's inventory | START
 
     private void loadMissionDanzaDeMuerte() {
-        QuestInventory q1_DanzaDeMuerte = new QuestInventory("Danza de Muerte", 
-        "Debes tener almacenadas dos armas.", 115);
+        QuestInventory q1_DanzaDeMuerte = new QuestInventory("Danza de Muerte",
+                "Debes tener almacenadas dos armas.", 115);
 
         q1_DanzaDeMuerte.addRequierement(ItemCategory.WEAPON, 2);
 
         quests.put(q1_DanzaDeMuerte.getId(), q1_DanzaDeMuerte);
     }
 
-    
     private void loadMissionCaballeroDelFenix() {
-        QuestInventory q2_CaballeroDelFenix = new QuestInventory("Caballero del Fénix", 
-        "Debes tener almacenada una armadura completa.", 185);
+        QuestInventory q2_CaballeroDelFenix = new QuestInventory("Caballero del Fénix",
+                "Debes tener almacenada una armadura completa.", 185);
 
         q2_CaballeroDelFenix.addRequierement(ItemCategory.WEAPON, 1);
         q2_CaballeroDelFenix.addRequierement(ItemCategory.HELMET, 1);
@@ -74,31 +71,29 @@ public class QuestRepository {
 
     // Based on the player's inventory | END
 
-
-
     // Based on the player's gear | START
 
     private void loadMissionGuardianDeAcero() {
-        QuestStats q3_GuardianDeAcero = new QuestStats("Guardián de Acero", 
-        "Equipa una armadura pesada completa.", 150);
-        
+        QuestStats q3_GuardianDeAcero = new QuestStats("Guardián de Acero",
+                "Equipa una armadura pesada completa.", 150);
+
         q3_GuardianDeAcero.addRequierement(ItemStatsType.SHIELD, 22, QuestStatsOperator.GREATER_THAN);
 
         quests.put(q3_GuardianDeAcero.getId(), q3_GuardianDeAcero);
     }
 
     private void loadMissionMaestroDeArmas() {
-        QuestStats q4_MaestroDeArmas = new QuestStats("Maestro de Armas", 
-        "Demuestra dominio con armamento avanzado.", 220);
-        
+        QuestStats q4_MaestroDeArmas = new QuestStats("Maestro de Armas",
+                "Demuestra dominio con armamento avanzado.", 220);
+
         q4_MaestroDeArmas.addRequierement(ItemStatsType.DAMAGE, 55, QuestStatsOperator.GREATER_THAN);
 
         quests.put(q4_MaestroDeArmas.getId(), q4_MaestroDeArmas);
     }
 
     private void loadMissionViajeroErrante() {
-        QuestStats q5_ViajeroErrante = new QuestStats("Viajero Errante", 
-        "El viaje será largo... Equipate con armadura ligera para esta expedición.", 140);
+        QuestStats q5_ViajeroErrante = new QuestStats("Viajero Errante",
+                "El viaje será largo... Equipate con armadura ligera para esta expedición.", 140);
 
         q5_ViajeroErrante.addRequierement(ItemStatsType.SHIELD, 10, QuestStatsOperator.LESS_THAN);
 
@@ -106,8 +101,8 @@ public class QuestRepository {
     }
 
     private void loadMissionInfiltracionSilenciosa() {
-        QuestStats q6_InfiltracionSilenciosa = new QuestStats("Infiltración Silenciosa", 
-            "Infíltrate en el campamento enemigo usando armamento ligero y fácil de esconder.", 180);
+        QuestStats q6_InfiltracionSilenciosa = new QuestStats("Infiltración Silenciosa",
+                "Infíltrate en el campamento enemigo usando armamento ligero y fácil de esconder.", 180);
 
         q6_InfiltracionSilenciosa.addRequierement(ItemStatsType.DAMAGE, 20, QuestStatsOperator.LESS_THAN);
 
@@ -115,8 +110,8 @@ public class QuestRepository {
     }
 
     private void loadMissionCaballeroDeLaTorre() {
-        QuestStats q7_CaballeroDeLaTorre = new QuestStats("Caballero de la Torre", 
-            "Conviértete en un bastión inamovible sacrificando tu capacidad ofensiva.", 250);
+        QuestStats q7_CaballeroDeLaTorre = new QuestStats("Caballero de la Torre",
+                "Conviértete en un bastión inamovible sacrificando tu capacidad ofensiva.", 250);
 
         q7_CaballeroDeLaTorre.addRequierement(ItemStatsType.SHIELD, 40, QuestStatsOperator.GREATER_THAN);
         q7_CaballeroDeLaTorre.addRequierement(ItemStatsType.DAMAGE, 15, QuestStatsOperator.LESS_THAN);
@@ -125,8 +120,9 @@ public class QuestRepository {
     }
 
     private void loadMissionAsesinoDeLaSombra() {
-        QuestStats q8_AsesinoDeLaSombra = new QuestStats("Asesino de la Sombra", 
-            "El objetivo no será fácil, pero pasar desapercibido tampoco... Ve armado hasta los dientes, pero con una armadura ultraligera.", 300);
+        QuestStats q8_AsesinoDeLaSombra = new QuestStats("Asesino de la Sombra",
+                "El objetivo no será fácil, pero pasar desapercibido tampoco... Ve armado hasta los dientes, pero con una armadura ultraligera.",
+                300);
 
         q8_AsesinoDeLaSombra.addRequierement(ItemStatsType.DAMAGE, 60, QuestStatsOperator.GREATER_THAN);
         q8_AsesinoDeLaSombra.addRequierement(ItemStatsType.SHIELD, 8, QuestStatsOperator.LESS_THAN);
@@ -136,44 +132,57 @@ public class QuestRepository {
 
     // Based on the player's gear | END
 
+    private void imprimirCajaMision(Quest quest) {
+        String reset = "\u001B[0m";
+        String morado = "\u001B[35m";
+        String amarillo = "\u001B[33m";
+        String rojo = "\u001B[31m";
+        String verde = "\u001B[32m";
+
+        String lineaTitulo = " [" + quest.getId() + "] " + morado + quest.getName() + reset;
+        String lineaRecompensa = " Recompensa: " + amarillo + quest.getGoldReward() + " (oro)" + reset;
+        String lineaEstado = " Estado: "
+                + (quest.getIsComplete() ? verde + "COMPLETADA" : rojo + "Misión no completada aún") + reset;
+
+        System.out.println("┌──────────────────────────────────────────────┐");
+        System.out.println("│                TABLÓN DE MISIONES            │");
+        System.out.println("├──────────────────────────────────────────────┤");
+        System.out.printf("│ %-53s │\n", lineaTitulo);
+        System.out.println("│  Descripción:                                │");
+
+        String desc = quest.getDescription();
+        int anchoMax = 40;
+        for (int i = 0; i < desc.length(); i += anchoMax) {
+            String fragmento = desc.substring(i, Math.min(i + anchoMax, desc.length()));
+            System.out.printf("│    %-41s │\n", fragmento);
+        }
+
+        System.out.println("├──────────────────────────────────────────────┤");
+        System.out.printf("│ %-53s │\n", lineaRecompensa);
+        System.out.printf("│ %-53s │\n", lineaEstado);
+        System.out.println("└──────────────────────────────────────────────┘");
+
+        System.out.println("┌── ⚔️ REQUISITOS DE EQUIPAMIENTO ──────────────┐");
+
+        quest.printRequirements();
+
+        System.out.println("└──────────────────────────────────────────────┘\n");
+    }
 
     public void printUncompletedQuests() {
-        System.out.println("†====|:::::::::::::::>\n");
-
         for (Integer id : quests.keySet()) {
-
             Quest tempQuest = quests.get(id);
-
             if (!tempQuest.getIsComplete()) {
-                Quest quest = quests.get(id);
-
-                System.out.println(quest);
-                System.out.println();
-                quest.printRequirements();
-                System.out.println();
-                System.out.println("†====|:::::::::::::::>");
-                System.out.println();
+                imprimirCajaMision(tempQuest);
             }
-            
         }
     }
-
 
     public void printAllQuests() {
-        System.out.println("†====|:::::::::::::::>\n");
-
         for (Integer id : quests.keySet()) {
-
-        Quest quest = quests.get(id);
-        System.out.println(quest);
-        System.out.println();
-        quest.printRequirements();
-        System.out.println();
-        System.out.println("†====|:::::::::::::::>");
-        System.out.println();
-            
+            Quest quest = quests.get(id);
+            imprimirCajaMision(quest);
         }
     }
-
 
 }
