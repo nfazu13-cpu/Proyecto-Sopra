@@ -64,8 +64,8 @@ public class PlayerView {
                 stats = "Sana: " + ((Potion) item).getHealPoints();
             }
 
-            System.out.printf(" || |  [%d] %-26s %-11s              | ||\n",
-                    id, item.getName(), stats);
+            System.out.printf(" || |  [%d] %-26s %-11s %d | ||\n", id, item.getName(), stats,
+                    item.getBasePrice() + (item.getBasePrice() * 0.80));
         }
 
         out.println(" || |                                                          | ||");
