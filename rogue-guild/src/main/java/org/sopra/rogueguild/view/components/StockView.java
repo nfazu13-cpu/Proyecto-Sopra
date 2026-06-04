@@ -57,8 +57,9 @@ public class StockView {
                 out.printf(" || |  [-] %-26s %-11s %4d oro          | ||%n", item.getName(), stats, item.getPrice());
             }
         }
-        
-        out.println(" || |" + Ansi.c(Ansi.GRAY, "  [0] Salir                                                    ") + "| ||");
+        if (inPurchase) {
+            out.println(" || |" + Ansi.c(Ansi.GRAY, "  [0] Salir                                                    ") + "| ||");
+        }
         out.println(" || \\_______________________________________________________________/ ||");
         out.println("  \\___________________________________________________________________/");
     }
