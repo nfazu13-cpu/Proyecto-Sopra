@@ -46,7 +46,6 @@ public class PlayerView {
         out.println(" || | ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ | ||");
         out.println(" || |                                                          | ||");
 
-        // Recorremos el mapa usando sus entradas (ID y Objeto)
         for (Map.Entry<Integer, Item> entry : inventory.entrySet()) {
             Integer id = entry.getKey();
             Item item = entry.getValue();
@@ -73,7 +72,5 @@ public class PlayerView {
         out.println(" || |  " + Ansi.c(Ansi.GRAY,"[0] Salir") + "                                               | ||");
         out.println(" || \\__________________________________________________________/ ||");
         out.println("  \\______________________________________________________________/");
-
     }
-
 }
