@@ -9,7 +9,6 @@ public final class Ansi {
     public static final String RED   = "\u001B[31m";
     public static final String PURP  = "\u001B[35m";
     public static final String GOLD  = "\u001B[33m";
-    public static final String CRIMSON  = "\u001B[91m";
     public static final String BLUE  = "\u001B[34m";
     
 
