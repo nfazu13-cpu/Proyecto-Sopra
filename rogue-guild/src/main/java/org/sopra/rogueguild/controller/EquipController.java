@@ -21,12 +21,25 @@ public class EquipController extends UtilController {
 
             int idEquipment;
 
-            System.out.println("Que quieres equipar: ");
-            System.out.println("1.Equipar Armadura");
-            System.out.println("2.Equipar Botas");
-            System.out.println("3.Equipar Casco");
-            System.out.println("4.Equipar Arma");
-            System.out.println("0.Salir");
+            System.out.println("- - - Inventario - - -");
+            System.out.println();
+            if (player.printInventoryByCategory(ItemCategory.ARMOR)) { }
+            System.out.println();
+            if (player.printInventoryByCategory(ItemCategory.BOOTS)) { }
+            System.out.println();
+            if (player.printInventoryByCategory(ItemCategory.HELMET)) { }
+            System.out.println();
+            if (player.printInventoryByCategory(ItemCategory.WEAPON)) { }
+            System.out.println();
+
+            System.out.println("¿Qué quieres equipar?: ");
+            System.out.println("1. Equipar Armadura");
+            System.out.println("2. Equipar Botas");
+            System.out.println("3. Equipar Casco");
+            System.out.println("4. Equipar Arma");
+            System.out.println("0. Salir");
+
+            
 
             idEquipment = super.askForInt();
 
@@ -38,6 +51,7 @@ public class EquipController extends UtilController {
                         idEquipment = super.askForInt();
                         if (validateEquipmentID(idEquipment)) {
                             equip(idEquipment);
+                            System.out.println("Objeto equipado con éxito.");
                         }
                     }
                     break;
@@ -48,6 +62,7 @@ public class EquipController extends UtilController {
                         idEquipment = super.askForInt();
                         if (validateEquipmentID(idEquipment)) {
                             equip(idEquipment);
+                            System.out.println("Objeto equipado con éxito.");
                         }
                     }
                     break;
@@ -59,6 +74,7 @@ public class EquipController extends UtilController {
                         idEquipment = super.askForInt();
                         if (validateEquipmentID(idEquipment)) {
                             equip(idEquipment);
+                            System.out.println("Objeto equipado con éxito.");
                         }
                     }
                     break;
@@ -70,6 +86,7 @@ public class EquipController extends UtilController {
                         idEquipment = super.askForInt();
                         if (validateEquipmentID(idEquipment)) {
                             equip(idEquipment);
+                            System.out.println("Objeto equipado con éxito.");
                         }
                     }
                     break;

@@ -49,7 +49,7 @@ public class Player {
         if (gold < 0) {
             this.gold = 0;
         } else if (gold > 500) {
-            System.out.println("No puedes tener mas de 500  monedas");
+            System.out.println("No puedes tener mas de 500 monedas");
             this.gold = 500;
         } else {
             this.gold = gold;
@@ -254,7 +254,24 @@ public class Player {
     }
 
     public boolean printInventoryByCategory(ItemCategory category) {
-        System.out.println("--- Objetos de la categoria: " + category + " ---");
+        String transcriptCat = "";
+
+        if (category.equals(ItemCategory.ARMOR)) {
+            transcriptCat = "armadura";
+        } else if (category.equals(ItemCategory.HELMET)) {
+            transcriptCat = "casco";
+        } else if (category.equals(ItemCategory.BOOTS)) {
+            transcriptCat = "botas";
+        } else if (category.equals(ItemCategory.WEAPON)) {
+            transcriptCat = "armas";
+        } else if (category.equals(ItemCategory.OTHERS)) {
+            transcriptCat = "otros";
+        } else {
+            transcriptCat = "Desconocido";
+        }
+        
+
+        System.out.println("- Objetos de la categoria " + transcriptCat);
         boolean encontrado = false;
 
         for (Integer id : inventory.keySet()) {

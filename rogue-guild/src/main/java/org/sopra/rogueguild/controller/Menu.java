@@ -61,7 +61,7 @@ public class Menu extends UtilController {
 
                             BuyResponse buyResponse = shopController.buyProcess(itemId);
                             view.buyResult(buyResponse, item.getCategory());
-
+                            
                             view.pressKeyMessage();
                             super.cleanBuffer();
 

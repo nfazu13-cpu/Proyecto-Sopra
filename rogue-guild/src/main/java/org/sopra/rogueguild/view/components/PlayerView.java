@@ -64,12 +64,6 @@ public class PlayerView {
                 stats = "Sana: " + ((Potion) item).getHealPoints();
             }
 
-            System.out.printf(" | || [%d] %-26.26s %-11.11s     || |\n", id, item.getName(), stats);
-        }
-
-        System.out.println(" | ||                                                || | ");
-        System.out.println(" | || [0] Volver al menú                           || | ");
-        System.out.println(" | ||________________________________________________|| | ");
             System.out.printf(" || |  [%d] %-26s %-11s              | ||\n",
                     id, item.getName(), stats);
         }
@@ -79,6 +73,7 @@ public class PlayerView {
         out.println(" || |  " + Ansi.c(Ansi.GRAY,"[0] Salir") + "                                               | ||");
         out.println(" || \\__________________________________________________________/ ||");
         out.println("  \\______________________________________________________________/");
+
     }
 
 }
